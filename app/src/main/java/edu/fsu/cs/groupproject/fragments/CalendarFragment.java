@@ -27,7 +27,7 @@ public class CalendarFragment extends Fragment {
 
     private void setupView(View view) {
         Button backButton = (Button) view.findViewById(R.id.calendar_returnButton);
-        backButton.setOnClickListener(v -> commsListener.onReturn());
+        backButton.setOnClickListener(v -> commsListener.onCalendarReturn());
     }
 
 
@@ -49,7 +49,7 @@ public class CalendarFragment extends Fragment {
     }
 
     public interface CalendarCommunication {
-        void onReturn();
+        void onCalendarReturn();
     }
 
 }
