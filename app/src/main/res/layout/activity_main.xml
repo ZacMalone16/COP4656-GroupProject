@@ -9,9 +9,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
-        android:name="edu.fsu.cs.groupproject.fragments.MainFragment"
-        android:layout_width="391dp"
-        android:layout_height="784dp"
+        android:name="edu.fsu.cs.groupproject.fragments.BlankFragment"
+        android:layout_width="408dp"
+        android:layout_height="591dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -65,7 +65,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="600dp"
-        android:text="A"
+        android:text="CA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
