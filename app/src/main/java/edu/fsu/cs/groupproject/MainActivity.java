@@ -3,10 +3,11 @@ package edu.fsu.cs.groupproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 
+import edu.fsu.cs.groupproject.fragments.BlankFragment;
 import edu.fsu.cs.groupproject.fragments.CalendarFragment;
 import edu.fsu.cs.groupproject.fragments.Comms;
-import edu.fsu.cs.groupproject.fragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity implements Comms {
 
@@ -22,24 +23,26 @@ public class MainActivity extends AppCompatActivity implements Comms {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        openMain();
+        init();
     }
 
-    private void openMain() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView2, new MainFragment(), MainFragment.class.getCanonicalName()).commit();
+    private void init() {
+        setupButtons();
     }
 
-    @Override
-    public void openCalendar() {
+    private void setupButtons() {
+        Button calendarButton = findViewById(R.id.main_calendarButton);
+        calendarButton.setOnClickListener(v -> openCalendar());
+    }
+
+    private void openCalendar() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView2, new CalendarFragment(), CalendarFragment.class.getCanonicalName()).commit();
     }
 
     @Override
     public void onReturn() {
-        openMain();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView2, new BlankFragment(), CalendarFragment.class.getCanonicalName()).commit();
     }
-
-
 }
