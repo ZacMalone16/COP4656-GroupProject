@@ -2,6 +2,7 @@ package edu.fsu.cs.groupproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -9,6 +10,7 @@ import edu.fsu.cs.groupproject.fragments.BlankFragment;
 import edu.fsu.cs.groupproject.fragments.CalendarFragment;
 import edu.fsu.cs.groupproject.fragments.Comms;
 import edu.fsu.cs.groupproject.fragments.CurrentWorkoutFragment;
+import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
 public class MainActivity extends AppCompatActivity implements Comms {
 
@@ -38,6 +40,14 @@ public class MainActivity extends AppCompatActivity implements Comms {
         Button currentWorkoutButton = findViewById(R.id.main_currentWorkoutButton);
         currentWorkoutButton.setOnClickListener(v -> openCurrentWorkout());
 
+        Button graphsButton = findViewById(R.id.main_previousWorkoutsButton);
+        graphsButton.setOnClickListener(v -> openWorkouts());
+
+    }
+
+    private void openWorkouts() {
+        Intent intent = new Intent(this, GraphActivity.class);
+        startActivity(intent);
     }
 
     private void openCurrentWorkout() {

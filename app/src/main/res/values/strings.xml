@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GroupProject</string>
+
+
+    <string-array name="graphs">
+        <item>Choose Graph</item>
+        <item>Sets, Reps, and Weight</item>
+        <item>Max Weight</item>
+    </string-array>
+
 </resources>
