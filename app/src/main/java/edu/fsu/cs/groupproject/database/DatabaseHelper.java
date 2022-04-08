@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_6 = "Workout_Time";
     public static final String COL_7 = "Duration";
     public static final String COL_8 = "Average_HR";
-    public static final String COL_9 = "Calories";
+    public static final String COL_9 = "Calorie";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
