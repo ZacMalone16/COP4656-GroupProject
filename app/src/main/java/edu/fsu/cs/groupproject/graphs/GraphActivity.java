@@ -9,15 +9,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 //import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity //Activity //AppCompatActivity
+import edu.fsu.cs.groupproject.R;
+
+public class GraphActivity extends Activity //Activity //AppCompatActivity
 {
     Graph graph;
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -107,7 +107,7 @@ public class MainActivity extends Activity //Activity //AppCompatActivity
                 manager = getFragmentManager();
                 FragmentTransaction ft2 = manager.beginTransaction();
                 MaxWeightFrag maxWeightFrag = new MaxWeightFrag();
-                ft2.replace(R.id.buttons_frag,maxWeightFrag);
+                ft2.replace(R.id.buttons_frag, maxWeightFrag);
                 ft2.commit();
 
                 //choose graph frag
@@ -160,7 +160,7 @@ public class MainActivity extends Activity //Activity //AppCompatActivity
             }
 
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
             builder.setTitle("Choose Chest Exercises");
             builder.setCancelable(false);
             builder.setMultiChoiceItems(chest_ex, chest_sel, new DialogInterface.OnMultiChoiceClickListener()
@@ -267,7 +267,7 @@ public class MainActivity extends Activity //Activity //AppCompatActivity
         if(v == MaxWeightFrag.back)
         {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
             builder.setTitle("Choose Back Exercises");
             builder.setCancelable(false);
             builder.setMultiChoiceItems(back_ex, back_sel, new DialogInterface.OnMultiChoiceClickListener() {

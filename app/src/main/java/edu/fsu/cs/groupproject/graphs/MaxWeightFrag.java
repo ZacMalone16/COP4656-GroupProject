@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.R;
+
 public class MaxWeightFrag extends Fragment
 {
 

@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.R;
+
 //missing 2 other constructors
 public class Graph extends FrameLayout
 {
@@ -131,17 +133,17 @@ public class Graph extends FrameLayout
         {
             case 0:
                 System.out.println("set_layout case 0 choose_graph");
-                inflate(getContext(),R.layout.activity_main,this);//R.layout.choose_graph
+                inflate(getContext(), R.layout.activity_main_graph,this);//R.layout.choose_graph
                 //layout = -1;
                 break;
             case 1:
                 System.out.println("set_layout case 1 sets_reps");
-                inflate(getContext(),R.layout.sets_reps,this);
+                inflate(getContext(),R.layout.frag_sets_reps,this);
                 //layout = 1;
                 break;
             case 2:
                 System.out.println("set_layout case 2 max_weight");
-                inflate(getContext(),R.layout.max_weight ,this);//R.layout.max_weight
+                inflate(getContext(),R.layout.frag_max_weight ,this);//R.layout.max_weight
                 //layout = 2;
                 break;
         }

@@ -2,7 +2,6 @@ package edu.fsu.cs.groupproject.graphs;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 //import androidx.fragment.app.Fragment;
@@ -11,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+
+import edu.fsu.cs.groupproject.R;
 
 
 public class ChooseFrag extends Fragment
@@ -85,7 +84,7 @@ public class ChooseFrag extends Fragment
                         System.out.println("case 0 selected in spinner");
                         break;
                     case 1:
-                        Intent intent = new Intent(getActivity(),MainActivity.class);
+                        Intent intent = new Intent(getActivity(), GraphActivity.class);
                         intent.putExtra("bundle_layout",1);
                         startActivity(intent);
                         //set int var in main to load the sets reps frag
@@ -100,7 +99,7 @@ public class ChooseFrag extends Fragment
                         break;
                     case 2:
                         //Intent intent2 = new Intent(getActivity(),MainActivity.class);
-                        Intent intent2 = new Intent(getActivity(),MainActivity.class);//MaxWeight.class
+                        Intent intent2 = new Intent(getActivity(), GraphActivity.class);//MaxWeight.class
                         intent2.putExtra("bundle_layout",2);
                         startActivity(intent2);
                         //choose_graph.setSelection(0);
