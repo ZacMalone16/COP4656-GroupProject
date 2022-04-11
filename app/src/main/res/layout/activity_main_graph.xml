@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".graphs.GraphActivity"
+    android:orientation="vertical"
+    android:id="@+id/linearLayout">
+
+
+    <edu.fsu.cs.groupproject.graphs.Graph
+        android:id="@+id/graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_conversion_absoluteHeight="731dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_conversion_absoluteWidth="411dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="activity main"
+        android:translationY="0sp"
+        />
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:layout_weight="1"/>
+
+    <FrameLayout
+        android:id="@+id/spinner_frag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="spinner frag" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/buttons_frag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <!--
+        android:translationY="400sp">
+        -->
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="buttons frag" />
+    </FrameLayout>
+
+
+    <!--
+    android:layout_weight="1"
+    android:layout_weight="1"
+android:gravity="center"
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:translationY="154sp">
+
+            <TextView
+                android:id="@+id/chest_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Chest" />
+
+            <TextView
+                android:id="@+id/back_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Back" />
+
+            <TextView
+                android:id="@+id/shoulder_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Shoulders" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:translationY="181sp">
+
+            <TextView
+                android:id="@+id/biceps_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Biceps" />
+
+            <TextView
+                android:id="@+id/triceps_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Triceps" />
+
+            <TextView
+                android:id="@+id/forearms_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Forearms" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:translationY="208sp">
+
+            <TextView
+                android:id="@+id/quads_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Quadriceps" />
+
+            <TextView
+                android:id="@+id/hamstrings_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Hamstrings" />
+
+            <TextView
+                android:id="@+id/calf_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Calves" />
+
+
+
+        </LinearLayout>
+    -->
+
+    <!--
+android:translationY="0sp"
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+    <FrameLayout
+        android:id="@+id/graph_container"
+        android:layout_width="match_parent"
+        android:layout_height="100sp" />
+
+    <FrameLayout
+        android:id="@+id/main_frag"
+        android:layout_width="match_parent"
+        android:layout_height="300sp" />
+
+
+    android:text="Chest"
+    -->
+
+</LinearLayout>

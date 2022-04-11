@@ -28,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, 1);}
     // SQLiteDatabase db = (this.getWritableDatabase());
 
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL("create table " + TABLE_NAME1 + " (ExerciseID INTEGER PRIMARY KEY AUTOINCREMENT, Exercise TEXT, MuscleGroup TEXT)" );
