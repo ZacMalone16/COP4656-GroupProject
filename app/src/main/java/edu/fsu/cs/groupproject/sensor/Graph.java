@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.R;
+
 //missing 2 other constructors
 public class Graph extends FrameLayout
 {
@@ -128,7 +130,7 @@ public class Graph extends FrameLayout
         {
             case 0:
                 System.out.println("set layout accel data graph");
-                inflate(getContext(),R.layout.activity_main,this);//R.layout.choose_graph
+                inflate(getContext(), R.layout.activity_main,this);//R.layout.choose_graph
                 //layout = -1;
                 break;
             case 1:

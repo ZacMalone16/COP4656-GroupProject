@@ -18,6 +18,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.R;
+
 public class MainActivity extends Activity implements SensorEventListener //AppCompatActivity
 {
 
