@@ -12,6 +12,10 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements SensorEventListener //AppCompatActivity
@@ -26,11 +30,10 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
     Button stop;
     Button graph_button;
     boolean stop_sensor = false;
-    //int [][] accel = new int[][]
     ArrayList<PointF> data_points = new ArrayList<>();
     ArrayList<PointF> reps = new ArrayList<>();
+    ArrayList<PointF> raw_data = new ArrayList<>();
     PointF prev;
-    //ArrayList<>
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
     //phone screen height
@@ -90,54 +93,44 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
             System.out.println("ay = " + (ay -= offset_y));
             System.out.println("az = " + (az -= offset_z));
 
-
-
         }
 
-
-
-
-       /*
+       /**
         System.out.println("************raw readings************");
         System.out.println("ax = " + ax);
         System.out.println("ay = " + ay);
         System.out.println("az = " + az);
         */
 
-
-
-
         if(!stop_sensor)
         {
-            //ax - offset_x) != 0.0 || (ay - offset_y) != 0.0
-            //(ax - offset_x) != 0.0 && (ay - offset_y) != 0.0 /////ay - offset_y) != 0.0
-            //if( !( (ay - offset_y) <= 0.01) && !((ay - offset_y) >= -0.01) )
-            //if(  (ay - offset_y) >= 0.02 && (ay - offset_y) <= -0.02 )
-            //if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
-            if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 ) //if((ay - offset_y) != 0.0)//
+            //if((ay - offset_y) != 0.0)
+            if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
             {
+                //add raw data outside -.2 to .2
+                PointF p = new PointF(count,(float)ay);
+                raw_data.add(p);
+                //if change in magnitude is larger than .5f add to data points
                 if(Math.abs(prev.y) - Math.abs((ay - offset_y)) > .5f)
                 {
                     //az -= offset_z;
                     ax -= offset_x;
                     ay -= offset_y;
-                    PointF p = new PointF(count,(float)ay);
+                    p = new PointF(count,(float)ay);
                     data_points.add(p);
                     count++;
                 }
 
             }
+            //save prev point
             prev = new PointF(count,(float)ay);
 
-
         }
+        //else stop pressed
         else
         {
             if(flag)
             {
-                //find_next_min_max();
-
-                //int index = 0;
                 boolean has_next_rep = get_reps();
                 int rep_count = 0;
                 while(has_next_rep)
@@ -146,16 +139,11 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
                     rep_count++;
                     System.out.printf("REP %d\n", rep_count);
                     has_next_rep = get_reps();
-
                 }
 
                 flag = false;
-                //return;
             }
-
         }
-
-        //for(int i = 0; i < )
     }//end onSensorChanged()
 
     boolean get_reps()
@@ -230,7 +218,7 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         //finds min
         if(str.equals("up"))
         {
-            if(next - current >= mag)//data_points.get(i + 1).y - data_points.get(i).y > 3.0
+            if(next - current >= mag)
             {
                 return true;
             }
@@ -254,255 +242,6 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
             return false;
         }
         return true;
-    }
-
-    void find_next_min_max()
-    {
-        int period = 60;
-        //PointF start = data_points.get(0);
-        float min_y = 1000;
-        float min_x = 0;
-        float max_y = -1000;
-        float max_x = 0;
-        int index = 0;
-        int new_index = 0;
-        boolean check_max = false;
-        boolean check_min = false;
-        boolean flip = true;
-
-        int size = data_points.size()/period;
-        int remainder = data_points.size() % period;
-        //size = (size * period) + remainder;
-
-        //find the first 2 mins
-       /**
-        for(int i = 0; i < size; i++)
-        {
-            for(int j = 0; j < period; j++)
-            {
-
-                //if on last iteration
-                //if(i == (size - 1))
-               // {
-               //     period = remainder;
-               // }
-
-                if(data_points.get(j + (i * period)).y < min_y)
-                {
-                    min_y = data_points.get(j).y;
-                    min_x = data_points.get(j).x;
-                    PointF p = new PointF(min_x,min_y);
-                    reps.add(0,p);
-                    index = (j + (i * period));
-                }
-                //check max
-                if(data_points.get(j + (i * period)).y > max_y)
-                {
-
-                }
-            }
-
-
-        }
-
-        //int i = (size * period);
-        for(int i = (size * period); i < data_points.size(); i++)
-        {
-
-
-            min_y = data_points.get(i).y;
-            min_x = data_points.get(i).x;
-        }
-        PointF p = new PointF(min_x,min_y);
-        reps.add(p);
-        */
-
-
-       /**
-        //check first 60 for min
-        for(int i = 0; i < period; i++)
-        {
-            if(data_points.get(i).y < min_y)
-            {
-                min_y = data_points.get(i).y;
-                min_x = data_points.get(i).x;
-                index = i;
-            }
-        }
-        //add 1st min
-        PointF p = new PointF(min_x,min_y);
-        reps.add(p);
-        */
-
-        //index = -1;
-        boolean has_next_period = check_next_period(index,period);
-        System.out.println("has next period = " + has_next_period);
-
-
-        PointF p = new PointF(data_points.get(0).x,data_points.get(0).y);
-        reps.add(p);
-        while(has_next_period)
-        {
-            if(has_next_period)
-            {
-                //check next 60 starting at index for max
-                for(int i = index; i < (index + period); i++ )//index + 2 + period// index + period
-                {
-
-                    if(flip)
-                    {
-                        if(data_points.get(i).y < min_y)
-                        {
-                            min_y = data_points.get(i).y;
-                            min_x = data_points.get(i).x;
-                            new_index = i;
-                        }
-                    }
-                    else
-                    {
-                        if(data_points.get(i).y > max_y)
-                        {
-                            max_y = data_points.get(i).y;
-                            max_x = data_points.get(i).x;
-                            new_index = i;
-                        }
-                    }
-                }
-                if(flip)
-                {
-                    p = new PointF(min_x,min_y);
-                }
-                else
-                {
-                    p = new PointF(max_x,max_y);
-                }
-
-                reps.add(p);
-                flip = !flip;
-                min_y = 1000;
-                max_y = -1000;
-            }
-            /*
-            //else until the end
-            else
-            {
-                //check remaining indices
-                for(int i = index + 1; i < data_points.size(); i++)
-                {
-
-                    if(flip)
-                    {
-                        if(data_points.get(i).y < min_y)
-                        {
-                            min_y = data_points.get(i).y;
-                            min_x = data_points.get(i).x;
-                            index = i;
-                        }
-                    }
-                    else
-                    {
-                        if(data_points.get(i).y > max_y)
-                        {
-                            max_y = data_points.get(i).y;
-                            max_x = data_points.get(i).x;
-                            index = i;
-                        }
-                    }
-
-                    if(data_points.get(i).y > max_y)
-                    {
-                        max_y = data_points.get(i).y;
-                        max_x = data_points.get(i).x;
-                        index = i;
-                    }
-
-                }
-                if(flip)
-                {
-                    p = new PointF(min_x,min_y);
-                }
-                else
-                {
-                    p = new PointF(max_x,max_y);
-                }
-
-                reps.add(p);
-                flip = !flip;
-                min_y = 1000;
-                max_y = -1000;
-            }
-             */
-
-            index = new_index;
-            //check next 60 exists
-            has_next_period = check_next_period(index,period);
-            System.out.println("has next period = " + has_next_period);
-
-        }
-
-       boolean has_more_data = has_remaining_data(index);
-
-       while(has_more_data)
-       {
-           //check remaining indices
-           for(int i = index + 1; i < data_points.size(); i++)
-           {
-
-               if(flip)
-               {
-                   if(data_points.get(i).y < min_y)
-                   {
-                       min_y = data_points.get(i).y;
-                       min_x = data_points.get(i).x;
-                       index = i;
-                   }
-               }
-               else
-               {
-                   if(data_points.get(i).y > max_y)
-                   {
-                       max_y = data_points.get(i).y;
-                       max_x = data_points.get(i).x;
-                       index = i;
-                   }
-               }
-
-               if(data_points.get(i).y > max_y)
-               {
-                   max_y = data_points.get(i).y;
-                   max_x = data_points.get(i).x;
-                   index = i;
-               }
-
-           }
-           if(flip)
-           {
-               p = new PointF(min_x,min_y);
-           }
-           else
-           {
-               p = new PointF(max_x,max_y);
-           }
-
-           reps.add(p);
-           flip = !flip;
-           min_y = 1000;
-           max_y = -1000;
-
-           has_more_data = has_remaining_data(index);
-
-       }
-
-    }//end find next min max ()
-
-    boolean check_next_period(int index,int period)
-    {
-        if((index + 1 + period) < data_points.size())//index + 1 + period
-        {
-
-            return true;
-        }
-        return  false;
     }
 
     boolean has_remaining_data(int index)
@@ -554,11 +293,19 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         reps_graph.proportion_graph2();
         reps_graph.draw_graph = true;
 
-        /**file I/O
+        //file I/O
         try
         {
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("reps.dat"));
+            //write data_points
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("data_points.dat"));
             os.writeObject(data_points);
+            //write raw data outside error margin
+            os = new ObjectOutputStream(new FileOutputStream("raw_data.dat"));
+            os.writeObject(raw_data);
+            //write reps data
+            os = new ObjectOutputStream(new FileOutputStream("reps.dat"));
+            os.writeObject(reps);
+
             os.close();
             //FileInputStream fis = new FileInputStream()
 
@@ -570,16 +317,12 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
                 fos.write(x);
             }
 
-
-
-
-
         }
         catch (Exception e)
         {
             System.out.println("error: " + e);
         }
-         */
+
 
     }
 
@@ -598,8 +341,25 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
             setContentView(graph);
             do_switch = !do_switch;
         }
+    }
 
+    public void load(View v)
+    {
+        try
+        {
 
+            FileInputStream fs = new FileInputStream("raw_data.dat");
+            ObjectInputStream is = new ObjectInputStream(fs);
+
+            while(fs.available() != 0)
+            {
+
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("error: " + e);
+        }
     }
 
     @Override
