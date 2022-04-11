@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class MainActivity extends Activity implements SensorEventListener //AppCompatActivity
 {
 
-    edu.fsu.cs.sensor.Graph graph;
-    edu.fsu.cs.sensor.Graph reps_graph;
+    Graph graph;
+    Graph reps_graph;
     SensorManager sensorManager;
     double ax,ay,az, offset_x, offset_y, offset_z;
     boolean once = true;
@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
     //int [][] accel = new int[][]
     ArrayList<PointF> data_points = new ArrayList<>();
     ArrayList<PointF> reps = new ArrayList<>();
+    PointF prev;
     //ArrayList<>
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -37,7 +38,7 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
     //phone screen width
     int width;
     int count = 0;
-    int graph_num = 1;
+    //int graph_num = 1;
     boolean do_switch = true;
     int index = 0;
 
@@ -55,12 +56,13 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
 
-        graph = new edu.fsu.cs.sensor.Graph(this,width,height,0);
-        reps_graph = new edu.fsu.cs.sensor.Graph(this,width,height,0);
+        graph = new Graph(this,width,height,0);
+        reps_graph = new Graph(this,width,height,0);
         setContentView(graph);
         graph.setBackgroundColor(Color.WHITE);
         reps_graph.setBackgroundColor(Color.WHITE);
 
+        prev = new PointF(0,0.0f);
         System.out.println("width: " + width);
         System.out.println("height: " + height);
 
@@ -83,7 +85,17 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
             offset_y = ay;
             offset_z = az;
             once = false;
+            System.out.println("************after offest************");
+            System.out.println("ax = " + (ax -= offset_x));
+            System.out.println("ay = " + (ay -= offset_y));
+            System.out.println("az = " + (az -= offset_z));
+
+
+
         }
+
+
+
 
        /*
         System.out.println("************raw readings************");
@@ -92,35 +104,31 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         System.out.println("az = " + az);
         */
 
+
+
+
         if(!stop_sensor)
         {
             //ax - offset_x) != 0.0 || (ay - offset_y) != 0.0
-            if((ay - offset_y) != 0.0) //(ax - offset_x) != 0.0 && (ay - offset_y) != 0.0 /////ay - offset_y) != 0.0
+            //(ax - offset_x) != 0.0 && (ay - offset_y) != 0.0 /////ay - offset_y) != 0.0
+            //if( !( (ay - offset_y) <= 0.01) && !((ay - offset_y) >= -0.01) )
+            //if(  (ay - offset_y) >= 0.02 && (ay - offset_y) <= -0.02 )
+            //if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
+            if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 ) //if((ay - offset_y) != 0.0)//
             {
-                //ax -= offset_x;
-                ax -= offset_x;
-                ay -= offset_y;
-                PointF p = new PointF(count,(float)ay);
-                data_points.add(p);
-                count++;
-
-//
-
-                /*
-                System.out.println("************after offset************");
-                System.out.println("ax = " + ax);
-                System.out.println("ay = " + ay);
-                System.out.println("az = " + az);
-                 */
+                if(Math.abs(prev.y) - Math.abs((ay - offset_y)) > .5f)
+                {
+                    //az -= offset_z;
+                    ax -= offset_x;
+                    ay -= offset_y;
+                    PointF p = new PointF(count,(float)ay);
+                    data_points.add(p);
+                    count++;
+                }
 
             }
-            //ax -= offset_x;
-            //ay -= offset_y;
-            //az -= offset_z;
+            prev = new PointF(count,(float)ay);
 
-            //Points p = new Points((int)ax,(int)ay,(int)ax,(int)ay,0);
-            //Point p = new Point((int)ax,(int)ay);
-            //data_points.add(p);
 
         }
         else
@@ -179,7 +187,7 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         }
 
         //add start point to reps
-        p = new PointF(data_points.get(index + 1).x,data_points.get(index + 1).y);
+        p = new PointF(data_points.get(index).x,data_points.get(index).y);//index + 1
         reps.add(p);
 
         if(!has_next_index(index))
@@ -206,7 +214,7 @@ public class MainActivity extends Activity implements SensorEventListener //AppC
         }
 
         //add end point to reps
-        p = new PointF(data_points.get(index + 1).x,data_points.get(index + 1).y);
+        p = new PointF(data_points.get(index).x,data_points.get(index).y);////index + 1
         reps.add(p);
 
         //success next rep found
