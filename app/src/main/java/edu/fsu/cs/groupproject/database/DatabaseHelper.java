@@ -1,6 +1,5 @@
 package edu.fsu.cs.groupproject.database;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -83,6 +82,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    // NEED Query by DATE
+
+
+    // Date -> Muscle Group -> Exercise
+
+
     //This is mostly for Collin (By collin) but it might help make sense of this crap
     //When we are inserting sets
     // The workoutID will remain the same
@@ -126,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //This is so we can retrieve workoutId to insert sets into a particular workout.
     public int getWorkoutID(){
-        int workoutID;
+        int workoutID = 0;
         String sql = "SELECT MAX(rowid) FROM " + TABLE_NAME2 + "";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
         if (cursor.moveToNext()) {
@@ -161,13 +166,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cur;
     }
 
-    //TODO: Date Query, Date/Muscle/Exercise Queries
-
-
-
-    // Date -> Muscle Group -> Exercise
-
-
+    public Cursor getDataForDate(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT Date, WorkoutID FROM " + TABLE_NAME2 + " WHERE Date = '" + date + "' ";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+    }
 
 }
-
+//TODO: Date Query, Date/Muscle/Exercise Queries
+// Date -> Muscle Group -> Exercise
