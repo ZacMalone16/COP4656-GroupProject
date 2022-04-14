@@ -8,4 +8,14 @@
         <item>Max Weight</item>
     </string-array>
 
+    <string name="addWorkoutMuscleSpinner">Select a muscle group</string>
+
+    <string-array name="addWorkoutMuscleEntries">
+        <item>Chest</item>
+        <item>Buttox</item>
+    </string-array>
+
+
+
+
 </resources>
