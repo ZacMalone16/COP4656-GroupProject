@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 
-public class DBHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Workouts.db";
     public static final String TABLE_NAME1 = "lifts_table";
     public static final String T1_COL0 = "ExerciseID";
@@ -25,9 +25,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String T2_COL5 = "Weight";
 
 
-    public DBHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, 1);}
+    public DatabaseHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, 1);}
     // SQLiteDatabase db = (this.getWritableDatabase());
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
