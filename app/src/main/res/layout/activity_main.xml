@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.016" />
 
-    <Button
+    <!--<Button
         android:id="@+id/main_ExerciseButtonButton"
         android:layout_width="48dp"
         android:layout_height="58dp"
@@ -67,7 +67,7 @@
         android:layout_marginTop="600dp"
         android:text="CA"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

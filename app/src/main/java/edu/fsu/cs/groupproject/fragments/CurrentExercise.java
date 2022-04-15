@@ -19,38 +19,27 @@ public class CurrentExercise extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_main, container, false);
-
+        View view = inflater.inflate(R.layout.current_exercise, container, false);
         setupView(view);
-
         return view;
     }
 
     private void setupView(View view) {
-
         setupMuscleSpinner(view);
         setupExerciseSpinner(view);
-
         setupSetsListView(view);
-
         setupTextViews(view);
     }
 
     private void setupTextViews(View view) {
-
     }
 
     private void setupSetsListView(View view) {
-
-
     }
 
     private void setupExerciseSpinner(View view) {
-
-
     }
 
     private void setupMuscleSpinner(View view) {
-
     }
 }
