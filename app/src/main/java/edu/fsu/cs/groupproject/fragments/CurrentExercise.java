@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,11 @@ public class CurrentExercise extends Fragment
     //Spinner back_spin;
     Spinner exercise_spin;
     Button add_set;
+    TextView set_num;
+    TextView weight;
+    Button add_five;
+    int num = 0;
+    int weight_amt = 0;
     DatabaseHelper db;
     Exercise e;
     int muscle_sel = 0;
@@ -61,6 +67,12 @@ public class CurrentExercise extends Fragment
         exercise_spin = (Spinner) view.findViewById(R.id.addWorkout_exercisesSpinner);
         add_set = (Button) view.findViewById(R.id.add_set_button);
         add_set.setVisibility(View.GONE);
+        set_num = (TextView) view.findViewById(R.id.set_num);
+        set_num.setVisibility(View.GONE);
+        weight = view.findViewById(R.id.weight);
+        weight.setVisibility(View.GONE);
+        add_five = view.findViewById(R.id.addSet_incrementButton);
+
         e = new Exercise();
 
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -100,6 +112,15 @@ public class CurrentExercise extends Fragment
                                             public void onClick(View view)
                                             {
                                                 System.out.println("add_set");
+                                                num++;
+                                                set_num.setVisibility(View.VISIBLE);
+                                                set_num.setTextSize(25);
+                                                String str = String.valueOf(num);
+                                                set_num.setText(str);
+                                                weight.setVisibility(View.VISIBLE);
+
+
+
                                             }
                                         });
 
@@ -190,8 +211,25 @@ public class CurrentExercise extends Fragment
 
         setupView(view);
 
+        add_five.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                weight_amt += 5;
+                String str = String.valueOf(weight_amt);
+                str = str.concat(" x ");
+
+                weight.setVisibility(View.VISIBLE);
+                weight.setTextSize(25);
+                weight.setText(String.valueOf(str));
+                System.out.println("weight = " + weight_amt);
+            }
+        });
+
         return view;
-    }
+    }//end onCreate View()
+
 
     private void setupView(View view)
     {
