@@ -25,6 +25,7 @@ public class CurrentExercise extends Fragment
 {
 
     Spinner muscle_spin;
+    //Spinner back_spin;
     Spinner exercise_spin;
     DatabaseHelper db;
     Exercise e;
@@ -32,6 +33,8 @@ public class CurrentExercise extends Fragment
     public static boolean muscle_chosen = false;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
     String[] chest_ex = {"Bench Press", "Incline Dumbbell Press", "Cable Flye"};
+    String[] back_ex = {"Lat Pulldown", "T Bar Row", "Cable Row"};
+    String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
     public static String [] exercise_array; // = {"","",""};
     public CurrentExercise()
     {
@@ -62,8 +65,9 @@ public class CurrentExercise extends Fragment
                     case 1:
                         //Exercise e = new Exercise();
                         System.out.println("case 1 chest ");
-                        e.muscle = "Chest";
-                        muscle_sel = 1;
+                        //e.muscle = "Chest";
+                        //muscle_sel = 1;
+                        //chest exercise spinner
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,chest_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
@@ -94,9 +98,39 @@ public class CurrentExercise extends Fragment
                             }
                         });
                         break;
-                    case 2:
-                        e.muscle = "Back";
-                        System.out.println("layout spinner  = " + muscle_spin.getSelectedItemPosition());
+                    case 2://back exercise spinner
+                        System.out.println("back spinner");
+                        exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,back_ex));//exercise_array
+                        exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                        {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+                            {
+                                switch (exercise_spin.getSelectedItemPosition())
+                                {
+                                    case 0://lat pulldown
+                                        System.out.println("Lat pulldown");
+                                        break;
+                                    case 1://T bar row
+                                        System.out.println("t bar");
+                                        break;
+                                    case 2://cable row
+                                        System.out.println("cable row");
+                                        break;
+                                    case 3:
+                                        break;
+                                    default:
+                                        System.out.println("deafult case");
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView)
+                            {
+
+                            }
+                        });
                         break;
                     case 3:
                         e.muscle = "Quads";
