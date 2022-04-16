@@ -33,6 +33,8 @@ public class CurrentExercise extends Fragment
     TextView set_num;
     TextView weight;
     Button add_five;
+    TextView reps;
+    Button start;
     int num = 0;
     int weight_amt = 0;
     DatabaseHelper db;
@@ -72,6 +74,9 @@ public class CurrentExercise extends Fragment
         weight = view.findViewById(R.id.weight);
         weight.setVisibility(View.GONE);
         add_five = view.findViewById(R.id.addSet_incrementButton);
+        reps = (TextView) view.findViewById(R.id.reps);
+        reps.setVisibility(View.GONE);
+        start = view.findViewById(R.id.startButton);
 
         e = new Exercise();
 
@@ -227,8 +232,20 @@ public class CurrentExercise extends Fragment
             }
         });
 
+        start.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                System.out.println("start clicked");
+
+            }
+        });
+
         return view;
     }//end onCreate View()
+
+
 
 
     private void setupView(View view)
