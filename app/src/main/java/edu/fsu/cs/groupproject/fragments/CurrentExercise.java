@@ -1,6 +1,6 @@
 package edu.fsu.cs.groupproject.fragments;
 
-import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,6 @@ import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 //import edu.fsu.cs.groupproject.graphs.Exercise;
 import edu.fsu.cs.groupproject.graphs.Exercise;
-import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
 public class CurrentExercise extends Fragment
 {
@@ -35,12 +34,15 @@ public class CurrentExercise extends Fragment
     Button add_five;
     TextView reps;
     Button start;
+    Button stop;
     int num = 0;
     int weight_amt = 0;
     DatabaseHelper db;
     Exercise e;
     int muscle_sel = 0;
+    int exercise_sel = 0;
     public static boolean muscle_chosen = false;
+    SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
     String[] chest_ex = {"Choose Exercise","Bench Press", "Incline Dumbbell Press", "Cable Flye"};
     String[] back_ex = {"Lat Pulldown", "T Bar Row", "Cable Row"};
@@ -56,6 +58,7 @@ public class CurrentExercise extends Fragment
     {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Nullable
@@ -65,6 +68,7 @@ public class CurrentExercise extends Fragment
         View view = inflater.inflate(R.layout.current_exercise, container, false);//activity_main
          db = new DatabaseHelper(getContext());
 
+         //sensorManager = (SensorManager) getS
         muscle_spin = (Spinner) view.findViewById(R.id.addWorkout_muscleSpinner);
         exercise_spin = (Spinner) view.findViewById(R.id.addWorkout_exercisesSpinner);
         add_set = (Button) view.findViewById(R.id.add_set_button);
@@ -76,10 +80,17 @@ public class CurrentExercise extends Fragment
         add_five = view.findViewById(R.id.addSet_incrementButton);
         reps = (TextView) view.findViewById(R.id.reps);
         reps.setVisibility(View.GONE);
-        start = view.findViewById(R.id.startButton);
+        start = view.findViewById(R.id.addSet_startButton);
+        stop = view.findViewById(R.id.addSet_stopButton);
 
         e = new Exercise();
 
+        System.out.println("muscle_sel = " + muscle_sel);
+        if(muscle_sel != 0)
+        {
+            muscle_spin.setSelection(muscle_sel);
+        }
+        //muscle_spin.setSelection(2);
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -94,8 +105,15 @@ public class CurrentExercise extends Fragment
                         //Exercise e = new Exercise();
                         System.out.println("case 1 chest ");
                         //e.muscle = "Chest";
-                        //muscle_sel = 1;
+                        muscle_sel = 1;
+                        MainActivity.muscle_sel = 1;
+                        System.out.println("muscle_sel = " + muscle_sel);
                         //chest exercise spinner
+                        if(exercise_sel != 0)
+                        {
+                            exercise_spin.setSelection(exercise_sel);
+                        }
+
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,chest_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
@@ -110,6 +128,7 @@ public class CurrentExercise extends Fragment
                                     case 1://bench
                                         System.out.println("bench press");
 
+                                        exercise_sel = 1;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
                                         {
@@ -223,7 +242,7 @@ public class CurrentExercise extends Fragment
             {
                 weight_amt += 5;
                 String str = String.valueOf(weight_amt);
-                str = str.concat(" x ");
+                str = str.concat("  x ");
 
                 weight.setVisibility(View.VISIBLE);
                 weight.setTextSize(25);
@@ -232,6 +251,8 @@ public class CurrentExercise extends Fragment
             }
         });
 
+        /*
+        //start button
         start.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -239,11 +260,44 @@ public class CurrentExercise extends Fragment
             {
                 System.out.println("start clicked");
 
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                //Bundle bundle = new Bundle();
+                intent.putExtra("start","true");
+                startActivity(intent);
+
+
+
+
+            }
+        });
+         */
+
+        //stop button
+        stop.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View view)
+            {
+                MainActivity.stop = true;
+                reps.setVisibility(View.VISIBLE);
+
+                int numReps =  MainActivity.count_reps();
+                //bool = funct();
+                //while(some)
+                reps.setTextSize(25);
+                System.out.println("before set text");
+                reps.setText(String.valueOf(numReps));
+
+
             }
         });
 
+
         return view;
     }//end onCreate View()
+
+
 
 
 
@@ -282,4 +336,6 @@ public class CurrentExercise extends Fragment
     {
 
     }
+
+
 }
