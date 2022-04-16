@@ -1,5 +1,6 @@
 package edu.fsu.cs.groupproject.fragments;
 
+import android.database.Cursor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,12 +36,13 @@ public class CurrentExercise extends Fragment
     TextView reps;
     Button start;
     Button stop;
-    int num = 0;
+    int setNumber = 0;
     int weight_amt = 0;
     DatabaseHelper db;
     Exercise e;
-    int muscle_sel = 0;
-    int exercise_sel = 0;
+    int muscle_lookup = 0;
+    int exercise_lookup = 0;
+    int prev_exercise = - 1;
     public static boolean muscle_chosen = false;
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
@@ -85,7 +87,7 @@ public class CurrentExercise extends Fragment
 
         e = new Exercise();
 
-        System.out.println("muscle_sel = " + muscle_sel);
+        //System.out.println("muscle_sel = " + muscle_sel);
         /*
         if(muscle_sel != 0)
         {
@@ -107,14 +109,16 @@ public class CurrentExercise extends Fragment
                         //Exercise e = new Exercise();
                         System.out.println("case 1 chest ");
                         //e.muscle = "Chest";
-                        muscle_sel = 1;
+                        //muscle_lookup = 1;
                         MainActivity.muscle_sel = 1;
-                        System.out.println("muscle_sel = " + muscle_sel);
+                        //System.out.println("muscle_sel = " + muscle_sel);
                         //chest exercise spinner
+                        /*
                         if(exercise_sel != 0)
                         {
                             exercise_spin.setSelection(exercise_sel);
                         }
+                         */
 
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,chest_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -130,7 +134,7 @@ public class CurrentExercise extends Fragment
                                     case 1://bench
                                         System.out.println("bench press");
 
-                                        exercise_sel = 1;
+                                        exercise_lookup = 1;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
                                         {
@@ -138,10 +142,10 @@ public class CurrentExercise extends Fragment
                                             public void onClick(View view)
                                             {
                                                 System.out.println("add_set");
-                                                num++;
+                                                setNumber++;
                                                 set_num.setVisibility(View.VISIBLE);
                                                 set_num.setTextSize(25);
-                                                String str = String.valueOf(num);
+                                                String str = String.valueOf(setNumber);
                                                 set_num.setText(str);
                                                 weight.setVisibility(View.VISIBLE);
                                             }
@@ -291,6 +295,84 @@ public class CurrentExercise extends Fragment
                 MainActivity.calibrate = false;
                 MainActivity.stop = false;
                 MainActivity.flag = true;
+
+                System.out.println("exercise lookup = " + exercise_lookup);
+                System.out.println("prev exercise = " + prev_exercise);
+                if(exercise_lookup != prev_exercise)
+                {
+                    System.out.println("insertWorkput called");
+                    //add data to database
+                    db.insertWorkout(exercise_lookup,"01.01.2021");
+
+                }
+
+                int workoutID = db.getWorkoutID();
+                System.out.println("workoutID = " + workoutID);
+                db.insertSet(workoutID,setNumber,numReps,weight_amt);
+
+                prev_exercise = exercise_lookup;
+
+                System.out.println("getAllData");
+                Cursor cur = db.getAllDatat1();
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    System.out.println("cur(0) = " + cur.getString(0));
+                    System.out.println("cur(1) = " + cur.getString(1));
+                    System.out.println("cur(2) = " + cur.getString(2));
+
+                    cur.moveToNext();
+                    System.out.println("cur(0) = " + cur.getString(0));
+                    System.out.println("cur(1) = " + cur.getString(1));
+                    System.out.println("cur(2) = " + cur.getString(2));
+
+
+                }
+                System.out.println("getExerciseData");
+                System.out.println("workoutID = " + workoutID);
+                cur = db.getExerciseData(workoutID);
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    System.out.println("cur(0) = " + cur.getString(0));
+                    System.out.println("cur(1) = " + cur.getString(1));
+                    System.out.println("cur(2) = " + cur.getString(2));
+
+                }
+
+                System.out.println("getWorkoutData");
+                System.out.println("workoutID = " + workoutID);
+                cur = db.getWorkoutData(workoutID);
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("0 setID = " + cur.getString(0));
+                        System.out.println("1 workoutID = " + cur.getString(1));
+                        System.out.println("2 setNum = " + cur.getString(2));
+                        System.out.println("3 Reps = " + cur.getString(3));
+                        System.out.println("4 weight = " + cur.getString(4));
+                        cur.moveToNext();
+                    }
+                }
+
+                /*
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    System.out.println("0 setID = " + cur.getString(0));
+                    System.out.println("1 workoutID = " + cur.getString(1));
+                    System.out.println("2 setNum = " + cur.getString(2));
+                    System.out.println("3 Reps = " + cur.getString(3));
+                    System.out.println("4 weight = " + cur.getString(4));
+
+                }
+                 */
+
+
+
 
 
             }

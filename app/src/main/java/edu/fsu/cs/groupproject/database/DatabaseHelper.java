@@ -13,8 +13,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Workouts.db";
     public static final String TABLE_NAME1 = "lifts_table";
     public static final String T1_COL0 = "ExerciseID";
-    public static final String T1_COL1 = "Exercise";
-    public static final String T1_COL2 = "MuscleGroup";
+    public static final String T1_COL1 = "MuscleGroup";//"Exercise"
+    public static final String T1_COL2 = "Exercise";//"MuscleGroup";
 
     public static final String TABLE_NAME2 = "workouts_table";
     public static final String T2_COL0 = "WorkoutID";  // Primary Key
@@ -45,21 +45,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
+
+        //lifts table
         //1
-        values.put(T1_COL1, "Bench Press");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");//muscle group
+        values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
-        values.put(T1_COL1, "Squat");
-        values.put(T1_COL2, "Legs");
+        values.put(T1_COL1, "Quads");
+        values.put(T1_COL2, "Squat");
         //3
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Flye");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Cable Flye");
         //4
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Dumbbell Curl");
-        values.put(T1_COL2, "Biceps");
+        values.put(T1_COL1, "Biceps");
+        values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
     }
 
