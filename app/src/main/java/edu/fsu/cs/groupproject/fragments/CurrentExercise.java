@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -27,17 +28,25 @@ public class CurrentExercise extends Fragment
     Spinner muscle_spin;
     //Spinner back_spin;
     Spinner exercise_spin;
+    Button add_set;
     DatabaseHelper db;
     Exercise e;
     int muscle_sel = 0;
     public static boolean muscle_chosen = false;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
-    String[] chest_ex = {"Bench Press", "Incline Dumbbell Press", "Cable Flye"};
+    String[] chest_ex = {"Choose Exercise","Bench Press", "Incline Dumbbell Press", "Cable Flye"};
     String[] back_ex = {"Lat Pulldown", "T Bar Row", "Cable Row"};
     String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
     public static String [] exercise_array; // = {"","",""};
     public CurrentExercise()
     {
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
 
     }
 
@@ -50,6 +59,8 @@ public class CurrentExercise extends Fragment
 
         muscle_spin = (Spinner) view.findViewById(R.id.addWorkout_muscleSpinner);
         exercise_spin = (Spinner) view.findViewById(R.id.addWorkout_exercisesSpinner);
+        add_set = (Button) view.findViewById(R.id.add_set_button);
+        add_set.setVisibility(View.GONE);
         e = new Exercise();
 
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -60,7 +71,7 @@ public class CurrentExercise extends Fragment
                 switch (muscle_spin.getSelectedItemPosition())
                 {
                     case 0:
-                        System.out.println("case 0 ");
+                        System.out.println("choose muscle");
                         break;
                     case 1:
                         //Exercise e = new Exercise();
@@ -76,14 +87,28 @@ public class CurrentExercise extends Fragment
                             {
                                 switch (exercise_spin.getSelectedItemPosition())
                                 {
-                                    case 0://bench press
+                                    case 0://choose
+                                        System.out.println("choose exercise");
+                                        break;
+                                    case 1://bench
                                         System.out.println("bench press");
+
+                                        add_set.setVisibility(View.VISIBLE);
+                                        add_set.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                System.out.println("add_set");
+                                            }
+                                        });
+
                                         break;
-                                    case 1://Incline Dumbbell Press
+                                    case 2://incline
+                                        System.out.println("Incline Dumbbell Press");
                                         break;
-                                    case 2://cable flye
-                                        break;
-                                    case 3:
+                                    case 3://cable flye
+                                        System.out.println("Cable Flye");
                                         break;
                                     default:
                                         System.out.println("deafult case");
@@ -195,11 +220,6 @@ public class CurrentExercise extends Fragment
     {
 
         //add muscle spinner
-
-
-
-
-
 
     }
 
