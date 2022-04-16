@@ -52,17 +52,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
-        values.put(T1_COL1, "Quads");
-        values.put(T1_COL2, "Squat");
-        //3
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Incline Dumbbell Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //3
+
         values.put(T1_COL1, "Chest");
         values.put(T1_COL2, "Cable Flye");
-        //4
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //4
+
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Lat Pulldown");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //5
+
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "T Bar Row");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //6
+
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Cable Row");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //7
+        values.put(T1_COL1, "Quads");
+        values.put(T1_COL2, "Squat");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //8
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
+
+
+
     }
 
     @Override

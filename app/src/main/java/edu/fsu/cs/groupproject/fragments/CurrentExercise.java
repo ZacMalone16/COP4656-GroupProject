@@ -47,7 +47,7 @@ public class CurrentExercise extends Fragment
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
     String[] chest_ex = {"Choose Exercise","Bench Press", "Incline Dumbbell Press", "Cable Flye"};
-    String[] back_ex = {"Lat Pulldown", "T Bar Row", "Cable Row"};
+    String[] back_ex = {"Choose Exercise","Lat Pulldown", "T Bar Row", "Cable Row"};
     String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
     public static String [] exercise_array; // = {"","",""};
     public CurrentExercise()
@@ -97,9 +97,11 @@ public class CurrentExercise extends Fragment
          */
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
             {
+                reps.setVisibility(View.GONE);
                 switch (muscle_spin.getSelectedItemPosition())
                 {
                     case 0:
@@ -108,18 +110,7 @@ public class CurrentExercise extends Fragment
                     case 1:
                         //Exercise e = new Exercise();
                         System.out.println("case 1 chest ");
-                        //e.muscle = "Chest";
-                        //muscle_lookup = 1;
-                        MainActivity.muscle_sel = 1;
-                        //System.out.println("muscle_sel = " + muscle_sel);
-                        //chest exercise spinner
-                        /*
-                        if(exercise_sel != 0)
-                        {
-                            exercise_spin.setSelection(exercise_sel);
-                        }
-                         */
-
+                        //MainActivity.muscle_sel = 1;
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,chest_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
@@ -133,7 +124,6 @@ public class CurrentExercise extends Fragment
                                         break;
                                     case 1://bench
                                         System.out.println("bench press");
-
                                         exercise_lookup = 1;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
@@ -173,6 +163,7 @@ public class CurrentExercise extends Fragment
                         break;
                     case 2://back exercise spinner
                         System.out.println("back spinner");
+                        setNumber = 0;
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,back_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
@@ -181,16 +172,35 @@ public class CurrentExercise extends Fragment
                             {
                                 switch (exercise_spin.getSelectedItemPosition())
                                 {
-                                    case 0://lat pulldown
+                                    case 0:
+                                        System.out.println("choose back exercise");
+                                        break;
+                                    case 1:////lat pulldown
+                                        exercise_lookup = 4;
                                         System.out.println("Lat pulldown");
+                                        add_set.setVisibility(View.VISIBLE);
+                                        add_set.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                System.out.println("add_set");
+                                                setNumber++;
+                                                set_num.setVisibility(View.VISIBLE);
+                                                set_num.setTextSize(25);
+                                                String str = String.valueOf(setNumber);
+                                                set_num.setText(str);
+                                                weight.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+
                                         break;
-                                    case 1://T bar row
+                                    case 2://T bar row
                                         System.out.println("t bar");
+
                                         break;
-                                    case 2://cable row
+                                    case 3://cable row
                                         System.out.println("cable row");
-                                        break;
-                                    case 3:
                                         break;
                                     default:
                                         System.out.println("deafult case");
@@ -317,6 +327,18 @@ public class CurrentExercise extends Fragment
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("cur(0) = " + cur.getString(0));
+                        System.out.println("cur(1) = " + cur.getString(1));
+                        System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+
+
+                    /*
+                    cur.moveToFirst();
                     System.out.println("cur(0) = " + cur.getString(0));
                     System.out.println("cur(1) = " + cur.getString(1));
                     System.out.println("cur(2) = " + cur.getString(2));
@@ -325,6 +347,7 @@ public class CurrentExercise extends Fragment
                     System.out.println("cur(0) = " + cur.getString(0));
                     System.out.println("cur(1) = " + cur.getString(1));
                     System.out.println("cur(2) = " + cur.getString(2));
+                     */
 
 
                 }
@@ -334,9 +357,15 @@ public class CurrentExercise extends Fragment
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
-                    System.out.println("cur(0) = " + cur.getString(0));
-                    System.out.println("cur(1) = " + cur.getString(1));
-                    System.out.println("cur(2) = " + cur.getString(2));
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("cur(0) = " + cur.getString(0));
+                        System.out.println("cur(1) = " + cur.getString(1));
+                        System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+
 
                 }
 
@@ -358,20 +387,23 @@ public class CurrentExercise extends Fragment
                     }
                 }
 
-                /*
+                System.out.println("getDataForDate");
+                System.out.println("workoutID = " + workoutID);
+                System.out.println("date = 01.01.2021");
+                cur = db.getDataForDate("01.01.2021");
+
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
-                    System.out.println("0 setID = " + cur.getString(0));
-                    System.out.println("1 workoutID = " + cur.getString(1));
-                    System.out.println("2 setNum = " + cur.getString(2));
-                    System.out.println("3 Reps = " + cur.getString(3));
-                    System.out.println("4 weight = " + cur.getString(4));
+                    while(!cur.isAfterLast())
+                    {
 
+                        System.out.println("cur(0) = " + cur.getString(0));
+                        System.out.println("cur(1) = " + cur.getString(1));
+                        //System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
                 }
-                 */
-
-
 
 
 
