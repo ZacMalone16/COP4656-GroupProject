@@ -86,11 +86,13 @@ public class CurrentExercise extends Fragment
         e = new Exercise();
 
         System.out.println("muscle_sel = " + muscle_sel);
+        /*
         if(muscle_sel != 0)
         {
             muscle_spin.setSelection(muscle_sel);
         }
         //muscle_spin.setSelection(2);
+         */
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -142,9 +144,6 @@ public class CurrentExercise extends Fragment
                                                 String str = String.valueOf(num);
                                                 set_num.setText(str);
                                                 weight.setVisibility(View.VISIBLE);
-
-
-
                                             }
                                         });
 
@@ -288,6 +287,10 @@ public class CurrentExercise extends Fragment
                 reps.setTextSize(25);
                 System.out.println("before set text");
                 reps.setText(String.valueOf(numReps));
+
+                MainActivity.calibrate = false;
+                MainActivity.stop = false;
+                MainActivity.flag = true;
 
 
             }

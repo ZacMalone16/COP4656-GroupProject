@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public static int muscle_sel = 0;
     PointF prev;
     double ax,ay,az, offset_x, offset_y, offset_z;
-    boolean calibrate = false;
+    public static boolean calibrate = false;
     public static boolean stop = false;
     int count = 0;
     public static int index = 0;
-    boolean flag  = true;
+    public static boolean flag  = true;
     public static int rep_count;
     boolean complete = false;
 
@@ -54,19 +54,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
-            /*
-            String [] values = getIntent().getStringArrayExtra("exercises");
-            for(int i = 0; i < values.length; i++)
-            {
-                System.out.println(values[i]);
-            }
-            CurrentExercise.exercise_array = values;
-            CurrentExercise.muscle_chosen = true;
-             */
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, currentExercise, "CurrentExercise").commit();//new CurrentExercise()
-
             onAddWorkoutSelected();
-
             System.out.println("bundle extras != null");
             String start = (String) extras.get("start");
             System.out.println("start = " + start);
@@ -112,16 +100,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         // Calendar needs to be implemented, haven't gotten to it yet.
     }
 
-    public static void reload_frag()
-    {
-
-        CurrentExercise frag = new CurrentExercise();
-        //manager = get
-        /*
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView2, new CurrentExercise(), "CurrentExercise").commit();
-         */
-    }
 
     @Override
     public void onSensorChanged(SensorEvent event)
@@ -132,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             ay = event.values[1];
             ax = event.values[2];
         }
+
 
         if(!calibrate)
         {
@@ -323,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public void start(View v)
     {
         calibrate = true;
+
     }
 }
 
