@@ -11,8 +11,17 @@
     <string name="addWorkoutMuscleSpinner">Select a muscle group</string>
 
     <string-array name="addWorkoutMuscleEntries">
+        <item>Choose Muscle Group</item>
         <item>Chest</item>
-        <item>Buttox</item>
+        <item>Back</item>
+        <item>Quads</item>
+        <item>Hamstrings</item>
+        <item>Calves</item>
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Forearms</item>
+        <item>Shoulders</item>
+
     </string-array>
 
 

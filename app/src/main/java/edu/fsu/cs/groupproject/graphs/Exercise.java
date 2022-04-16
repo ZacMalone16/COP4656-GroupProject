@@ -7,10 +7,15 @@ import java.util.ArrayList;
 public class Exercise
 {
 
-    String name;//bench press
-    String muscle;
-    ArrayList<Point> data = new ArrayList<>();//sets and reps
+    public String name;//bench press
+    public String muscle;
+    public ArrayList<Point> data = new ArrayList<>();//index is set #, each row,col is weight and reps
     //int[][] exercise = new int[][]
+
+    public Exercise()
+    {
+
+    }
 
     Exercise(String m,String n,int[][] array)
     {

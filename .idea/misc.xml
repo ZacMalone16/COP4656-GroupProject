@@ -3,17 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Collin/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main_sensor.xml" value="0.17603850050658562" />
-        <entry key="..\:/Users/Collin/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/reps_graph_layout.xml" value="0.17603850050658562" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main.xml" value="0.37149532710280375" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main_graph.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main_sensor.xml" value="0.31296296296296294" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/choose_graph.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/current_exercise.xml" value="0.2" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/currentworkout_fragment.xml" value="0.371875" />
+        <entry key="..\:/Users/togam/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/start_page.xml" value="0.4041666666666667" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main_graph.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/activity_main_sensor.xml" value="0.3069687900812313" />
-        <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/add_set.xml" value="0.28986746472851643" />
-        <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/add_workout.xml" value="0.28986746472851643" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/blank_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/calendar_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/choose_graph.xml" value="0.3069687900812313" />
-        <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/current_exercise.xml" value="0.4" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/currentworkout_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/frag_max_weight.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/fragment_choose_frag.xml" value="0.15049166310389056" />
@@ -21,7 +23,6 @@
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/graphs_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/main_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/max_weight.xml" value="0.3069687900812313" />
-        <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/COP4656-GroupProject/app/src/main/res/layout/start_page.xml" value="0.28986746472851643" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/app/src/main/res/layout/calendar_fragment.xml" value="0.3069687900812313" />
         <entry key="..\:/Users/zacma/Development/AndroidStudioProjects/app/src/main/res/layout/main_fragment.xml" value="0.264" />

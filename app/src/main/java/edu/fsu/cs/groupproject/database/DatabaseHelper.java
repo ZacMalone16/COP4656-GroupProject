@@ -45,14 +45,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
+        //1
         values.put(T1_COL1, "Bench Press");
         values.put(T1_COL2, "Chest");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //2
         values.put(T1_COL1, "Squat");
         values.put(T1_COL2, "Legs");
+        //3
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         values.put(T1_COL1, "Flye");
         values.put(T1_COL2, "Chest");
+        //4
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         values.put(T1_COL1, "Dumbbell Curl");
         values.put(T1_COL2, "Biceps");
@@ -99,7 +103,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     The "Workout" is added to the workouts table.
     Retrieve the WorkoutID from the workouts table. (It is autoincremented) //This is the weird step
     Until the User is done logging that workout, this workoutID will not change.
-
    Example call for workout:
    //will need a date variable.
     db.insertWorkout(1, "01-01-2021");
@@ -110,7 +113,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Sensor tracks reps - stores to reps variable
     Sensor incremenets hypothetical "set_number" variable
     db.insertSet(workoutid, set_number, reps, weight);
-
     prompt for next weight or finish workout.
      */
     public boolean insertSet(int WorkoutID, int Set, int Reps, int Weight){
