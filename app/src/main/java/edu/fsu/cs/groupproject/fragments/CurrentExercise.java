@@ -365,7 +365,8 @@ public class CurrentExercise extends Fragment
                 cur = db.getExerciseData(workoutID);
                 if(cur != null && cur.getCount() > 0)
                 {
-                    cur.moveToFirst();
+                    //cur.moveToFirst();
+                    cur.moveToNext();
                     while(!cur.isAfterLast())
                     {
 
@@ -376,6 +377,10 @@ public class CurrentExercise extends Fragment
                     }
 
 
+                }
+                else
+                {
+                    System.out.println("cur =  null or getcount = 0");
                 }
                 System.out.println("getAllExerciseData");
                 cur = db.getAllExerciseData();
@@ -423,8 +428,8 @@ public class CurrentExercise extends Fragment
                     while(!cur.isAfterLast())
                     {
 
-                        System.out.println("cur(0) = " + cur.getString(0));
-                        System.out.println("cur(1) = " + cur.getString(1));
+                        System.out.println("cur(0)date = " + cur.getString(0));
+                        System.out.println("cur(1)workout ID = " + cur.getString(1));
                         //System.out.println("cur(2) = " + cur.getString(2));
                         cur.moveToNext();
                     }
