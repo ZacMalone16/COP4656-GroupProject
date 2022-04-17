@@ -82,7 +82,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
 
 
-
     }
 
     @Override
