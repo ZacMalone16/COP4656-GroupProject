@@ -102,6 +102,13 @@ public class CurrentExercise extends Fragment
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
             {
                 reps.setVisibility(View.GONE);
+                setNumber = 0;
+                set_num.setVisibility(View.GONE);
+                weight.setVisibility(View.GONE);
+                //set_num.setVisibility(View.VISIBLE);
+                //set_num.setTextSize(25);
+                //String str = String.valueOf(setNumber);
+                //set_num.setText(str);
                 switch (muscle_spin.getSelectedItemPosition())
                 {
                     case 0:
@@ -163,7 +170,7 @@ public class CurrentExercise extends Fragment
                         break;
                     case 2://back exercise spinner
                         System.out.println("back spinner");
-                        setNumber = 0;
+                        //setNumber = 0;
                         exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,back_ex));//exercise_array
                         exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
@@ -316,6 +323,7 @@ public class CurrentExercise extends Fragment
 
                 }
 
+                //one specific exercise?
                 int workoutID = db.getWorkoutID();
                 System.out.println("workoutID = " + workoutID);
                 db.insertSet(workoutID,setNumber,numReps,weight_amt);
@@ -330,9 +338,9 @@ public class CurrentExercise extends Fragment
                     while(!cur.isAfterLast())
                     {
 
-                        System.out.println("cur(0) = " + cur.getString(0));
-                        System.out.println("cur(1) = " + cur.getString(1));
-                        System.out.println("cur(2) = " + cur.getString(2));
+                        System.out.println("0 exercise ID = " + cur.getString(0));
+                        System.out.println("1 muscleGroup = " + cur.getString(1));
+                        System.out.println("2 Exercise = " + cur.getString(2));
                         cur.moveToNext();
                     }
 
@@ -351,8 +359,9 @@ public class CurrentExercise extends Fragment
 
 
                 }
-                System.out.println("getExerciseData");
-                System.out.println("workoutID = " + workoutID);
+                System.out.println("getExerciseData with workout id");
+                System.out.println("current workoutID = " + workoutID);
+                //need a way to get every row in this table
                 cur = db.getExerciseData(workoutID);
                 if(cur != null && cur.getCount() > 0)
                 {
@@ -360,14 +369,30 @@ public class CurrentExercise extends Fragment
                     while(!cur.isAfterLast())
                     {
 
-                        System.out.println("cur(0) = " + cur.getString(0));
-                        System.out.println("cur(1) = " + cur.getString(1));
-                        System.out.println("cur(2) = " + cur.getString(2));
+                        System.out.printf("0: %s workoutID = specific exercise on this date\n", cur.getString(0));
+                        System.out.printf("1: %s exerciseID refers 1 = bench \n", cur.getString(1));
+                        System.out.printf("2: %s date \n", cur.getString(2));
                         cur.moveToNext();
                     }
 
 
                 }
+                System.out.println("getAllExerciseData");
+                cur = db.getAllExerciseData();
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("0 workoutID = " + cur.getString(0));
+                        System.out.println("1 exerciseID = " + cur.getString(1));
+                        System.out.println("2 date = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+
+                }
+
 
                 System.out.println("getWorkoutData");
                 System.out.println("workoutID = " + workoutID);

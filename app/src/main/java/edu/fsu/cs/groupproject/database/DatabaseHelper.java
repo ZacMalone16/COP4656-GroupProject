@@ -28,9 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String T3_COL3 = "Reps";
     public static final String T3_COL4 = "Weight";
 
-
-
-
     public DatabaseHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, 1);}
     //SQLiteDatabase db = (this.getWritableDatabase());
 
@@ -48,32 +45,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //lifts table
         //1
-        values.put(T1_COL1, "Chest");//muscle group
-        values.put(T1_COL2, "Bench Press");//exercise
+        values.put(T1_COL1, "Bench Press");//muscle group
+        values.put(T1_COL2, "Chest");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
-        values.put(T1_COL1, "Chest");
-        values.put(T1_COL2, "Incline Dumbbell Press");
+        values.put(T1_COL1, "Incline Dumbbell Press");
+        values.put(T1_COL2, "Chest");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //3
 
-        values.put(T1_COL1, "Chest");
-        values.put(T1_COL2, "Cable Flye");
+        values.put(T1_COL1, "Cable Flye");
+        values.put(T1_COL2, "Chest");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //4
 
-        values.put(T1_COL1, "Back");
-        values.put(T1_COL2, "Lat Pulldown");
+        values.put(T1_COL1, "Lat Pulldown");
+        values.put(T1_COL2, "Back");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //5
 
-        values.put(T1_COL1, "Back");
-        values.put(T1_COL2, "T Bar Row");
+        values.put(T1_COL1, "T Bar Row");
+        values.put(T1_COL2, "Back");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //6
 
-        values.put(T1_COL1, "Back");
-        values.put(T1_COL2, "Cable Row");
+        values.put(T1_COL1, "Cable Row");
+        values.put(T1_COL2, "Back");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //7
         values.put(T1_COL1, "Quads");
@@ -183,6 +180,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cur =  db.rawQuery(sql, null);
         //Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME2, null);
         return cur;
+    }
+    public Cursor getAllExerciseData()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME2, null);
+        return cur;
+
     }
 
     public Cursor getWorkoutData(int WorkoutID){

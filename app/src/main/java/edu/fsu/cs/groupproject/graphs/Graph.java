@@ -63,6 +63,7 @@ public class Graph extends FrameLayout
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
 
+
     public Graph(Context context)
     {
         super(context);

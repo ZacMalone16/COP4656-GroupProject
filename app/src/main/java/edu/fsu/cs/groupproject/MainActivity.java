@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
+import edu.fsu.cs.groupproject.graphs.GraphActivity;
+import edu.fsu.cs.groupproject.graphs.Graph;
 
 public class MainActivity extends AppCompatActivity implements FragmentCommunications, SensorEventListener
 {
@@ -81,6 +84,12 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         getSupportActionBar().hide();
     }
 
+    public void graph_frag(View v)
+    {
+        Intent intent = new Intent(this, GraphActivity.class);
+        startActivity(intent);
+    }
+
     //start page frag
     private void openStart() {
         getSupportFragmentManager().beginTransaction()
@@ -121,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 
         if(calibrate && !stop)
         {
-            System.out.println("calibrate && !stop");
+            //System.out.println("calibrate && !stop");
             if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )//if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
             {
                 //add raw data outside -.2 to .2
@@ -182,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             System.out.printf("REP %d\n", rep_count);
             has_next_rep = get_reps();
         }
+        System.out.println("");
 
         return rep_count;
 
@@ -269,20 +279,20 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         //finds min
         if(str.equals("up"))
         {
-            System.out.printf("up: %f - %f = %f\n", next,current, next - current);
+            //System.out.printf("up: %f - %f = %f\n", next,current, next - current);
             if(next - current >= mag)
             {
-                System.out.println("min found$$$$$$$$$$$$$$$$$");
+                //System.out.println("min found$$$$$$$$$$$$$$$$$");
                 return true;
             }
         }
         //finds max
         else if(str.equals("down"))
         {
-            System.out.printf("down: %f - %f = %f\n", next,current, next - current);
+            //System.out.printf("down: %f - %f = %f\n", next,current, next - current);
             if(next - current <= -mag)
             {
-                System.out.println("max found$$$$$$$$$$$$$$$$$");
+                //System.out.println("max found$$$$$$$$$$$$$$$$$");
 
                 return true;
             }
@@ -304,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         calibrate = true;
 
     }
-}
+}//end MainActivity class
 
 /*    private void openWorkouts() {
         Intent intent = new Intent(this, GraphActivity.class);
