@@ -45,15 +45,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
-        values.put(T1_COL1, "Chest");
-        values.put(T1_COL2, "Bench Press");
+        values.put(T1_COL1, "Chest");//muscle group
+        values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Legs");
+        //2
+        values.put(T1_COL1, "Incline Dumbbell Press");
+        values.put(T1_COL2, "Chest");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //3
+
+        values.put(T1_COL1, "Cable Flye");
+        values.put(T1_COL2, "Chest");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //4
+
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Lat Pulldown");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //5
+
+        values.put(T1_COL1, "T Bar Row");
+        values.put(T1_COL2, "Back");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //6
+
+        values.put(T1_COL1, "Cable Row");
+        values.put(T1_COL2, "Back");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //7
+        values.put(T1_COL1, "Quads");
         values.put(T1_COL2, "Squat");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Chest");
-        values.put(T1_COL2, "Flye");
-        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //8
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
@@ -99,7 +122,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     The "Workout" is added to the workouts table.
     Retrieve the WorkoutID from the workouts table. (It is autoincremented) //This is the weird step
     Until the User is done logging that workout, this workoutID will not change.
-
    Example call for workout:
    //will need a date variable.
     db.insertWorkout(1, "01-01-2021");
@@ -110,7 +132,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Sensor tracks reps - stores to reps variable
     Sensor incremenets hypothetical "set_number" variable
     db.insertSet(workoutid, set_number, reps, weight);
-
     prompt for next weight or finish workout.
      */
     public boolean insertSet(int WorkoutID, int Set, int Reps, int Weight){

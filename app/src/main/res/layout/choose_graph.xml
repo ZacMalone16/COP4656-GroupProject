@@ -8,14 +8,18 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
-        android:layout_height="48sp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
 
+
+        style="@android:style/Widget.Spinner"
         android:entries="@array/graphs"
-        android:translationY="0sp" />
+         />
 </RelativeLayout>
 
     <!--600
-
+    android:textSize="30sp"
+android:translationY="0sp"
        <edu.fsu.cs.graph.Graph
         android:layout_width="match_parent"
         android:layout_height="match_parent"

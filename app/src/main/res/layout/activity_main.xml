@@ -25,9 +25,10 @@
         android:layout_height="58dp"
         android:layout_marginStart="228dp"
         android:layout_marginTop="600dp"
-        android:text="D"
+        android:text="G"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="graph_frag"/>
 
     <Button
         android:id="@+id/main_previousWorkoutsButton"
@@ -35,7 +36,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="600dp"
-        android:text="C"
+        android:text="CE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +56,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="600dp"
-        android:text="B"
+        android:text="CW"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +66,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="600dp"
-        android:text="CA"
+        android:text="C"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

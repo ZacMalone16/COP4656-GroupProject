@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 //import android.support.v4.app.Fragment;
@@ -33,6 +35,11 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
     FragmentManager manager;
     FragmentTransaction ft;
+    static int choose_graph_sel;
+
+    //Spinner muscle_spin;
+    //Spinner exercise_spin;
+    //Spinner date_spin;
 
     //vectors of exercises added (int index in list)
 
@@ -74,8 +81,13 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
+
+        //muscle_spin = (Spinner) findViewById(R.id.muscleSpinner);
+        //exercise_spin = (Spinner) findViewById(R.id.exerciseSpinner);
+        //date_spin = (Spinner) findViewById(R.id.dateSpinner);
         System.out.println("width: " + width);
         System.out.println("height: " + height);
+
 
         //check if bundle is null
         //if nundle is null load choose frag
@@ -86,18 +98,38 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         {
 
             System.out.println("bundle extras != null");
-            int bundle_layout = extras.getInt("bundle_layout");
-            System.out.println("main bundle_layout = " + bundle_layout);
+            //int bundle_layout = extras.getInt("bundle_layout");
+            int graph_num = extras.getInt("graph_num");
+            //System.out.println("main bundle_layout = " + bundle_layout);
+            System.out.println("main graphnum = " + graph_num);
             //load sets and reps frag
-            if(bundle_layout == 1)
+            if(graph_num == 1)//if(bundle_layout == 1)
             {
+                choose_graph_sel = 1;
 
-                graph = new Graph(this, width, height, 1);//
+                graph = new Graph(this, width, height, 0);//
                 setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
+
+                //sets and reps frag
+                manager = getFragmentManager();
+                FragmentTransaction ft2 = manager.beginTransaction();
+                SetsRepsFrag setsRepsFrag = new SetsRepsFrag();
+                ft2.replace(R.id.buttons_frag, setsRepsFrag);
+                ft2.commit();
+
+                //choose graph frag
+                manager = getFragmentManager();
+                ft = manager.beginTransaction();
+                ChooseFrag chooseFrag = new ChooseFrag();
+                ft.replace(R.id.spinner_frag,chooseFrag);
+                ft.commit();
+                //chooseFrag.choose_graph.setSelection(1);
+
+
             }
             //load max weight frag
-            else if(bundle_layout == 2)
+            else if(graph_num == 2)//else if(bundle_layout == 2)
             {
                 graph = new Graph(this, width, height, 0);//2
                 setContentView(graph);
@@ -140,6 +172,12 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         //graph.set_legend_y(quads.getY());
 
         //setContentView(R.layout.activity_main);
+
+
+
+
+
+
 
     }//end OnCreate()
 
