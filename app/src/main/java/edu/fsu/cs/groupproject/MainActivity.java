@@ -314,6 +314,11 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         calibrate = true;
 
     }
+
+    public void man_add_reps(View v)
+    {
+
+    }
 }//end MainActivity class
 
 /*    private void openWorkouts() {

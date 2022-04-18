@@ -361,7 +361,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         if(v == MaxWeightFrag.chest)
         {
-            pop_max_data();
+            //pop_max_data();
             System.out.println("chestlsit.size = " + chest_list.size());
             System.out.println("chest-sel.size = " + chest_sel.length);
 

@@ -61,9 +61,21 @@ public class SetsRepsFrag extends Fragment
             }
         }
 
-        for(int i = 0; i < date_list.size(); i++)
+        cur = db.dateQuery("04.08.2022");
+        if(cur != null && cur.getCount() > 0)
         {
-            System.out.println();
+            cur.moveToFirst();
+            while(!cur.isAfterLast())
+            {
+                System.out.println("cur(0)WorkoutID = " + cur.getString(0));
+                System.out.println("cur(1)Exercise = " + cur.getString(1));
+                System.out.println("cur(2 Set Number = " + cur.getString(2));
+                System.out.println("cur(3 Weight = " + cur.getString(3));
+                System.out.println("cur(4 Reps = " + cur.getString(4));
+
+                //System.out.println("cur(2) = " + cur.getString(2));
+                cur.moveToNext();
+            }
         }
     }
 
@@ -102,10 +114,11 @@ public class SetsRepsFrag extends Fragment
                 {
                     //get workoutID
                     System.out.println("cur(0) = " + Integer.parseInt(cur.getString(0)));
-                    workoutID = Integer.parseInt(cur.getString(0));
+                    //
+                    workoutID = Integer.parseInt(cur.getString(0));//was 5
                     System.out.println("cur.getcount = " + cur.getCount());
                     //skip to next record if the workout ID is the same
-                    if(Integer.parseInt(cur.getString(0)) == current_exercise)
+                    if(workoutID == current_exercise)//if(Integer.parseInt(cur.getString(0)) == current_exercise)
                     {
 
                         cur.moveToNext();
@@ -145,7 +158,7 @@ public class SetsRepsFrag extends Fragment
                             cur2.moveToFirst();
                             while(!cur2.isAfterLast())//
                             {
-                                if(Integer.parseInt(cur2.getString(0)) == workoutID)
+                                if(Integer.parseInt(cur2.getString(0)) == Integer.parseInt(cur.getString(5)))//==workoutid
                                 {
                                     GraphActivity.names.add(cur2.getString(2));
 

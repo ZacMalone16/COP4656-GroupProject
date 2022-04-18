@@ -30,6 +30,7 @@ public class CurrentExercise extends Fragment
     //Spinner back_spin;
     Spinner exercise_spin;
     Button add_set;
+    Button add_reps_man;
     TextView set_num;
     TextView weight;
     Button add_five;
@@ -115,6 +116,7 @@ public class CurrentExercise extends Fragment
         reps.setVisibility(View.GONE);
         start = view.findViewById(R.id.addSet_startButton);
         stop = view.findViewById(R.id.addSet_stopButton);
+        add_reps_man = view.findViewById(R.id.add_reps_manual);
 
         e = new Exercise();
 
@@ -136,6 +138,7 @@ public class CurrentExercise extends Fragment
                 setNumber = 0;
                 set_num.setVisibility(View.GONE);
                 weight.setVisibility(View.GONE);
+                add_reps_man.setVisibility(View.GONE);
                 //set_num.setVisibility(View.VISIBLE);
                 //set_num.setTextSize(25);
                 //String str = String.valueOf(setNumber);
@@ -164,6 +167,7 @@ public class CurrentExercise extends Fragment
                                         System.out.println("bench press");
                                         exercise_lookup = 1;
                                         add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
                                         {
                                             @Override
@@ -178,6 +182,16 @@ public class CurrentExercise extends Fragment
                                                 weight.setVisibility(View.VISIBLE);
                                             }
                                         });
+                                        /*
+                                        add_reps_man.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+
+                                            }
+                                        });
+                                         */
 
                                         break;
                                     case 2://incline
@@ -254,7 +268,7 @@ public class CurrentExercise extends Fragment
                         });
                         break;
                     case 3:
-                        e.muscle = "Quads";
+                        //e.muscle = "Quads";
                         break;
                     case 4:
                         break;
@@ -279,10 +293,6 @@ public class CurrentExercise extends Fragment
             }
         });
 
-        if(muscle_chosen)
-        {
-
-        }
 
         setupView(view);
 
