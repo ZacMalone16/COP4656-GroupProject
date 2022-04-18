@@ -491,7 +491,24 @@ public class CurrentExercise extends Fragment
                     }
                 }
 
-            }
+                System.out.println("get all dates");
+                cur = db.getDates();
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("cur(0)dates = " + cur.getString(0));
+
+                        //System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+                }
+
+
+
+            }//end stop
         });
 
 

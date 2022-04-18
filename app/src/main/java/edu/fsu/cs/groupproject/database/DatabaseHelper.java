@@ -210,11 +210,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //cur.getString(4) // Reps
     }
 
+    /*
     public Cursor getAllDates()
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME1, null);
         return cur;
+    }
+     */
+
+    public Cursor maxWeight(int ExerciseID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //date and max weight for that specific exercise on each day.
+        // select max(weight), date
+        String sql = "SELECT  lifts_table.Exercise, max(sets_table.Weight), Date FROM lifts_table, workouts_table, sets_table ON workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.ExerciseID = '" + ExerciseID + "'";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //Exercise Name
+        //cur.getString(1) //Max Weight
+        //cur.getString(2) //Date of Max
+    }
+
+    public Cursor getDates(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT DISTINCT Date FROM " + TABLE_NAME2 + "";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //Date
     }
 
 }

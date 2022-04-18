@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.R;
+import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
 public class GraphActivity extends Activity //Activity //AppCompatActivity
 {
@@ -69,6 +71,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     boolean[] chest_sel = new boolean[3];//selectedLang
     boolean[] back_sel = new boolean[3];
     boolean[] shoulder_sel = new boolean[3];
+    DatabaseHelper db;
 
     //int set_
     @Override
@@ -83,6 +86,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
+        db = new DatabaseHelper(getBaseContext());
 
         //muscle_spin = (Spinner) findViewById(R.id.muscleSpinner);
         //exercise_spin = (Spinner) findViewById(R.id.exerciseSpinner);
@@ -214,6 +218,34 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
     public void chest_max(View v)
     {
+        //start dynamic pop//////////////////////////
+
+        /*
+        //clear list of exercises
+        data.clear();
+        //get name of exercise
+        Cursor cur2 = db.getAllDatat1();
+        if(cur2 != null && cur2.getCount() > 0)
+        {
+            cur2.moveToFirst();
+            while(!cur2.isAfterLast())//
+            {
+                //loop through exercises in db and check if the name equals the item checked
+                if(cur2.getString(2).equals(chest_ex[chest_list.get(j)]))
+                {
+                    names.add(cur2.getString(2));
+
+                }
+
+                System.out.println("0 exercise ID = " + cur2.getString(0));
+                System.out.println("1 muscleGroup = " + cur2.getString(1));
+                System.out.println("2 Exercise = " + cur2.getString(2));
+                cur2.moveToNext();
+            }
+
+        }
+        //end dynamic pop//////////////////////////
+         */
 
         if(v == MaxWeightFrag.chest)
         {
@@ -271,10 +303,14 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 {
 
                     System.out.println("OK musclselist.size = " + chest_list.size());
-                    for (int j = 0; j < chest_list.size(); j++) {
+                    for (int j = 0; j < chest_list.size(); j++)
+                    {
                         //if exercise namec is not already in list
                         if (graph.try_add(chest_ex[chest_list.get(j)]))
                         {
+
+
+
                             //pass arraylist for chest1,name & index of exercise to set_exercises
                             graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
                             graph.proportion_graph2();

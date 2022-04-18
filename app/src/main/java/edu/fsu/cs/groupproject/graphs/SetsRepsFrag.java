@@ -72,6 +72,7 @@ public class SetsRepsFrag extends Fragment
                         }
                         while(!cur.isAfterLast())
                         {
+                            //get workoutID
                             System.out.println("cur(0) = " + Integer.parseInt(cur.getString(0)));
                             workoutID = Integer.parseInt(cur.getString(0));
                             System.out.println("cur.getcount = " + cur.getCount());
@@ -149,6 +150,22 @@ public class SetsRepsFrag extends Fragment
                                 //}
                             }
                             current_exercise = Integer.parseInt(cur.getString(0));
+                            System.out.println("max weight");
+                            System.out.println("current exercise = " + current_exercise);
+                            Cursor cur3 = db.maxWeight(current_exercise);
+                            if(cur3 != null && cur3.getCount() > 0)
+                            {
+                                cur3.moveToFirst();
+                                while(!cur3.isAfterLast())
+                                {
+                                    System.out.println("cur(0) Name = " + cur3.getString(0));
+                                    System.out.println("cur(1) = " + cur3.getString(1));
+
+                                    //System.out.println("cur(2) = " + cur.getString(2));
+                                    cur3.moveToNext();
+                                }
+                            }
+
                             cur.moveToNext();
 
                         }//end while
@@ -156,6 +173,8 @@ public class SetsRepsFrag extends Fragment
                         //intent.putExtra("bundle_layout",1);
                         intent.putExtra("graph_num",3);
                         startActivity(intent);
+
+
 
                         break;
                 }
