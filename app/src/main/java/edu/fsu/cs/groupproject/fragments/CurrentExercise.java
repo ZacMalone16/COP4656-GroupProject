@@ -319,7 +319,7 @@ public class CurrentExercise extends Fragment
                 {
                     System.out.println("insertWorkput called");
                     //add data to database
-                    db.insertWorkout(exercise_lookup,"01.01.2021");
+                    db.insertWorkout(exercise_lookup,"04.01.2022");
 
                 }
 
@@ -382,6 +382,7 @@ public class CurrentExercise extends Fragment
                 {
                     System.out.println("cur =  null or getcount = 0");
                 }
+                /*
                 System.out.println("getAllExerciseData");
                 cur = db.getAllExerciseData();
                 if(cur != null && cur.getCount() > 0)
@@ -397,6 +398,7 @@ public class CurrentExercise extends Fragment
                     }
 
                 }
+                 */
 
 
                 System.out.println("getWorkoutData");
@@ -434,6 +436,29 @@ public class CurrentExercise extends Fragment
                         cur.moveToNext();
                     }
                 }
+
+                System.out.println("new date query***********");
+                cur = db.dateQuery("04.01.2022");
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("cur(0)WorkoutID = " + cur.getString(0));
+                        System.out.println("cur(1)Exercise = " + cur.getString(1));
+                        System.out.println("cur(2 Set Number = " + cur.getString(2));
+                        System.out.println("cur(3 Weight = " + cur.getString(3));
+                        System.out.println("cur(4 Reps = " + cur.getString(4));
+                        //System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+                }
+                //cur.getString(0) //WorkoutID
+                //cur.getString(1) //Exercise
+                //cur.getString(2) // Set Number
+                //cur.getString(3) // Weight
+                //cur.getString(4) // Reps
 
 
 

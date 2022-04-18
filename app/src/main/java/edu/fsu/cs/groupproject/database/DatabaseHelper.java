@@ -13,8 +13,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Workouts.db";
     public static final String TABLE_NAME1 = "lifts_table";
     public static final String T1_COL0 = "ExerciseID";
-    public static final String T1_COL1 = "MuscleGroup";//"Exercise"
-    public static final String T1_COL2 = "Exercise";//"MuscleGroup";
+    public static final String T1_COL1 = "MuscleGroup";
+    public static final String T1_COL2 = "Exercise";
 
     public static final String TABLE_NAME2 = "workouts_table";
     public static final String T2_COL0 = "WorkoutID";  // Primary Key
@@ -28,12 +28,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String T3_COL3 = "Reps";
     public static final String T3_COL4 = "Weight";
 
+
+
     public DatabaseHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, 1);}
     //SQLiteDatabase db = (this.getWritableDatabase());
 
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("create table " + TABLE_NAME1 + " (ExerciseID INTEGER PRIMARY KEY AUTOINCREMENT, Exercise TEXT, MuscleGroup TEXT)" );
+        sqLiteDatabase.execSQL("create table " + TABLE_NAME1 + " (ExerciseID INTEGER PRIMARY KEY AUTOINCREMENT, MuscleGroup TEXT, Exercise TEXT)" );
         sqLiteDatabase.execSQL("create table " + TABLE_NAME2 + " (WorkoutID INTEGER PRIMARY KEY AUTOINCREMENT, ExerciseID INTEGER, Date TEXT)" );
         sqLiteDatabase.execSQL("create table " + TABLE_NAME3 + " (SetID INTEGER PRIMARY KEY AUTOINCREMENT, WorkoutID INTEGER, SetNum INTEGER, Reps INTEGER, Weight INTEGER)" );
 
@@ -42,11 +45,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
-
-        //lifts table
-        //1
-        values.put(T1_COL1, "Bench Press");//muscle group
-        values.put(T1_COL2, "Chest");//exercise
+        values.put(T1_COL1, "Chest");//muscle group
+        values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
         values.put(T1_COL1, "Incline Dumbbell Press");
@@ -59,8 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //4
 
-        values.put(T1_COL1, "Lat Pulldown");
-        values.put(T1_COL2, "Back");
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Lat Pulldown");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //5
 
@@ -80,8 +80,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-
-
     }
 
     @Override
@@ -180,13 +178,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME2, null);
         return cur;
     }
-    public Cursor getAllExerciseData()
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME2, null);
-        return cur;
-
-    }
 
     public Cursor getWorkoutData(int WorkoutID){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -201,6 +192,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sql = "SELECT Date, WorkoutID FROM " + TABLE_NAME2 + " WHERE Date = '" + date + "' ";
         Cursor cur =  db.rawQuery(sql, null);
         return cur;
+    }
+
+    public Cursor dateQuery(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT workouts_table.WorkoutID, lifts_table.Exercise, sets_table.SetNum, sets_table.Weight, sets_table.Reps FROM lifts_table, workouts_table, sets_table ON lifts_table.ExerciseID = workouts_table.ExerciseID AND workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.Date = '" + date + "' ORDER BY workouts_table.WorkoutID";
+
+
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //WorkoutID
+        //cur.getString(1) //Exercise
+        //cur.getString(2) // Set Number
+        //cur.getString(3) // Weight
+        //cur.getString(4) // Reps
     }
 
 }
