@@ -20,7 +20,8 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
             android:hint="Chest"
-            android:onClick="chest_max"/>
+            android:onClick="chest_max"
+            style="@android:style/Theme.Black"/>
 
 
         <TextView
@@ -31,7 +32,8 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
             android:hint="Back"
-            android:onClick="back_max"/>
+            android:onClick="back_max"
+            style="@android:style/Theme.Black"/>
 
         <TextView
             android:id="@+id/shoulder_drop"
@@ -41,7 +43,8 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
             android:hint="Shoulders"
-            android:onClick="shoulder_max"/>
+            android:onClick="shoulder_max"
+            style="@android:style/Theme.Black"/>
 
     </LinearLayout>
 
@@ -58,7 +61,8 @@
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
-            android:hint="Biceps" />
+            android:hint="Biceps"
+            style="@android:style/Theme.Black"/>
 
         <TextView
             android:id="@+id/triceps_drop"
@@ -67,7 +71,8 @@
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
-            android:hint="Triceps" />
+            android:hint="Triceps"
+            style="@android:style/Theme.Black"/>
 
         <TextView
             android:id="@+id/forearms_drop"
@@ -76,7 +81,8 @@
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
-            android:hint="Forearms" />
+            android:hint="Forearms"
+            style="@android:style/Theme.Black"/>
 
 
     </LinearLayout>
@@ -94,7 +100,8 @@
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
-            android:hint="Quadriceps" />
+            android:hint="Quadriceps"
+            style="@android:style/Theme.Black"/>
 
         <TextView
             android:id="@+id/hamstrings_drop"
@@ -103,7 +110,8 @@
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
-            android:hint="Hamstrings" />
+            android:hint="Hamstrings"
+            style="@android:style/Theme.Black"/>
 
         <TextView
             android:id="@+id/calf_drop"
@@ -111,8 +119,9 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/editbox_background"
             android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Calves" />
+            android:drawablePadding="8dp"
+            android:hint="Calves"
+            style="@android:style/Theme.Black"/>
 
 
 

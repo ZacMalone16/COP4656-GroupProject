@@ -628,7 +628,7 @@ public class Graph extends FrameLayout
     }
     void draw_legend(Canvas canvas)
     {
-        //draw y axis units
+        //draw legend line name with color
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(45);
         paint.setAntiAlias(true);
@@ -639,7 +639,7 @@ public class Graph extends FrameLayout
         for(int i = 0; i < data.size(); i++)
         {
             paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - 420) + (i * spacer),paint);
+            canvas.drawText(data.get(i).name,50,(height - 350) + (i * spacer),paint);//(height - 420)
             //canvas.drawLine();
 
         }
