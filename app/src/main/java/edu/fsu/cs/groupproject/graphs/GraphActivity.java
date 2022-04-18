@@ -36,6 +36,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     FragmentManager manager;
     FragmentTransaction ft;
     static int choose_graph_sel;
+    static ArrayList<int[][]> data = new ArrayList<>();
 
     //Spinner muscle_spin;
     //Spinner exercise_spin;
@@ -149,6 +150,32 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 ft.replace(R.id.spinner_frag,chooseFrag);
                 ft.commit();
             }
+            else if(graph_num == 3)
+            {
+                choose_graph_sel = 1;
+
+                graph = new Graph(this, width, height, 0);//
+                setContentView(graph);
+                graph.setBackgroundColor(Color.WHITE);
+                graph.set_exercises(data,"BenchPress",0);
+                graph.proportion_graph2();
+                graph.draw_graph = true;
+                setContentView(graph);
+
+                //sets and reps frag
+                manager = getFragmentManager();
+                FragmentTransaction ft2 = manager.beginTransaction();
+                SetsRepsFrag setsRepsFrag = new SetsRepsFrag();
+                ft2.replace(R.id.buttons_frag, setsRepsFrag);
+                ft2.commit();
+
+                //choose graph frag
+                manager = getFragmentManager();
+                ft = manager.beginTransaction();
+                ChooseFrag chooseFrag = new ChooseFrag();
+                ft.replace(R.id.spinner_frag,chooseFrag);
+                ft.commit();
+            }
 
         }
         //extras == null
@@ -173,13 +200,12 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         //setContentView(R.layout.activity_main);
 
-
-
-
-
-
-
     }//end OnCreate()
+
+    public void set_content()
+    {
+        setContentView(graph);
+    }
 
     public void chest_max(View v)
     {

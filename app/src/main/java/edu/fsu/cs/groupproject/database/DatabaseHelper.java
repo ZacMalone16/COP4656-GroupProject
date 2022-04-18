@@ -43,19 +43,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+
+
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
         values.put(T1_COL1, "Chest");//muscle group
         values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
-        values.put(T1_COL1, "Incline Dumbbell Press");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Incline Dumbbell Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //3
 
-        values.put(T1_COL1, "Cable Flye");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Cable Flye");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //4
 
@@ -64,8 +66,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //5
 
-        values.put(T1_COL1, "T Bar Row");
-        values.put(T1_COL2, "Back");
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "T Bar Row");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //6
 
