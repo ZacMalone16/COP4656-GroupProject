@@ -330,6 +330,7 @@ public class CurrentExercise extends Fragment
 
                 prev_exercise = exercise_lookup;
 
+                /** old debug querys
                 System.out.println("getAllData");
                 Cursor cur = db.getAllDatat1();
                 if(cur != null && cur.getCount() > 0)
@@ -343,20 +344,6 @@ public class CurrentExercise extends Fragment
                         System.out.println("2 Exercise = " + cur.getString(2));
                         cur.moveToNext();
                     }
-
-
-                    /*
-                    cur.moveToFirst();
-                    System.out.println("cur(0) = " + cur.getString(0));
-                    System.out.println("cur(1) = " + cur.getString(1));
-                    System.out.println("cur(2) = " + cur.getString(2));
-
-                    cur.moveToNext();
-                    System.out.println("cur(0) = " + cur.getString(0));
-                    System.out.println("cur(1) = " + cur.getString(1));
-                    System.out.println("cur(2) = " + cur.getString(2));
-                     */
-
 
                 }
                 System.out.println("getExerciseData with workout id");
@@ -382,9 +369,9 @@ public class CurrentExercise extends Fragment
                 {
                     System.out.println("cur =  null or getcount = 0");
                 }
-                /*
+
                 System.out.println("getAllExerciseData");
-                cur = db.getAllExerciseData();
+                //cur = db.getAllExerciseData();
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
@@ -398,7 +385,7 @@ public class CurrentExercise extends Fragment
                     }
 
                 }
-                 */
+
 
 
                 System.out.println("getWorkoutData");
@@ -436,9 +423,11 @@ public class CurrentExercise extends Fragment
                         cur.moveToNext();
                     }
                 }
+                 */
+
 
                 System.out.println("new date query***********");
-                cur = db.dateQuery("04.01.2022");
+                Cursor cur = db.dateQuery("04.01.2022");
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
@@ -454,13 +443,6 @@ public class CurrentExercise extends Fragment
                         cur.moveToNext();
                     }
                 }
-                //cur.getString(0) //WorkoutID
-                //cur.getString(1) //Exercise
-                //cur.getString(2) // Set Number
-                //cur.getString(3) // Weight
-                //cur.getString(4) // Reps
-
-
 
             }
         });
