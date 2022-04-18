@@ -159,7 +159,7 @@ public class SetsRepsFrag extends Fragment
                                 while(!cur3.isAfterLast())
                                 {
                                     System.out.println("cur(0) Name = " + cur3.getString(0));
-                                    System.out.println("cur(1) = " + cur3.getString(1));
+                                    System.out.println("cur(1) max weight = " + cur3.getString(1));
 
                                     //System.out.println("cur(2) = " + cur.getString(2));
                                     cur3.moveToNext();
