@@ -87,7 +87,7 @@ public class CurrentExercise extends Fragment
         db.insertSet(workoutID,1,12,45);
         db.insertSet(workoutID,2,10,50);
         db.insertSet(workoutID,3,8,55);
-        db.insertSet(workoutID,4,4,60);
+        db.insertSet(workoutID,4,6,60);
 
     }
 

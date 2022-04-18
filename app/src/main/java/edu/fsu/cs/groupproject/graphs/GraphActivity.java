@@ -37,6 +37,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     FragmentTransaction ft;
     static int choose_graph_sel;
     static ArrayList<int[][]> data = new ArrayList<>();
+    static ArrayList<String> names = new ArrayList<>();
 
     //Spinner muscle_spin;
     //Spinner exercise_spin;
@@ -157,7 +158,11 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 graph = new Graph(this, width, height, 0);//
                 setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
-                graph.set_exercises(data,"BenchPress",0);
+                for(int i = 0; i < data.size(); i++)
+                {
+                    graph.set_exercises(data,names.get(i),i);//"BenchPress"
+                }
+
                 graph.proportion_graph2();
                 graph.draw_graph = true;
                 setContentView(graph);

@@ -71,8 +71,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //6
 
-        values.put(T1_COL1, "Cable Row");
-        values.put(T1_COL2, "Back");
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Cable Row");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //7
         values.put(T1_COL1, "Quads");
@@ -208,6 +208,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //cur.getString(2) // Set Number
         //cur.getString(3) // Weight
         //cur.getString(4) // Reps
+    }
+
+    public Cursor getAllDates()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME1, null);
+        return cur;
     }
 
 }
