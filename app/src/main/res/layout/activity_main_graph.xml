@@ -43,7 +43,10 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="spinner frag" />
+             />
+        <!--
+        android:text="spinner frag"
+        -->
     </FrameLayout>
 
     <FrameLayout
@@ -60,8 +63,12 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="buttons frag"
+
             />
+
+        <!--
+       android:text="buttons frag"
+       -->
     </FrameLayout>
 
 

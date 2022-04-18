@@ -43,19 +43,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+
+
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
         values.put(T1_COL1, "Chest");//muscle group
         values.put(T1_COL2, "Bench Press");//exercise
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //2
-        values.put(T1_COL1, "Incline Dumbbell Press");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Incline Dumbbell Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //3
 
-        values.put(T1_COL1, "Cable Flye");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Cable Flye");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //4
 
@@ -64,13 +66,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //5
 
-        values.put(T1_COL1, "T Bar Row");
-        values.put(T1_COL2, "Back");
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "T Bar Row");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //6
 
-        values.put(T1_COL1, "Cable Row");
-        values.put(T1_COL2, "Back");
+        values.put(T1_COL1, "Back");
+        values.put(T1_COL2, "Cable Row");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //7
         values.put(T1_COL1, "Quads");
@@ -196,7 +198,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor dateQuery(String date){
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT workouts_table.WorkoutID, lifts_table.Exercise, sets_table.SetNum, sets_table.Weight, sets_table.Reps FROM lifts_table, workouts_table, sets_table ON lifts_table.ExerciseID = workouts_table.ExerciseID AND workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.Date = '" + date + "' ORDER BY workouts_table.WorkoutID";
+        String sql = "SELECT workouts_table.WorkoutID, lifts_table.Exercise, sets_table.SetNum, sets_table.Weight, sets_table.Reps, lifts_table.ExerciseID FROM lifts_table, workouts_table, sets_table ON lifts_table.ExerciseID = workouts_table.ExerciseID AND workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.Date = '" + date + "' ORDER BY workouts_table.WorkoutID";
 
 
         Cursor cur =  db.rawQuery(sql, null);
@@ -206,6 +208,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //cur.getString(2) // Set Number
         //cur.getString(3) // Weight
         //cur.getString(4) // Reps
+        //cur.getString(5) // ExerciseID
+    }
+
+    /*
+    public Cursor getAllDates()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cur =  db.rawQuery("SELECT * FROM " + TABLE_NAME1, null);
+        return cur;
+    }
+     */
+
+    public Cursor maxWeight(int ExerciseID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //date and max weight for that specific exercise on each day.
+        // select max(weight), date
+        String sql = "SELECT  lifts_table.Exercise, max(sets_table.Weight), Date FROM lifts_table, workouts_table, sets_table ON workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.ExerciseID = '" + ExerciseID + "'";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //Exercise Name
+        //cur.getString(1) //Max Weight
+        //cur.getString(2) //Date of Max
+    }
+
+    public Cursor getDates(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT DISTINCT Date FROM " + TABLE_NAME2 + "";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //Date
+    }
+
+    public Cursor dailyMax(int ExerciseID)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        //date and max for that exercise on that day
+        String sql = "SELECT  Date, Max(Weight) FROM workouts_table, sets_table ON workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.ExerciseID = '" + ExerciseID + "' GROUP BY Date";
+        Cursor cur = db.rawQuery(sql, null);
+        return cur;
     }
 
     public Cursor maxWeight(int ExerciseID){

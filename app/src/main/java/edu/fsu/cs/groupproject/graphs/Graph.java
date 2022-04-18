@@ -52,8 +52,11 @@ public class Graph extends FrameLayout
     int r_margin;
     int l_margin;
     int top_margin;
-    int min;
-    int max;
+    float min_y;
+    float max_y;
+    float min_x;
+    float max_x;
+    float zero_y;
     float legend_y;
     boolean draw_graph;
     //int mod;
@@ -104,8 +107,10 @@ public class Graph extends FrameLayout
         calendar_h = (h - 1000) - top_margin;
         origin.x = l_margin;
         origin.y = height - 1000;
-        min = 1000;
-        max = -1;
+        min_y = 1000;
+        max_y = -1000;
+        min_x = 1000;
+        max_x = -1000;
         System.out.printf("origin x,y: %d,%d\n", origin.x,origin.y);
         //each day width on graph
         day_w = calendar_w/31;
@@ -477,7 +482,7 @@ public class Graph extends FrameLayout
             {
                 //draw y axis notches
                 canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);//line1.get(i).y
-                canvas.drawText(String.valueOf(data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);//line1.get(i).lbs
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);//line1.get(i).lbs
 
                 //
                 //draw x axis notches
@@ -486,7 +491,7 @@ public class Graph extends FrameLayout
                 //next to point
 
                 //on x axis
-                canvas.drawText(String.valueOf(data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
             }
 
         }
@@ -547,6 +552,7 @@ public class Graph extends FrameLayout
 
     }
 
+   /*
     void proportion_graph2()
     {
         //get difference between max and min
@@ -562,10 +568,52 @@ public class Graph extends FrameLayout
         {
             for(int j = 0; j < data.get(i).points.size(); j++)
             {
+
                 data.get(i).points.get(j).x = (data.get(i).points.get(j).day * day_w) + l_margin;//data2.get(i).points.get(j).x
                 //spread the y coordinates out, set the difference in lbs gained from min amount of weight
                 data.get(i).points.get(j).diff = data.get(i).points.get(j).lbs - min;//data2.get(i).points.get(j).y
                 data.get(i).points.get(j).y = (origin.y - spacer) - (data.get(i).points.get(j).diff * mod);
+
+            }
+
+        }
+
+    }//end proportion graph
+    */
+
+    void proportion_graph2()
+    {
+        //get difference between max and min
+        float span_x = find_span_x();
+        float span_y = find_span_y();
+        System.out.println("span x = " + span_x);
+        System.out.println("span y = " + span_y);
+        //mult every lb gained by this modifier, should be a double
+        float mod_y = calendar_h/span_y;
+        float mod_x = calendar_w/span_x;
+
+        int spacer = 25;
+        zero_y = (origin.y - spacer) - ((0 - min_y) * mod_y);
+        System.out.println("zero_y: " + zero_y);
+
+        System.out.println("mod y = " + mod_y);
+        System.out.println("mod x = " + mod_x);
+
+
+        //spread the x coordinates out
+        for(int i = 0; i < data.size(); i++)
+        {
+            for(int j = 0; j < data.get(i).points.size(); j++)
+            {
+                //data.get(i).points.get(j).x = (data.get(i).points.get(j).day * day_w) + l_margin;//data2.get(i).points.get(j).x
+                data.get(i).points.get(j).diff_x = data.get(i).points.get(j).day - min_x;
+                data.get(i).points.get(j).x = (data.get(i).points.get(j).diff_x * mod_x) + l_margin;
+                //spread the y coordinates out, set the difference in lbs gained from min amount of weight
+
+
+
+                data.get(i).points.get(j).diff_y = data.get(i).points.get(j).lbs - min_y;
+                data.get(i).points.get(j).y = (origin.y - spacer) - (data.get(i).points.get(j).diff_y * mod_y);
             }
 
         }
@@ -585,6 +633,75 @@ public class Graph extends FrameLayout
 
     }
 
+    float find_span_y()
+    {
+        max_y = -1000;
+        min_y = 1000;
+        //check 1st line data
+        for(int i = 0; i < data.size(); i++)
+        {
+            for(int j = 0; j < data.get(i).points.size(); j++)//data2.get(i).points.get(j).x
+            {
+                if(data.get(i).points.get(j).lbs > max_y)//data.get(i).get(j).y > max
+                {
+                    max_y = data.get(i).points.get(j).lbs;//max = data.get(i).get(j).y;
+                }
+            }
+
+        }
+
+        for(int i = 0; i < data.size(); i++)
+        {
+            for(int j = 0; j < data.get(i).points.size(); j++)
+            {
+                if(data.get(i).points.get(j).lbs < min_y)
+                {
+                    min_y = data.get(i).points.get(j).lbs;
+                }
+            }
+
+        }
+
+        System.out.printf("min,max y: %f,%f\n", min_y,max_y);
+
+        return max_y - min_y;
+    }
+
+    float find_span_x()
+    {
+        max_x = -1000;
+        min_x = 1000;
+        //check 1st line data
+        for(int i = 0; i < data.size(); i++)
+        {
+            for(int j = 0; j < data.get(i).points.size(); j++)//data2.get(i).points.get(j).x
+            {
+                if(data.get(i).points.get(j).day > max_x)//data.get(i).get(j).y > max
+                {
+                    max_x = data.get(i).points.get(j).day;//max = data.get(i).get(j).y;
+                }
+            }
+
+        }
+
+        for(int i = 0; i < data.size(); i++)
+        {
+            for(int j = 0; j < data.get(i).points.size(); j++)
+            {
+                if(data.get(i).points.get(j).day < min_x)
+                {
+                    min_x = data.get(i).points.get(j).day;
+                }
+            }
+
+        }
+
+        System.out.printf("min,max x: %f,%f\n", min_x,max_x);
+
+        return max_x - min_x;
+    }
+
+    /*
     int find_span2()
     {
         max = -1;
@@ -618,6 +735,7 @@ public class Graph extends FrameLayout
 
         return max - min;
     }
+     */
 
     void set_legend_y(float y)
     {
@@ -668,6 +786,8 @@ public class Graph extends FrameLayout
             case 4:
                 //paint.setColor(Color.LTGRAY);
                 return Color.DKGRAY;
+            case 5:
+                return Color.CYAN;
                 //break;
 
         }

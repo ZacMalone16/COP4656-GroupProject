@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.R;
+import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
 public class GraphActivity extends Activity //Activity //AppCompatActivity
 {
@@ -36,6 +38,12 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     FragmentManager manager;
     FragmentTransaction ft;
     static int choose_graph_sel;
+    static ArrayList<int[][]> data = new ArrayList<>();
+    static ArrayList<String> names = new ArrayList<>();
+    int [][] max_by_date;
+    int workoutID;
+    int current_exercise;
+    String name;
 
     //Spinner muscle_spin;
     //Spinner exercise_spin;
@@ -67,6 +75,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     boolean[] chest_sel = new boolean[3];//selectedLang
     boolean[] back_sel = new boolean[3];
     boolean[] shoulder_sel = new boolean[3];
+    DatabaseHelper db;
 
     //int set_
     @Override
@@ -81,6 +90,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
+        db = new DatabaseHelper(getBaseContext());
 
         //muscle_spin = (Spinner) findViewById(R.id.muscleSpinner);
         //exercise_spin = (Spinner) findViewById(R.id.exerciseSpinner);
@@ -110,6 +120,10 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 graph = new Graph(this, width, height, 0);//
                 setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
+
+                //clear the data before adding to graph
+                data.clear();
+                names.clear();
 
                 //sets and reps frag
                 manager = getFragmentManager();
@@ -149,6 +163,37 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 ft.replace(R.id.spinner_frag,chooseFrag);
                 ft.commit();
             }
+            //after clicked a day in SetsRepsFrag
+            else if(graph_num == 3)
+            {
+                choose_graph_sel = 1;
+
+                graph = new Graph(this, width, height, 0);//
+                //setContentView(graph);
+                graph.setBackgroundColor(Color.WHITE);
+                for(int i = 0; i < data.size(); i++)
+                {
+                    graph.set_exercises(data,names.get(i),i);//"BenchPress"
+                }
+
+                graph.proportion_graph2();
+                graph.draw_graph = true;
+                setContentView(graph);
+
+                //sets and reps frag
+                manager = getFragmentManager();
+                FragmentTransaction ft2 = manager.beginTransaction();
+                SetsRepsFrag setsRepsFrag = new SetsRepsFrag();
+                ft2.replace(R.id.buttons_frag, setsRepsFrag);
+                ft2.commit();
+
+                //choose graph frag
+                manager = getFragmentManager();
+                ft = manager.beginTransaction();
+                ChooseFrag chooseFrag = new ChooseFrag();
+                ft.replace(R.id.spinner_frag,chooseFrag);
+                ft.commit();
+            }
 
         }
         //extras == null
@@ -173,19 +218,210 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         //setContentView(R.layout.activity_main);
 
-
-
-
-
-
-
     }//end OnCreate()
+
+    public void set_content()
+    {
+        setContentView(graph);
+    }
+
+    public void daily_max(int sel)
+    {
+        //chest bench
+        int exerciseID = sel;
+        //data.clear();
+        Cursor cur = db.dailyMax(exerciseID);
+
+        if(cur != null && cur.getCount() > 0)
+        {
+            //set up array to size of cur.getCount()
+            max_by_date = new int[cur.getCount()][2];
+            cur.moveToFirst();
+            int x = 0;
+            //while there is another row
+            while(!cur.isAfterLast())
+            {
+                //Cursor cur2 = db.dailyMax()
+                System.out.println("cur(0)date = " + cur.getString(0));
+                System.out.println("cur(1)max weight = " + cur.getString(1));
+                //put into an 2d array of ints, x,y is date, weight
+                max_by_date[x][0] = Integer.parseInt(cur.getString(0));//date
+                max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
+
+                //System.out.println("cur(2) = " + cur.getString(2));
+                cur.moveToNext();
+            }
+            data.add(max_by_date);
+
+            Cursor cur2 = db.getAllDatat1();
+
+            if(cur2 != null && cur2.getCount() > 0)
+            {
+                cur2.moveToFirst();
+                while(!cur2.isAfterLast())//
+                {
+                    if(Integer.parseInt(cur2.getString(0)) == exerciseID)//==workoutid
+                    {
+                        //GraphActivity.names.add(cur2.getString(2));
+                        name = cur2.getString(2);
+                        break;
+
+                    }
+
+                    //System.out.println("0 exercise ID = " + cur2.getString(0));
+                    //System.out.println("1 muscleGroup = " + cur2.getString(1));
+                    //System.out.println("2 Exercise = " + cur2.getString(2));
+                    cur2.moveToNext();
+                }
+
+            }
+
+
+            //need to add index by checking what the size is
+            graph.set_exercises(data,name,data.size() - 1);//chest_ex[chest_list.get(j)]
+        }
+
+    }
+
+    public void pop_max_data()
+    {
+        //start dynamic pop//////////////////////////
+        //clear list of exercises
+        data.clear();
+        names.clear();
+        //get name of exercise
+        Cursor cur2 = db.getAllDatat1();
+
+        if(cur2 != null && cur2.getCount() > 0)
+        {
+            cur2.moveToFirst();
+            while(!cur2.isAfterLast())//
+            {
+                //loop through exercises in db and check if the name equals the item checked
+
+                //get all chest exercises //Integer.parseInt(cur2.getString(2)) == workoutID
+                if(cur2.getString(1).equals("Chest"))//cur2.getString(2).equals(chest_ex[chest_list.get(j)])
+                {
+                    names.add(cur2.getString(2));
+                    //System.out.println("0 exercise ID = " + cur2.getString(0));
+                    //System.out.println("1 muscleGroup = " + cur2.getString(1));
+                    System.out.println("2 Exercise = " + cur2.getString(2));
+
+                }
+
+                cur2.moveToNext();
+                //workoutID++;
+            }
+
+        }
+
+        Cursor cur = db.getDates();
+        if(cur != null && cur.getCount() > 0)
+        {
+            cur.moveToFirst();
+            while(!cur.isAfterLast())
+            {
+                //for every date in date query
+                cur2 = db.dateQuery(cur.getString(0));
+                int max = 0;
+
+                if(cur2 != null && cur2.getCount() > 0)
+                {
+                    cur2.moveToFirst();
+                    //set current exercise
+                    current_exercise = Integer.parseInt(cur.getString(0));
+                    while(!cur2.isAfterLast())//
+                    {
+                        if(Integer.parseInt(cur.getString(0)) == current_exercise)
+                        {
+
+                            cur.moveToNext();
+                            continue;
+                        }
+
+                        //if the weight on this set is greater than max
+                        if(Integer.parseInt(cur2.getString(3)) > max)
+                        {
+                            max = Integer.parseInt(cur2.getString(3));
+
+                        }
+                        //date query
+                        System.out.println("cur(0)WorkoutID = " + cur2.getString(0));
+                        System.out.println("cur(1)Exercise = " + cur2.getString(1));
+                        System.out.println("cur(2 Set Number = " + cur2.getString(2));
+                        System.out.println("cur(3 Weight = " + cur2.getString(3));
+                        System.out.println("cur(4 Reps = " + cur2.getString(4));
+                        cur2.moveToNext();
+                        //workoutID++;
+                    }
+
+                }
+
+                //go to next date
+                cur.moveToNext();
+            }
+        }
+
+
+
+
+        cur2 = db.maxWeight(1);
+        System.out.println("exerciseID = " + 1);
+        if(cur2 != null && cur2.getCount() > 0)
+        {
+            cur2.moveToFirst();
+            while(!cur2.isAfterLast())//
+            {
+                System.out.printf("0 Exercise Name %s\n",cur2.getString(0));
+                System.out.printf("1 Max weight %s\n",cur2.getString(1));
+                System.out.printf("2 date of max %s\n",cur2.getString(2));
+                //cur.getString(0) //Exercise Name
+                //cur.getString(1) //Max Weight
+                //cur.getString(2) //Date of Max
+                cur2.moveToNext();
+                //workoutID++;
+            }
+
+        }
+
+       /*
+        cur2 = db.getDates();
+        if(cur2 != null && cur2.getCount() > 0)
+        {
+            cur2.moveToFirst();
+            while(!cur2.isAfterLast())//
+            {
+                System.out.println("");
+                cur2.moveToNext();
+                //workoutID++;
+            }
+
+        }
+        */
+
+        /*
+        workoutID = 1;
+        //cur2 = db.getWorkoutData(workoutID);
+        cur2 = db.maxWeight(workoutID);
+        while(cur2 != null && cur2.getCount() > 0)
+        {
+            cur2.moveToFirst();
+
+        }
+         */
+
+
+
+        //end dynamic pop//////////////////////////
+
+    }//end pop_max_data
 
     public void chest_max(View v)
     {
 
         if(v == MaxWeightFrag.chest)
         {
+            //pop_max_data();
             System.out.println("chestlsit.size = " + chest_list.size());
             System.out.println("chest-sel.size = " + chest_sel.length);
 
@@ -239,11 +475,17 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
 
+
                     System.out.println("OK musclselist.size = " + chest_list.size());
-                    for (int j = 0; j < chest_list.size(); j++) {
-                        //if exercise namec is not already in list
+                    for (int j = 0; j < chest_list.size(); j++)
+                    {
+
+
+                        //if exercise name is not already in list
                         if (graph.try_add(chest_ex[chest_list.get(j)]))
                         {
+                            //daily_max(chest_list.get(j));
+
                             //pass arraylist for chest1,name & index of exercise to set_exercises
                             graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
                             graph.proportion_graph2();

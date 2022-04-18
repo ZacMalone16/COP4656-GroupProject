@@ -30,6 +30,7 @@ public class CurrentExercise extends Fragment
     //Spinner back_spin;
     Spinner exercise_spin;
     Button add_set;
+    Button add_reps_man;
     TextView set_num;
     TextView weight;
     Button add_five;
@@ -43,6 +44,7 @@ public class CurrentExercise extends Fragment
     int muscle_lookup = 0;
     int exercise_lookup = 0;
     int prev_exercise = - 1;
+    String current_date = "04.08.2022";
     public static boolean muscle_chosen = false;
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
@@ -60,6 +62,36 @@ public class CurrentExercise extends Fragment
     {
         super.onCreate(savedInstanceState);
 
+        db = new DatabaseHelper(getContext());
+
+        /*
+        Cursor cur = db.dateQuery("04.01.2022");
+        if(cur != null && cur.getCount() > 0)
+        {
+           return;
+        }
+
+        System.out.println("populating db with prev workouts");
+        //chest bench
+        db.insertWorkout(1,"04.01.2022");
+        //one specific exercise
+        int workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,95);
+        db.insertSet(workoutID,2,10,115);
+        db.insertSet(workoutID,3,8,135);
+        db.insertSet(workoutID,4,4,145);
+
+        //incline dumbbell press
+        db.insertWorkout(2,"04.01.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,45);
+        db.insertSet(workoutID,2,10,50);
+        db.insertSet(workoutID,3,8,55);
+        db.insertSet(workoutID,4,6,60);
+         */
 
     }
 
@@ -68,7 +100,7 @@ public class CurrentExercise extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.current_exercise, container, false);//activity_main
-         db = new DatabaseHelper(getContext());
+
 
          //sensorManager = (SensorManager) getS
         muscle_spin = (Spinner) view.findViewById(R.id.addWorkout_muscleSpinner);
@@ -84,6 +116,7 @@ public class CurrentExercise extends Fragment
         reps.setVisibility(View.GONE);
         start = view.findViewById(R.id.addSet_startButton);
         stop = view.findViewById(R.id.addSet_stopButton);
+        add_reps_man = view.findViewById(R.id.add_reps_manual);
 
         e = new Exercise();
 
@@ -105,6 +138,7 @@ public class CurrentExercise extends Fragment
                 setNumber = 0;
                 set_num.setVisibility(View.GONE);
                 weight.setVisibility(View.GONE);
+                add_reps_man.setVisibility(View.GONE);
                 //set_num.setVisibility(View.VISIBLE);
                 //set_num.setTextSize(25);
                 //String str = String.valueOf(setNumber);
@@ -133,6 +167,7 @@ public class CurrentExercise extends Fragment
                                         System.out.println("bench press");
                                         exercise_lookup = 1;
                                         add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
                                         {
                                             @Override
@@ -147,6 +182,16 @@ public class CurrentExercise extends Fragment
                                                 weight.setVisibility(View.VISIBLE);
                                             }
                                         });
+                                        /*
+                                        add_reps_man.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+
+                                            }
+                                        });
+                                         */
 
                                         break;
                                     case 2://incline
@@ -223,7 +268,7 @@ public class CurrentExercise extends Fragment
                         });
                         break;
                     case 3:
-                        e.muscle = "Quads";
+                        //e.muscle = "Quads";
                         break;
                     case 4:
                         break;
@@ -248,10 +293,6 @@ public class CurrentExercise extends Fragment
             }
         });
 
-        if(muscle_chosen)
-        {
-
-        }
 
         setupView(view);
 
@@ -319,7 +360,7 @@ public class CurrentExercise extends Fragment
                 {
                     System.out.println("insertWorkput called");
                     //add data to database
-                    db.insertWorkout(exercise_lookup,"04.01.2022");
+                    db.insertWorkout(exercise_lookup,current_date);
 
                 }
 
@@ -427,6 +468,7 @@ public class CurrentExercise extends Fragment
 
 
                 System.out.println("new date query***********");
+                System.out.println("04.01.2022");
                 Cursor cur = db.dateQuery("04.01.2022");
                 if(cur != null && cur.getCount() > 0)
                 {
@@ -444,7 +486,26 @@ public class CurrentExercise extends Fragment
                     }
                 }
 
-            }
+                System.out.println(current_date);
+                cur = db.dateQuery(current_date);
+                if(cur != null && cur.getCount() > 0)
+                {
+                    cur.moveToFirst();
+                    while(!cur.isAfterLast())
+                    {
+
+                        System.out.println("cur(0)WorkoutID = " + cur.getString(0));
+                        System.out.println("cur(1)Exercise = " + cur.getString(1));
+                        System.out.println("cur(2 Set Number = " + cur.getString(2));
+                        System.out.println("cur(3 Weight = " + cur.getString(3));
+                        System.out.println("cur(4 Reps = " + cur.getString(4));
+                        //System.out.println("cur(2) = " + cur.getString(2));
+                        cur.moveToNext();
+                    }
+                }
+
+
+            }//end stop
         });
 
 
