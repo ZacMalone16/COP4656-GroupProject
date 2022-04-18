@@ -100,7 +100,6 @@ public class SetsRepsFrag extends Fragment
                 System.out.println(clicked_date);
                 Cursor cur = db.dateQuery(clicked_date);
 
-
                 if(cur != null && cur.getCount() > 0)
                 {
                     cur.moveToFirst();
