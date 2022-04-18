@@ -114,7 +114,7 @@ public class SetsRepsFrag extends Fragment
                                 if(cur2 != null && cur2.getCount() > 0)
                                 {
                                     cur2.moveToFirst();
-                                    while(!cur2.isAfterLast())
+                                    while(!cur2.isAfterLast())//
                                     {
                                         if(Integer.parseInt(cur2.getString(0)) == workoutID)
                                         {
