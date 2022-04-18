@@ -1,10 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <TextView
+    <!--
+    android:prompt="@string/addWorkoutMuscleSpinner"
+    -->
+
+    <Spinner
+        android:id="@+id/dateSpinner"
+        android:layout_width="301dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:entries="@array/datesEntries"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        style="@android:style/Widget.Spinner"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+
+<Spinner
+        android:id="@+id/muscleSpinner"
+
+        android:layout_width="301dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:entries="@array/addWorkoutMuscleEntries"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106" />
+
+    <Spinner
+        android:id="@+id/exerciseSpinner"
+        android:layout_width="301dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+
+
+<TextView
         android:id="@+id/sets_reps_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,113 +68,113 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:translationY="0sp"> <!--500  154 -->
+        android:translationY="0sp">
 
 
-        <TextView
-            android:id="@+id/chest_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Chest"
-            android:onClick="chest_sets"/>
+<TextView
+android:id="@+id/chest_drop_sets"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@android:drawable/editbox_background"
+android:drawableRight="@android:drawable/arrow_down_float"
+android:drawablePadding="16dp"
+android:hint="Chest"
+android:onClick="chest_sets"/>
 
 
-        <TextView
-            android:id="@+id/back_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Back"
-            android:onClick="back_sets"/>
+<TextView
+android:id="@+id/back_drop_sets"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@android:drawable/editbox_background"
+android:drawableRight="@android:drawable/arrow_down_float"
+android:drawablePadding="16dp"
+android:hint="Back"
+android:onClick="back_sets"/>
 
-        <TextView
-            android:id="@+id/shoulder_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Shoulders"
-            android:onClick="shoulder_sets"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:translationY="27sp"> <!--527  181 -->
-
-        <TextView
-            android:id="@+id/biceps_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Biceps" />
-
-        <TextView
-            android:id="@+id/triceps_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Triceps" />
-
-        <TextView
-            android:id="@+id/forearms_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Forearms" />
-
+<TextView
+android:id="@+id/shoulder_drop_sets"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@android:drawable/editbox_background"
+android:drawableRight="@android:drawable/arrow_down_float"
+android:drawablePadding="16dp"
+android:hint="Shoulders"
+android:onClick="shoulder_sets"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:translationY="54sp"> <!--554  208 -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:translationY="27sp">
 
-        <TextView
-            android:id="@+id/quads_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Quadriceps" />
+<TextView
+    android:id="@+id/biceps_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Biceps" />
 
-        <TextView
-            android:id="@+id/hamstrings_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Hamstrings" />
+<TextView
+    android:id="@+id/triceps_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Triceps" />
 
-        <TextView
-            android:id="@+id/calf_drop_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/arrow_down_float"
-            android:drawablePadding="16dp"
-            android:hint="Calves" />
+<TextView
+    android:id="@+id/forearms_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Forearms" />
+
+
+</LinearLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:translationY="54sp">
+
+<TextView
+    android:id="@+id/quads_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Quadriceps" />
+
+<TextView
+    android:id="@+id/hamstrings_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Hamstrings" />
+
+<TextView
+    android:id="@+id/calf_drop_sets"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+    android:drawableRight="@android:drawable/arrow_down_float"
+    android:drawablePadding="16dp"
+    android:hint="Calves" />
 
 
 
-    </LinearLayout>
+</LinearLayout>
 
-</RelativeLayout>
+-->

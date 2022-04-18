@@ -18,6 +18,7 @@ import edu.fsu.cs.groupproject.R;
 public class ChooseFrag extends Fragment
 {
 
+    public Spinner choose_graph;
 
     public ChooseFrag()
     {
@@ -28,6 +29,7 @@ public class ChooseFrag extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -42,7 +44,9 @@ public class ChooseFrag extends Fragment
         //SpinnerAdapter spinnerAdapter = new SpinnerAdapter() {
         //}
 
-        Spinner choose_graph = (Spinner) view.findViewById(R.id.spinner);
+        choose_graph = (Spinner) view.findViewById(R.id.spinner);
+
+
         choose_graph.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -55,7 +59,8 @@ public class ChooseFrag extends Fragment
                         break;
                     case 1:
                         Intent intent = new Intent(getActivity(), GraphActivity.class);
-                        intent.putExtra("bundle_layout",1);
+                        //intent.putExtra("bundle_layout",1);
+                        intent.putExtra("graph_num",1);
                         startActivity(intent);
                         //set int var in main to load the sets reps frag
                         //graph = new Graph(getBaseContext(), width, height, 1);
@@ -70,7 +75,8 @@ public class ChooseFrag extends Fragment
                     case 2:
                         //Intent intent2 = new Intent(getActivity(),MainActivity.class);
                         Intent intent2 = new Intent(getActivity(), GraphActivity.class);//MaxWeight.class
-                        intent2.putExtra("bundle_layout",2);
+                        //intent2.putExtra("bundle_layout",2);
+                        intent2.putExtra("graph_num",2);
                         startActivity(intent2);
                         //choose_graph.setSelection(0);
                         //set int var in main to load max weight frag
@@ -95,6 +101,8 @@ public class ChooseFrag extends Fragment
 
             }
         });
+
+
 
         return view;
     }

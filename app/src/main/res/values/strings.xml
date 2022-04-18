@@ -10,6 +10,14 @@
 
     <string name="addWorkoutMuscleSpinner">Select a muscle group</string>
 
+    <string-array name="datesEntries">
+        <item>Choose A Day</item>
+        <item>April 01, 2022</item>
+        <item>April 02, 2022</item>
+        <item>April 03, 2022</item>
+        <item>April 04, 2022</item>
+    </string-array>
+
     <string-array name="addWorkoutMuscleEntries">
         <item>Choose Muscle Group</item>
         <item>Chest</item>
