@@ -13,8 +13,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Workouts.db";
     public static final String TABLE_NAME1 = "lifts_table";
     public static final String T1_COL0 = "ExerciseID";
-    public static final String T1_COL1 = "Exercise";
-    public static final String T1_COL2 = "MuscleGroup";
+    public static final String T1_COL1 = "MuscleGroup";
+    public static final String T1_COL2 = "Exercise";
 
     public static final String TABLE_NAME2 = "workouts_table";
     public static final String T2_COL0 = "WorkoutID";  // Primary Key
@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("create table " + TABLE_NAME1 + " (ExerciseID INTEGER PRIMARY KEY AUTOINCREMENT, Exercise TEXT, MuscleGroup TEXT)" );
+        sqLiteDatabase.execSQL("create table " + TABLE_NAME1 + " (ExerciseID INTEGER PRIMARY KEY AUTOINCREMENT, MuscleGroup TEXT, Exercise TEXT)" );
         sqLiteDatabase.execSQL("create table " + TABLE_NAME2 + " (WorkoutID INTEGER PRIMARY KEY AUTOINCREMENT, ExerciseID INTEGER, Date TEXT)" );
         sqLiteDatabase.execSQL("create table " + TABLE_NAME3 + " (SetID INTEGER PRIMARY KEY AUTOINCREMENT, WorkoutID INTEGER, SetNum INTEGER, Reps INTEGER, Weight INTEGER)" );
 
@@ -45,17 +45,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Exercises and their Muscle Groups are Hard Coded:
         // Will add more as we get sections working together.
-        values.put(T1_COL1, "Bench Press");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Bench Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Squat");
-        values.put(T1_COL2, "Legs");
+        values.put(T1_COL1, "Legs");
+        values.put(T1_COL2, "Squat");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Flye");
-        values.put(T1_COL2, "Chest");
+        values.put(T1_COL1, "Chest");
+        values.put(T1_COL2, "Flye");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        values.put(T1_COL1, "Dumbbell Curl");
-        values.put(T1_COL2, "Biceps");
+        values.put(T1_COL1, "Biceps");
+        values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
     }
 
@@ -171,6 +171,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sql = "SELECT Date, WorkoutID FROM " + TABLE_NAME2 + " WHERE Date = '" + date + "' ";
         Cursor cur =  db.rawQuery(sql, null);
         return cur;
+    }
+
+    public Cursor dateQuery(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT workouts_table.WorkoutID, lifts_table.Exercise, sets_table.SetNum, sets_table.Weight, sets_table.Reps FROM lifts_table, workouts_table, sets_table ON lifts_table.ExerciseID = workouts_table.ExerciseID AND workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.Date = '" + date + "' ORDER BY workouts_table.WorkoutID";
+
+
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+        //cur.getString(0) //WorkoutID
+        //cur.getString(1) //Exercise
+        //cur.getString(2) // Set Number
+        //cur.getString(3) // Weight
+        //cur.getString(4) // Reps
     }
 
 }
