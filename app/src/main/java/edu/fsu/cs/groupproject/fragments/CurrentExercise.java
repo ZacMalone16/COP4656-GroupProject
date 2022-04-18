@@ -495,9 +495,6 @@ public class CurrentExercise extends Fragment
                 }
 
 
-
-
-
             }//end stop
         });
 

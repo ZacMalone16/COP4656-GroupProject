@@ -786,6 +786,8 @@ public class Graph extends FrameLayout
             case 4:
                 //paint.setColor(Color.LTGRAY);
                 return Color.DKGRAY;
+            case 5:
+                return Color.CYAN;
                 //break;
 
         }
