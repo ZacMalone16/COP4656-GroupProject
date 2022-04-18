@@ -482,7 +482,7 @@ public class Graph extends FrameLayout
             {
                 //draw y axis notches
                 canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);//line1.get(i).y
-                canvas.drawText(String.valueOf(data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);//line1.get(i).lbs
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);//line1.get(i).lbs
 
                 //
                 //draw x axis notches
@@ -491,7 +491,7 @@ public class Graph extends FrameLayout
                 //next to point
 
                 //on x axis
-                canvas.drawText(String.valueOf(data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
             }
 
         }

@@ -63,6 +63,7 @@ public class CurrentExercise extends Fragment
 
         db = new DatabaseHelper(getContext());
 
+        /*
         Cursor cur = db.dateQuery("04.01.2022");
         if(cur != null && cur.getCount() > 0)
         {
@@ -80,6 +81,7 @@ public class CurrentExercise extends Fragment
         db.insertSet(workoutID,3,8,135);
         db.insertSet(workoutID,4,4,145);
 
+        //incline dumbbell press
         db.insertWorkout(2,"04.01.2022");
         //one specific exercise
         workoutID = db.getWorkoutID();
@@ -88,6 +90,7 @@ public class CurrentExercise extends Fragment
         db.insertSet(workoutID,2,10,50);
         db.insertSet(workoutID,3,8,55);
         db.insertSet(workoutID,4,6,60);
+         */
 
     }
 
@@ -491,20 +494,7 @@ public class CurrentExercise extends Fragment
                     }
                 }
 
-                System.out.println("get all dates");
-                cur = db.getDates();
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
 
-                        System.out.println("cur(0)dates = " + cur.getString(0));
-
-                        //System.out.println("cur(2) = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
-                }
 
 
 
