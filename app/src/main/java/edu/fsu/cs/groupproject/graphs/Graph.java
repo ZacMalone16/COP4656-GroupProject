@@ -475,7 +475,7 @@ public class Graph extends FrameLayout
         paint.setAntiAlias(true);
         paint.setFakeBoldText(true);
         //draw axis units
-        for(int i = 0; i < data.size(); i++)//line1.size()
+        for(int i = 0; i < data.size(); i++)//line1.size()//
         {
             for(int j = 0; j < data.get(i).points.size(); j++)//stagger notches and units up and down to fit
             {
