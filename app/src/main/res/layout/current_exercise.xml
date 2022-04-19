@@ -150,57 +150,60 @@
         app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addWorkout_exercisesSpinner"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.214" />
 
     <TextView
         android:id="@+id/set_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         android:text="set num"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintTop_toBottomOf="@+id/add_set_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         android:text="weight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintTop_toBottomOf="@+id/add_set_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/reps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
         android:text="reps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.412"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintTop_toBottomOf="@+id/add_reps_manual"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/add_reps_manual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="81dp"
+        android:onClick="man_add_reps"
         android:text="Manually Add Reps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addWorkout_exercisesSpinner"
-        app:layout_constraintVertical_bias="0.0"
-        android:onClick="man_add_reps"/>
+        app:layout_constraintVertical_bias="0.525" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

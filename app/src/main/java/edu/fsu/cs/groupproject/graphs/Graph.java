@@ -466,7 +466,6 @@ public class Graph extends FrameLayout
     }
 
 
-
     void draw_marks2(Canvas canvas)
     {
         //draw y axis units
@@ -475,10 +474,10 @@ public class Graph extends FrameLayout
         paint.setTextSize(45);
         paint.setAntiAlias(true);
         paint.setFakeBoldText(true);
-        //draw y axis units weight in lbs
+        //draw axis units
         for(int i = 0; i < data.size(); i++)//line1.size()
         {
-            for(int j = 0; j < data.get(i).points.size(); j++)
+            for(int j = 0; j < data.get(i).points.size(); j++)//stagger notches and units up and down to fit
             {
                 //draw y axis notches
                 canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);//line1.get(i).y
@@ -598,7 +597,6 @@ public class Graph extends FrameLayout
 
         System.out.println("mod y = " + mod_y);
         System.out.println("mod x = " + mod_x);
-
 
         //spread the x coordinates out
         for(int i = 0; i < data.size(); i++)
