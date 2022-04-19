@@ -10,11 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import edu.fsu.cs.groupproject.R;
+import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
 public class Calendar extends Fragment implements Communications {
 
     CalendarCommunications calendarCommunications;
+    DatabaseHelper databaseHelper;
 
     public Calendar() {}
 
@@ -42,6 +52,25 @@ public class Calendar extends Fragment implements Communications {
     }
 
     private void init(View view) {
+        databaseHelper = new DatabaseHelper(getActivity());
+
+        MaterialCalendarView materialCalendarView = view.findViewById(R.id.calendarView);
+
+        ArrayList<String> dates = databaseHelper.getDatesList();
+
+
+
+        for (String s : dates) {
+            String[] dayMonthYear;
+            dayMonthYear = s.split("\\.");
+            int month = Integer.parseInt(dayMonthYear[0]);
+            int day = Integer.parseInt(dayMonthYear[1]);
+            int year = Integer.parseInt(dayMonthYear[2]);
+            CalendarDay selectedDay = CalendarDay.from(year, month, day);
+            System.out.println(selectedDay.toString());
+            materialCalendarView.setDateSelected(selectedDay, true);
+        }
+
 
     }
 

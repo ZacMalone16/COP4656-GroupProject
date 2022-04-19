@@ -15,6 +15,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.database.DatabaseHelper;
 import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 {
     static FragmentManager manager;
     static FragmentTransaction ft;
+
+    DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     static ArrayList<PointF> data_points = new ArrayList<>();
     static ArrayList<PointF> reps = new ArrayList<>();
