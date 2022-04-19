@@ -489,8 +489,10 @@ public class Graph extends FrameLayout
                 paint.setTextSize(45);
                 //next to point
 
+
                 //on x axis
-                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);
+
             }
 
         }

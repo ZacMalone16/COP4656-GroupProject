@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import java.util.Random;
+
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
@@ -40,6 +42,20 @@ public class ChooseFrag extends Fragment
         {
             return;
         }
+
+        /*
+        Random rand = new Random();
+        for(int i = 0; i < 3; i++)
+        {
+            db.insertWorkout(i + 1,"04.11.2022");
+            int workoutID = db.getWorkoutID();
+            for(int j = 0; j < 4; j++)
+            {
+                db.insertSet(workoutID,j + 1, rand.nextInt(16) + 1, rand.nextInt(226) + 1);
+            }
+
+        }
+         */
 
         System.out.println("populating db with prev workouts");
         //chest bench
