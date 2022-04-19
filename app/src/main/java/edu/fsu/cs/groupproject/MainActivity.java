@@ -15,6 +15,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.database.DatabaseHelper;
+import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 {
     static FragmentManager manager;
     static FragmentTransaction ft;
+
+    DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     static ArrayList<PointF> data_points = new ArrayList<>();
     static ArrayList<PointF> reps = new ArrayList<>();
@@ -99,16 +103,17 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     //current exercise frag
     public void onAddWorkoutSelected() {
-         //currentExercise = new CurrentExercise();
+        //currentExercise = new CurrentExercise();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView2, currentExercise, "CurrentExercise").commit();
     }
 
     @Override
-    public void onViewPreviousSelected() {
+    public void onCalendarSelected() {
         // Calendar needs to be implemented, haven't gotten to it yet.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView2, new Calendar(), "Calendar").commit();
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event)
@@ -117,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         {
             ax = event.values[0];
             ay = event.values[1];
+            // TODO () migrate ax -> az
             ax = event.values[2];
         }
 
@@ -160,12 +166,10 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             //{
                 /*
                 //new VanityTask().execute();
-
                 boolean has_next_rep = get_reps();
                 rep_count = 0;
                 while(has_next_rep)
                 {
-
                     rep_count++;
                     System.out.printf("REP %d\n", rep_count);
                     has_next_rep = get_reps();
@@ -173,8 +177,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
                  */
 
 
-                //rep_count_num.setText(rep_count);
-               // flag = false;
+            //rep_count_num.setText(rep_count);
+            // flag = false;
 
 
             //}
@@ -318,6 +322,12 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public void man_add_reps(View v)
     {
 
+    }
+
+
+    @Override
+    public void onDateSelected(View view) {
+        graph_frag(view);
     }
 }//end MainActivity class
 

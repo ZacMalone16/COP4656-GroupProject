@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 //import android.app.Fragment;
 
+import java.util.Date;
+
 import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
@@ -45,6 +47,8 @@ public class CurrentExercise extends Fragment
     int exercise_lookup = 0;
     int prev_exercise = - 1;
     String current_date = "04.08.2022";
+    Date curDate = new Date(java.util.Calendar.getInstance().getTimeInMillis());
+
     public static boolean muscle_chosen = false;
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
@@ -349,6 +353,8 @@ public class CurrentExercise extends Fragment
                 reps.setTextSize(25);
                 System.out.println("before set text");
                 reps.setText(String.valueOf(numReps));
+
+
 
                 MainActivity.calibrate = false;
                 MainActivity.stop = false;
