@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 //import android.app.Fragment;
 import androidx.fragment.app.Fragment;
+//import androidx.fragment.app.Fragment;
 
 import edu.fsu.cs.groupproject.R;
 
@@ -49,12 +50,12 @@ public class StartPage extends Fragment implements Communications {
         Button addNewWorkout = (Button) view.findViewById(R.id.startPage_addNewWorkout);
         addNewWorkout.setOnClickListener(v -> startPageCommunications.onAddWorkoutSelected());
 
-        Button viewPreviousWorkouts = (Button) view.findViewById(R.id.startPage_viewPreviousWorkouts);
-        viewPreviousWorkouts.setOnClickListener(v -> startPageCommunications.onViewPreviousSelected());
+        Button viewCalendar = (Button) view.findViewById(R.id.startPage_viewCalendar);
+        viewCalendar.setOnClickListener(v -> startPageCommunications.onCalendarSelected());
     }
 
     public interface StartPageCommunications {
         void onAddWorkoutSelected();
-        void onViewPreviousSelected();
+        void onCalendarSelected();
     }
 }

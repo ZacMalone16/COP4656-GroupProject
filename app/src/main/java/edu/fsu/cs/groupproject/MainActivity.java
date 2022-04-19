@@ -15,6 +15,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
@@ -99,16 +100,17 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     //current exercise frag
     public void onAddWorkoutSelected() {
-         //currentExercise = new CurrentExercise();
+        //currentExercise = new CurrentExercise();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView2, currentExercise, "CurrentExercise").commit();
     }
 
     @Override
-    public void onViewPreviousSelected() {
+    public void onCalendarSelected() {
         // Calendar needs to be implemented, haven't gotten to it yet.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView2, new Calendar(), "Calendar").commit();
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event)
@@ -160,12 +162,10 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             //{
                 /*
                 //new VanityTask().execute();
-
                 boolean has_next_rep = get_reps();
                 rep_count = 0;
                 while(has_next_rep)
                 {
-
                     rep_count++;
                     System.out.printf("REP %d\n", rep_count);
                     has_next_rep = get_reps();
@@ -173,8 +173,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
                  */
 
 
-                //rep_count_num.setText(rep_count);
-               // flag = false;
+            //rep_count_num.setText(rep_count);
+            // flag = false;
 
 
             //}
@@ -319,6 +319,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     {
 
     }
+
+
 }//end MainActivity class
 
 /*    private void openWorkouts() {

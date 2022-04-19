@@ -350,6 +350,8 @@ public class CurrentExercise extends Fragment
                 System.out.println("before set text");
                 reps.setText(String.valueOf(numReps));
 
+
+
                 MainActivity.calibrate = false;
                 MainActivity.stop = false;
                 MainActivity.flag = true;

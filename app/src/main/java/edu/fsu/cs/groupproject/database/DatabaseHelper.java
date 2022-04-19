@@ -249,7 +249,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cur;
     }
 
-    public Cursor maxWeight(int ExerciseID){
+/*    public Cursor maxWeight(int ExerciseID){
         SQLiteDatabase db = this.getReadableDatabase();
         //date and max weight for that specific exercise on each day.
         // select max(weight), date
@@ -267,7 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cur =  db.rawQuery(sql, null);
         return cur;
         //cur.getString(0) //Date
-    }
+    }*/
 
 }
 //TODO: Date Query, Date/Muscle/Exercise Queries
