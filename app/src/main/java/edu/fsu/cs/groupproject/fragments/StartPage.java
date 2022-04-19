@@ -43,14 +43,10 @@ public class StartPage extends Fragment implements Communications {
     }
 
     private void setupView(View view) {
-        setupButtons(view);
-    }
-
-    private void setupButtons(View view) {
-        Button addNewWorkout = (Button) view.findViewById(R.id.startPage_addNewWorkout);
+        Button addNewWorkout = view.findViewById(R.id.startPage_addNewWorkout);
         addNewWorkout.setOnClickListener(v -> startPageCommunications.onAddWorkoutSelected());
 
-        Button viewCalendar = (Button) view.findViewById(R.id.startPage_viewCalendar);
+        Button viewCalendar = view.findViewById(R.id.startPage_viewCalendar);
         viewCalendar.setOnClickListener(v -> startPageCommunications.onCalendarSelected());
     }
 

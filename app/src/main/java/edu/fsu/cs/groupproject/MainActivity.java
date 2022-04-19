@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         {
             ax = event.values[0];
             ay = event.values[1];
+            // TODO () migrate ax -> az
             ax = event.values[2];
         }
 
@@ -324,6 +325,10 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     }
 
 
+    @Override
+    public void onDateSelected(View view) {
+        graph_frag(view);
+    }
 }//end MainActivity class
 
 /*    private void openWorkouts() {

@@ -250,6 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         while (cursor.moveToNext()) {
+            System.out.println(cursor.getString(0));
             dates.add(cursor.getString(0));
         }
 
