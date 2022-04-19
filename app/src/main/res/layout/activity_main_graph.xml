@@ -30,7 +30,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="250sp"
+        android:layout_height="280sp"
         android:layout_weight="1"/>
 
     <FrameLayout

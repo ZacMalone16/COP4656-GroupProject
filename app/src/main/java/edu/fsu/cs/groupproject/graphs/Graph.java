@@ -757,7 +757,7 @@ public class Graph extends FrameLayout
         for(int i = 0; i < data.size(); i++)
         {
             paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - 350) + (i * spacer),paint);//(height - 420)
+            canvas.drawText(data.get(i).name,50,(height - 330) + (i * spacer),paint);//(height - 420)
             //canvas.drawLine();
 
         }

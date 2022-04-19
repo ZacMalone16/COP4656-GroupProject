@@ -44,7 +44,7 @@ public class CurrentExercise extends Fragment
     int muscle_lookup = 0;
     int exercise_lookup = 0;
     int prev_exercise = - 1;
-    String current_date = "04.08.2022";
+    String current_date = "04.29.2022";
     public static boolean muscle_chosen = false;
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};

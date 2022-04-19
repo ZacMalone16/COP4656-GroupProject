@@ -228,7 +228,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     public void daily_max(int sel)
     {
         //chest bench
-        int exerciseID = sel;
+        int exerciseID = sel + 1;
         //data.clear();
         Cursor cur = db.dailyMax(exerciseID);
 
@@ -244,11 +244,15 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 //Cursor cur2 = db.dailyMax()
                 System.out.println("cur(0)date = " + cur.getString(0));
                 System.out.println("cur(1)max weight = " + cur.getString(1));
+                String day = cur.getString(0);
+                day = day.substring(3,5);
+                System.out.println("day = " + day);
                 //put into an 2d array of ints, x,y is date, weight
-                max_by_date[x][0] = Integer.parseInt(cur.getString(0));//date
+                max_by_date[x][0] = Integer.parseInt(day);//date //Integer.parseInt(cur.getString(0)
                 max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
 
                 //System.out.println("cur(2) = " + cur.getString(2));
+                x++;
                 cur.moveToNext();
             }
             data.add(max_by_date);
@@ -484,10 +488,10 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                         //if exercise name is not already in list
                         if (graph.try_add(chest_ex[chest_list.get(j)]))
                         {
-                            //daily_max(chest_list.get(j));
+                            daily_max(chest_list.get(j));
 
                             //pass arraylist for chest1,name & index of exercise to set_exercises
-                            graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
+                            //graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
                             graph.proportion_graph2();
                             System.out.printf("****%d: %s\n", j, chest_ex[chest_list.get(j)]);
                         }
