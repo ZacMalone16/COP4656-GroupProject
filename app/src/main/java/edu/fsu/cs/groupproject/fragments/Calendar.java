@@ -76,7 +76,6 @@ public class Calendar extends Fragment implements Communications {
             int day = Integer.parseInt(dayMonthYear[1]);
             int year = Integer.parseInt(dayMonthYear[2]);
             CalendarDay selectedDay = CalendarDay.from(year, month, day);
-            System.out.println(selectedDay.toString());
             materialCalendarView.setDateSelected(selectedDay, true);
         }
     }
