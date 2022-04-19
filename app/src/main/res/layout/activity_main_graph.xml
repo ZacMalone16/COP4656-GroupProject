@@ -19,18 +19,12 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_conversion_absoluteWidth="411dp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="activity main"
-        android:translationY="0sp"
-        />
+
 
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="280sp"
+        android:layout_height="330sp"
         android:layout_weight="1"/>
 
     <FrameLayout
@@ -44,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              />
+        <!-- android:layout_height="280sp" -->
         <!--
         android:text="spinner frag"
         -->
@@ -73,6 +68,15 @@
 
 
     <!--
+     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="activity main"
+        android:translationY="0sp"
+        />
+
+
     android:layout_weight="1"
     android:layout_weight="1"
 android:gravity="center"

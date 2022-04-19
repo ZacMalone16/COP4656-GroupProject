@@ -1,5 +1,6 @@
 package edu.fsu.cs.groupproject.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 //import edu.fsu.cs.groupproject.graphs.Exercise;
 import edu.fsu.cs.groupproject.graphs.Exercise;
+import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
 public class CurrentExercise extends Fragment
 {
@@ -31,6 +33,7 @@ public class CurrentExercise extends Fragment
     Spinner exercise_spin;
     Button add_set;
     Button add_reps_man;
+    Spinner rep_spin;
     TextView set_num;
     TextView weight;
     Button add_five;
@@ -39,6 +42,7 @@ public class CurrentExercise extends Fragment
     Button stop;
     int setNumber = 0;
     int weight_amt = 0;
+    int numReps;
     DatabaseHelper db;
     Exercise e;
     int muscle_lookup = 0;
@@ -117,6 +121,7 @@ public class CurrentExercise extends Fragment
         start = view.findViewById(R.id.addSet_startButton);
         stop = view.findViewById(R.id.addSet_stopButton);
         add_reps_man = view.findViewById(R.id.add_reps_manual);
+        rep_spin = (Spinner) view.findViewById(R.id.rep_spinner);
 
         e = new Exercise();
 
@@ -333,6 +338,61 @@ public class CurrentExercise extends Fragment
         });
          */
 
+        //rep spinner
+        rep_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                int sel = rep_spin.getSelectedItemPosition();
+
+                System.out.println("rep spin sel = " + sel);
+                if(sel != 0)
+                {
+                    numReps = sel;
+                    reps.setText(String.valueOf(numReps));
+                }
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+
+            }
+        });
+
+        add_reps_man.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                reps.setVisibility(View.VISIBLE);
+                reps.setTextSize(25);
+                System.out.println("before set text");
+                reps.setText(String.valueOf(numReps));
+
+                if(exercise_lookup != prev_exercise)
+                {
+                    System.out.println("insertWorkput called");
+                    //add data to database
+                    db.insertWorkout(exercise_lookup,current_date);
+
+                }
+
+                //one specific exercise
+                int workoutID = db.getWorkoutID();
+                System.out.println("workoutID = " + workoutID);
+                db.insertSet(workoutID,setNumber,numReps,weight_amt);
+
+                prev_exercise = exercise_lookup;
+
+            }
+        });
+
+
+
         //stop button
         stop.setOnClickListener(new View.OnClickListener()
         {
@@ -343,7 +403,7 @@ public class CurrentExercise extends Fragment
                 MainActivity.stop = true;
                 reps.setVisibility(View.VISIBLE);
 
-                int numReps =  MainActivity.count_reps();
+                numReps =  MainActivity.count_reps();
                 //bool = funct();
                 //while(some)
                 reps.setTextSize(25);
