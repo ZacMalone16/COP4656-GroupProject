@@ -39,7 +39,7 @@ public class CalendarGraphActivity extends Activity//Activity //AppCompatActivit
 
     TextView textview;
     //TextView chest;
-    TextView quads;
+    TextView quads1;
 
     FragmentManager manager;
     FragmentTransaction ft;
