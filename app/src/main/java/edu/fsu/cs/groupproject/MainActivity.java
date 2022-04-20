@@ -325,9 +325,12 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     }
 
 
+
+
     @Override
-    public void onDateSelected(View view) {
-        graph_frag(view);
+    public void onBackButton() {
+        System.out.println("main -onbackbutton");
+        openStart();
     }
 }//end MainActivity class
 

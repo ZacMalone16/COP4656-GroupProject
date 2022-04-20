@@ -30,24 +30,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="250sp"
-        android:layout_weight="1"/>
-
-    <FrameLayout
-        android:id="@+id/spinner_frag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />
-        <!--
-        android:text="spinner frag"
-        -->
-    </FrameLayout>
+        android:layout_height="467dp"
+        android:layout_weight="1" />
 
     <FrameLayout
         android:id="@+id/buttons_frag"
@@ -69,6 +53,31 @@
         <!--
        android:text="buttons frag"
        -->
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/spinner_frag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/backButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <!--
+        android:text="spinner frag"
+        -->
     </FrameLayout>
 
 

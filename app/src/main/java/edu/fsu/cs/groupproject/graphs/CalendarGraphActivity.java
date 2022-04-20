@@ -9,26 +9,28 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-//import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
+import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.Communications;
 
-public class GraphActivity extends Activity implements Communications //Activity //AppCompatActivity
+public class CalendarGraphActivity extends Activity//Activity //AppCompatActivity
 {
-    CalendarCommunications calendarCommunications;
     Graph graph;
     DisplayMetrics displayMetrics = new DisplayMetrics();
+
+    //CalendarCommunications calendarCommunications;
     //phone screen height
     int height;
     //phone screen width
@@ -44,18 +46,18 @@ public class GraphActivity extends Activity implements Communications //Activity
     static int choose_graph_sel;
     static ArrayList<int[][]> data = new ArrayList<>();
     static ArrayList<String> names = new ArrayList<>();
-    int [][] max_by_date;
+    //int [][] max_by_date;
     int workoutID;
     int current_exercise;
     String name;
 
-/*    public static void addName(String nameToAdd) {
+    public static void addName(String nameToAdd) {
         names.add(nameToAdd);
     }
 
     public static void addData(int[][] dataToAdd) {
         data.add(dataToAdd);
-    }*/
+    }
 
     //Spinner muscle_spin;
     //Spinner exercise_spin;
@@ -89,23 +91,29 @@ public class GraphActivity extends Activity implements Communications //Activity
     boolean[] shoulder_sel = new boolean[3];
     DatabaseHelper db;
 
+
+
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+
+        return super.onCreateView(name, context, attrs);
+    }
+
     //int set_
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        Button backButton = findViewById(R.id.backButton1);
-
-        if (backButton == null) {
-            System.out.println("kys2");
-        }
-
-        backButton.setOnClickListener(v -> {calendarCommunications.onBackButton();});
-
         //setContentView(R.layout.activity_main);
 
         //System.out.println("main activiy oncreate(), layout = " + layout);
+
+
+
 
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -154,15 +162,16 @@ public class GraphActivity extends Activity implements Communications //Activity
                 ft2.commit();
 
                 //choose graph frag
-                manager = getFragmentManager();
+/*                manager = getFragmentManager();
                 ft = manager.beginTransaction();
                 ChooseFrag chooseFrag = new ChooseFrag();
                 ft.replace(R.id.spinner_frag,chooseFrag);
-                ft.commit();
+                ft.commit();*/
                 //chooseFrag.choose_graph.setSelection(1);
 
 
             }
+
             //load max weight frag
             else if(graph_num == 2)//else if(bundle_layout == 2)
             {
@@ -171,18 +180,18 @@ public class GraphActivity extends Activity implements Communications //Activity
                 graph.setBackgroundColor(Color.WHITE);
 
                 //max weight frag
-                manager = getFragmentManager();
+/*                manager = getFragmentManager();
                 FragmentTransaction ft2 = manager.beginTransaction();
                 MaxWeightFrag maxWeightFrag = new MaxWeightFrag();
                 ft2.replace(R.id.buttons_frag, maxWeightFrag);
-                ft2.commit();
+                ft2.commit();*/
 
-                //choose graph frag
+                /*//choose graph frag
                 manager = getFragmentManager();
                 ft = manager.beginTransaction();
                 ChooseFrag chooseFrag = new ChooseFrag();
                 ft.replace(R.id.spinner_frag,chooseFrag);
-                ft.commit();
+                ft.commit();*/
             }
             //after clicked a day in SetsRepsFrag
             else if(graph_num == 3)
@@ -202,19 +211,20 @@ public class GraphActivity extends Activity implements Communications //Activity
                 setContentView(graph);
 
                 //sets and reps frag
-                manager = getFragmentManager();
+/*                manager = getFragmentManager();
                 FragmentTransaction ft2 = manager.beginTransaction();
                 SetsRepsFrag setsRepsFrag = new SetsRepsFrag();
                 ft2.replace(R.id.buttons_frag, setsRepsFrag);
-                ft2.commit();
+                ft2.commit();*/
 
-                //choose graph frag
+/*                //choose graph frag
                 manager = getFragmentManager();
                 ft = manager.beginTransaction();
                 ChooseFrag chooseFrag = new ChooseFrag();
                 ft.replace(R.id.spinner_frag,chooseFrag);
-                ft.commit();
+                ft.commit();*/
             }
+
 
         }
         //extras == null
@@ -228,11 +238,16 @@ public class GraphActivity extends Activity implements Communications //Activity
             manager = getFragmentManager();
             ft = manager.beginTransaction();
             //Graph g2 = new Graph(this, width, height, 0);
-            ChooseFrag chooseFrag = new ChooseFrag();
+            //ChooseFrag chooseFrag = new ChooseFrag();
             //ft.replace(R.id.buttons_frag,chooseFrag);//
-            ft.replace(R.id.spinner_frag,chooseFrag);
-            ft.commit();
+            //ft.replace(R.id.spinner_frag,chooseFrag);
+            //ft.commit();
         }
+
+
+
+
+
 
         //set position of legend y
         //graph.set_legend_y(quads.getY());
@@ -256,7 +271,7 @@ public class GraphActivity extends Activity implements Communications //Activity
         if(cur != null && cur.getCount() > 0)
         {
             //set up array to size of cur.getCount()
-            max_by_date = new int[cur.getCount()][2];
+            //max_by_date = new int[cur.getCount()][2];
             cur.moveToFirst();
             int x = 0;
             //while there is another row
@@ -266,13 +281,13 @@ public class GraphActivity extends Activity implements Communications //Activity
                 System.out.println("cur(0)date = " + cur.getString(0));
                 System.out.println("cur(1)max weight = " + cur.getString(1));
                 //put into an 2d array of ints, x,y is date, weight
-                max_by_date[x][0] = Integer.parseInt(cur.getString(0));//date
-                max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
+                //max_by_date[x][0] = Integer.parseInt(cur.getString(0));//date
+                //max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
 
                 //System.out.println("cur(2) = " + cur.getString(2));
                 cur.moveToNext();
             }
-            data.add(max_by_date);
+            //data.add(max_by_date);
 
             Cursor cur2 = db.getAllDatat1();
 
@@ -455,7 +470,7 @@ public class GraphActivity extends Activity implements Communications //Activity
             }
 
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(CalendarGraphActivity.this);
             builder.setTitle("Choose Chest Exercises");
             builder.setCancelable(false);
             builder.setMultiChoiceItems(chest_ex, chest_sel, new DialogInterface.OnMultiChoiceClickListener()
@@ -568,7 +583,7 @@ public class GraphActivity extends Activity implements Communications //Activity
         if(v == MaxWeightFrag.back)
         {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(CalendarGraphActivity.this);
             builder.setTitle("Choose Back Exercises");
             builder.setCancelable(false);
             builder.setMultiChoiceItems(back_ex, back_sel, new DialogInterface.OnMultiChoiceClickListener() {
@@ -657,18 +672,7 @@ public class GraphActivity extends Activity implements Communications //Activity
     }//end back_max()
 
 
-    @Override
-    public void establishCommunications(Context context) {
-        if (context instanceof GraphActivity.CalendarCommunications) {
-            calendarCommunications = (GraphActivity.CalendarCommunications) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement CalendarCommunications.");
-        }
-    }
 
-    public interface CalendarCommunications {
-        void onBackButton();
-    }
     /*
     static Graph get_graph()
     {

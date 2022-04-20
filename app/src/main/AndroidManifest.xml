@@ -24,7 +24,10 @@
             android:exported="true">
         </activity>
 
-
+        <activity
+            android:name=".graphs.CalendarGraphActivity"
+            android:exported="true">
+        </activity>
 
     </application>
 
