@@ -24,9 +24,25 @@ import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 import edu.fsu.cs.groupproject.fragments.Communications;
 
-public class GraphActivity extends Activity implements Communications //Activity //AppCompatActivity
+public class GraphActivity extends Activity implements Communications//Activity //AppCompatActivity
 {
+
     CalendarCommunications calendarCommunications;
+
+    @Override
+    public void establishCommunications(Context context) {
+        if (context instanceof GraphActivity.CalendarCommunications) {
+            calendarCommunications = (GraphActivity.CalendarCommunications) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement CalendarCommunications.");
+        }
+    }
+
+    public interface CalendarCommunications {
+        void onBackButton();
+    } //Activity //AppCompatActivity
+
+
     Graph graph;
     DisplayMetrics displayMetrics = new DisplayMetrics();
     //phone screen height
@@ -95,13 +111,7 @@ public class GraphActivity extends Activity implements Communications //Activity
     {
         super.onCreate(savedInstanceState);
 
-        Button backButton = findViewById(R.id.backButton1);
 
-        if (backButton == null) {
-            System.out.println("kys2");
-        }
-
-        backButton.setOnClickListener(v -> {calendarCommunications.onBackButton();});
 
         //setContentView(R.layout.activity_main);
 
@@ -118,6 +128,8 @@ public class GraphActivity extends Activity implements Communications //Activity
         //date_spin = (Spinner) findViewById(R.id.dateSpinner);
         System.out.println("width: " + width);
         System.out.println("height: " + height);
+
+
 
 
         //check if bundle is null
@@ -220,6 +232,15 @@ public class GraphActivity extends Activity implements Communications //Activity
         //extras == null
         else
         {
+            Button backButton = findViewById(R.id.backButton1);
+
+            if (backButton == null) {
+                System.out.println("kys2");
+            }
+
+            backButton.setOnClickListener(v -> {
+                System.out.println("not null");;});
+
             System.out.println("bundle extras = null");
             graph = new Graph(this, width, height, 0);//
             setContentView(graph);
@@ -656,19 +677,13 @@ public class GraphActivity extends Activity implements Communications //Activity
         }//end v == MaxWeightFrag.back
     }//end back_max()
 
+    public void goHome(View view) {
 
-    @Override
-    public void establishCommunications(Context context) {
-        if (context instanceof GraphActivity.CalendarCommunications) {
-            calendarCommunications = (GraphActivity.CalendarCommunications) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement CalendarCommunications.");
-        }
+
+
     }
 
-    public interface CalendarCommunications {
-        void onBackButton();
-    }
+
     /*
     static Graph get_graph()
     {

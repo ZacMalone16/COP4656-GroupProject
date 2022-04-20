@@ -25,8 +25,8 @@ import edu.fsu.cs.groupproject.database.DatabaseHelper;
 import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.Communications;
 
-public class CalendarGraphActivity extends Activity//Activity //AppCompatActivity
-{
+public class CalendarGraphActivity extends Activity {
+
     Graph graph;
     DisplayMetrics displayMetrics = new DisplayMetrics();
 
@@ -40,6 +40,8 @@ public class CalendarGraphActivity extends Activity//Activity //AppCompatActivit
     TextView textview;
     //TextView chest;
     TextView quads1;
+
+
 
     FragmentManager manager;
     FragmentTransaction ft;

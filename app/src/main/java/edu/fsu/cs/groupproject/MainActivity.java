@@ -324,9 +324,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 
     }
 
-
-
-
     @Override
     public void onBackButton() {
         System.out.println("main -onbackbutton");
