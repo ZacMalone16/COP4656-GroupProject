@@ -81,8 +81,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(T1_COL2, "Squat");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //8
+        values.put(T1_COL1, "Hamstrings");
+        values.put(T1_COL2, "Leg Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //9
+        values.put(T1_COL1, "Calves");
+        values.put(T1_COL2, "Calf Raise");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //10
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Dumbbell Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //11
+        values.put(T1_COL1, "Biceps");
+        values.put(T1_COL2, "Barbell Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //12
+        values.put(T1_COL1, "Biceps");
+        values.put(T1_COL2, "Cable Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //11
+        values.put(T1_COL1, "Triceps");
+        values.put(T1_COL2, "Barbell Extension");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //12
+        values.put(T1_COL1, "Triceps");
+        values.put(T1_COL2, "Dumbbell Extension");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //13
+        values.put(T1_COL1, "Triceps");
+        values.put(T1_COL2, "Cable Push Down");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //14
+        values.put(T1_COL1, "Forearms");
+        values.put(T1_COL2, "Wrist Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //15
+        values.put(T1_COL1, "Shoulders");
+        values.put(T1_COL2, "Barbell Press");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //16
+        values.put(T1_COL1, "Shoulders");
+        values.put(T1_COL2, "Dumbbell Press");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //17
+        values.put(T1_COL1, "Shoulders");
+        values.put(T1_COL2, "Lateral Raise");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
     }
 

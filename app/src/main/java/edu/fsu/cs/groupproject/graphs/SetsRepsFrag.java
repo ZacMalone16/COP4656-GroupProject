@@ -3,6 +3,7 @@ package edu.fsu.cs.groupproject.graphs;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ public class SetsRepsFrag extends Fragment
 {
     Spinner date_spin;
     ListView simpleListView;
+    TextView days_list;
     DatabaseHelper db;
     ArrayList<int[][]> data = new ArrayList<>();
     ArrayList<String> date_list = new ArrayList<>();
@@ -85,11 +87,16 @@ public class SetsRepsFrag extends Fragment
     {
         View view = inflater.inflate(R.layout.frag_sets_reps,container,false);
         //date_spin = (Spinner) view.findViewById(R.id.dateSpinner);
+        days_list = (TextView) view.findViewById(R.id.itemTextView);
+        days_list.setTextColor(Color.BLACK);
+        //days_list.setHighlightColor(Color.BLUE);
 
         simpleListView = (ListView) view.findViewById(R.id.simpleListView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(),R.layout.frag_sets_reps,R.id.itemTextView,date_list);
         simpleListView.setAdapter(arrayAdapter);
         simpleListView.setClickable(true);
+
+
         simpleListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

@@ -466,7 +466,6 @@ public class Graph extends FrameLayout
     }
 
 
-
     void draw_marks2(Canvas canvas)
     {
         //draw y axis units
@@ -475,10 +474,10 @@ public class Graph extends FrameLayout
         paint.setTextSize(45);
         paint.setAntiAlias(true);
         paint.setFakeBoldText(true);
-        //draw y axis units weight in lbs
-        for(int i = 0; i < data.size(); i++)//line1.size()
+        //draw axis units
+        for(int i = 0; i < data.size(); i++)//line1.size()//
         {
-            for(int j = 0; j < data.get(i).points.size(); j++)
+            for(int j = 0; j < data.get(i).points.size(); j++)//stagger notches and units up and down to fit
             {
                 //draw y axis notches
                 canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);//line1.get(i).y
@@ -490,8 +489,10 @@ public class Graph extends FrameLayout
                 paint.setTextSize(45);
                 //next to point
 
+
                 //on x axis
-                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);//bench_press[i][0] // line1.get(i).day
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);
+
             }
 
         }
@@ -598,7 +599,6 @@ public class Graph extends FrameLayout
 
         System.out.println("mod y = " + mod_y);
         System.out.println("mod x = " + mod_x);
-
 
         //spread the x coordinates out
         for(int i = 0; i < data.size(); i++)
@@ -757,7 +757,7 @@ public class Graph extends FrameLayout
         for(int i = 0; i < data.size(); i++)
         {
             paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - 350) + (i * spacer),paint);//(height - 420)
+            canvas.drawText(data.get(i).name,50,(height - 330) + (i * spacer),paint);//(height - 420)
             //canvas.drawLine();
 
         }

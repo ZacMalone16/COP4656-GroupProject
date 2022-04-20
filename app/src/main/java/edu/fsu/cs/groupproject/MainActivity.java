@@ -322,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public void man_add_reps(View v)
     {
 
+
     }
 
     @Override
