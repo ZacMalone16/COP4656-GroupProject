@@ -246,10 +246,11 @@ public class GraphActivity extends Activity implements Communications //Activity
         setContentView(graph);
     }
 
-    public void daily_max(int sel)
+    public void daily_max(int sel,int eID)
     {
+
         //chest bench
-        int exerciseID = sel;
+        int exerciseID = sel + 1 + eID;
         //data.clear();
         Cursor cur = db.dailyMax(exerciseID);
 
@@ -265,11 +266,15 @@ public class GraphActivity extends Activity implements Communications //Activity
                 //Cursor cur2 = db.dailyMax()
                 System.out.println("cur(0)date = " + cur.getString(0));
                 System.out.println("cur(1)max weight = " + cur.getString(1));
+                String day = cur.getString(0);
+                day = day.substring(3,5);
+                System.out.println("day = " + day);
                 //put into an 2d array of ints, x,y is date, weight
-                max_by_date[x][0] = Integer.parseInt(cur.getString(0));//date
+                max_by_date[x][0] = Integer.parseInt(day);//date //Integer.parseInt(cur.getString(0)
                 max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
 
                 //System.out.println("cur(2) = " + cur.getString(2));
+                x++;
                 cur.moveToNext();
             }
             data.add(max_by_date);
@@ -505,10 +510,10 @@ public class GraphActivity extends Activity implements Communications //Activity
                         //if exercise name is not already in list
                         if (graph.try_add(chest_ex[chest_list.get(j)]))
                         {
-                            //daily_max(chest_list.get(j));
+                            daily_max(chest_list.get(j),0);
 
                             //pass arraylist for chest1,name & index of exercise to set_exercises
-                            graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
+                            //graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
                             graph.proportion_graph2();
                             System.out.printf("****%d: %s\n", j, chest_ex[chest_list.get(j)]);
                         }
@@ -571,11 +576,14 @@ public class GraphActivity extends Activity implements Communications //Activity
             AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
             builder.setTitle("Choose Back Exercises");
             builder.setCancelable(false);
-            builder.setMultiChoiceItems(back_ex, back_sel, new DialogInterface.OnMultiChoiceClickListener() {
+            builder.setMultiChoiceItems(back_ex, back_sel, new DialogInterface.OnMultiChoiceClickListener()
+            {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                public void onClick(DialogInterface dialogInterface, int i, boolean b)
+                {
 
-                    if (b) {
+                    if (b)
+                    {
 
                         //vector of ints
                         back_list.add(i);
@@ -584,7 +592,8 @@ public class GraphActivity extends Activity implements Communications //Activity
 
                     }
                     //checkbox is cleared, call remove function
-                    else {
+                    else
+                    {
                         System.out.printf("****removed %d: %s\n", i, back_ex[i]);//error this line //muscle_list.get(i)
                         graph.remove(back_ex[i]);//muscle_list.get(i)
                         back_list.remove(Integer.valueOf(i));
@@ -601,14 +610,17 @@ public class GraphActivity extends Activity implements Communications //Activity
             //add exercises to graph if OK clicked
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
 
                     System.out.println("OK musclselist.size = " + back_list.size());
                     for (int j = 0; j < back_list.size(); j++) {
                         //if exercise is not already in list
-                        if (graph.try_add(back_ex[back_list.get(j)])) {
+                        if (graph.try_add(back_ex[back_list.get(j)]))
+                        {
+                            daily_max(back_list.get(j),3);
                             //pass name & index of exercise to set_exercises
-                            graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
+                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
                             graph.proportion_graph2();
                             System.out.printf("****%d: %s\n", j, back_ex[back_list.get(j)]);
                         }
