@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.Random;
@@ -24,6 +25,7 @@ public class ChooseFrag extends Fragment
 
     public Spinner choose_graph;
     DatabaseHelper db;
+    Button home;
 
     public ChooseFrag()
     {
@@ -278,6 +280,7 @@ public class ChooseFrag extends Fragment
         //}
 
         choose_graph = (Spinner) view.findViewById(R.id.spinner);
+        home = (Button) view.findViewById(R.id.home_button);
 
 
         choose_graph.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()

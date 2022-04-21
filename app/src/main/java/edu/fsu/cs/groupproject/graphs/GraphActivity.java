@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 
 //import android.support.v4.app.Fragment;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
@@ -650,12 +654,12 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         }//end v == MaxWeightFrag.back
     }//end back_max()
 
-    /*
-    static Graph get_graph()
+
+    public void home(View v)
     {
-        return graph;
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
     }
-     */
 
 
 }
