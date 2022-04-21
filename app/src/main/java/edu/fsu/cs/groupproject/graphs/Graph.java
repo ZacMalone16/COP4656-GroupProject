@@ -800,8 +800,32 @@ public class Graph extends FrameLayout
             case 5:
                 return Color.CYAN;
                 //break;
+            case 6:
+                //Color.rgb col = new Color.rgb();
+                return Color.rgb(128,128,128);
+            case 7:
+                return Color.rgb(128,0,0);
+            case 8:
+                return Color.rgb(0,0,128);
+            case 9:
+                return Color.rgb(128,128,0);
+            case 10:
+                return Color.rgb(0,128,128);
+            case 11:
+                return Color.BLUE;
+            case 12:
+                return Color.RED;
+            case 13:
+                return Color.MAGENTA;
+            case 14:
+                return Color.GREEN;
+            case 15:
+                return Color.DKGRAY;
+            case 16:
+                return Color.CYAN;
 
         }
+        //add return random color if more lines than 17
         return Color.GREEN;
     }
 
