@@ -238,9 +238,6 @@ public class GraphActivity extends Activity implements Communications//Activity 
                 System.out.println("kys2");
             }
 
-            backButton.setOnClickListener(v -> {
-                System.out.println("not null");;});
-
             System.out.println("bundle extras = null");
             graph = new Graph(this, width, height, 0);//
             setContentView(graph);
