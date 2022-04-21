@@ -58,27 +58,28 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     ArrayList<Integer> chest_list = new ArrayList<>();//langlist
     ArrayList<Integer> back_list = new ArrayList<>();
     ArrayList<Integer> shoulder_list = new ArrayList<>();
-    ArrayList<Integer> quad_list = new ArrayList<>();
-    ArrayList<Integer> ham_list = new ArrayList<>();
+    ArrayList<Integer> quads_list = new ArrayList<>();
+    ArrayList<Integer> hams_list = new ArrayList<>();
     ArrayList<Integer> calf_list = new ArrayList<>();
-    ArrayList<Integer> bicep_list = new ArrayList<>();
-    ArrayList<Integer> tricep_list = new ArrayList<>();
-    ArrayList<Integer> forearm_list = new ArrayList<>();
+    ArrayList<Integer> biceps_list = new ArrayList<>();
+    ArrayList<Integer> triceps_list = new ArrayList<>();
+    ArrayList<Integer> forearms_list = new ArrayList<>();
 
     //exercise lists
     String[] chest_ex = {"Bench Press", "Incline Dumbbell Press", "Cable Flye"};//langarray
     String[] back_ex = {"Lat Pulldown", "T Bar Row", "Cable Row"};
-    String[] shoulder_ex = {"Dumbbell Press", "Barbell Press", "Lateral Raise"};
-    String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
-    String[] ham_ex = {"Deadlift", "Leg Curl", "Dumbbell Lunge"};
+    String[] shoulder_ex = {"Barbell Press","Dumbbell Press" , "Lateral Raise"};
+    String[] quads_ex = {"Squat", "Leg Press", "Leg Extension"};
+    String[] hams_ex = {"Deadlift", "Leg Curl", "Dumbbell Lunge"};
     String[] calf_ex = {"Leg Press Calf Extension", "Seated Calf Raise", "Standing Calf Raise"};
-    String[] bicep_ex = {"Barbell Curl", "Dumbbell Curl", "Barbell Preacher Lunge"};
-    String[] tricep_ex = {"Seated Dumbbell Extension", "Overhead Barbell Extension", "Dumbbell Kickback"};
+    String[] biceps_ex = {"Barbell Curl", "Dumbbell Curl", "Barbell Preacher Lunge"};
+    String[] triceps_ex = {"Seated Dumbbell Extension", "Overhead Barbell Extension", "Dumbbell Kickback"};
     String[] forearm_ex = {"Standing Barbell Wrist Curl", "Seated Dumbbell Wrist Curl"};
 
     boolean[] chest_sel = new boolean[3];//selectedLang
     boolean[] back_sel = new boolean[3];
     boolean[] shoulder_sel = new boolean[3];
+    boolean[] biceps_sel = new boolean[3];
     DatabaseHelper db;
 
     //int set_
@@ -653,6 +654,208 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
             //end back
         }//end v == MaxWeightFrag.back
     }//end back_max()
+
+    //shoulder drop down onclick
+    public void shoulder_max(View v)
+    {
+        if(v == MaxWeightFrag.shoulder)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
+            builder.setTitle("Choose Shoulder Exercises");
+            builder.setCancelable(false);
+            builder.setMultiChoiceItems(shoulder_ex, shoulder_sel, new DialogInterface.OnMultiChoiceClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i, boolean b)
+                {
+
+                    if (b)
+                    {
+
+                        //vector of ints
+                        shoulder_list.add(i);
+                        System.out.printf("%d added\n", i);
+                        System.out.println("checked musclselist.size = " + shoulder_list.size());
+
+                    }
+                    //checkbox is cleared, call remove function
+                    else
+                    {
+                        System.out.printf("****removed %d: %s\n", i, shoulder_ex[i]);//error this line //muscle_list.get(i)
+                        graph.remove(shoulder_ex[i]);//muscle_list.get(i)
+                        shoulder_list.remove(Integer.valueOf(i));
+                        graph.proportion_graph2();
+                        System.out.println("unchecked musclselist.size = " + shoulder_list.size());
+
+                        setContentView(graph);
+
+                    }
+
+                }
+            });
+
+            //add exercises to graph if OK clicked
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+
+                    System.out.println("OK musclselist.size = " + shoulder_list.size());
+                    for (int j = 0; j < shoulder_list.size(); j++) {
+                        //if exercise is not already in list
+                        if (graph.try_add(shoulder_ex[shoulder_list.get(j)]))
+                        {
+                            daily_max(shoulder_list.get(j),21);
+                            //pass name & index of exercise to set_exercises
+                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
+                            graph.proportion_graph2();
+                            System.out.printf("****%d: %s\n", j, shoulder_ex[shoulder_list.get(j)]);
+                        }
+
+                    }
+
+                    graph.draw_graph = true;
+                    setContentView(graph);
+
+                    System.out.println("***************debug***************");
+                    System.out.println("graph.data2.size() = " + graph.data.size());
+                    for (int k = 0; k < graph.data.size(); k++) {
+                        System.out.printf("%d:\n", k);
+                        graph.data.get(k).print();
+
+                    }
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    // remove all items from graph
+                    graph.data.clear();
+                    //clear the list of ints
+                    shoulder_list.clear();
+                    //clear all checks
+                    for (int j = 0; j < shoulder_sel.length; j++) {
+                        shoulder_sel[j] = false;
+                    }
+                    setContentView(graph);
+
+                }
+            });
+            builder.show();
+            //end shoulder
+        }//end v == MaxWeightFrag.back
+    }//end shoulder_max()
+
+    //biceps drop down onclick
+    public void biceps_max(View v)
+    {
+        if(v == MaxWeightFrag.biceps)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
+            builder.setTitle("Choose Shoulder Exercises");
+            builder.setCancelable(false);
+            builder.setMultiChoiceItems(biceps_ex, biceps_sel, new DialogInterface.OnMultiChoiceClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i, boolean b)
+                {
+
+                    if (b)
+                    {
+
+                        //vector of ints
+                        biceps_list.add(i);
+                        System.out.printf("%d added\n", i);
+                        System.out.println("checked musclselist.size = " + biceps_list.size());
+
+                    }
+                    //checkbox is cleared, call remove function
+                    else
+                    {
+                        System.out.printf("****removed %d: %s\n", i, biceps_ex[i]);//error this line //muscle_list.get(i)
+                        graph.remove(biceps_ex[i]);//muscle_list.get(i)
+                        biceps_list.remove(Integer.valueOf(i));
+                        graph.proportion_graph2();
+                        System.out.println("unchecked musclselist.size = " + biceps_list.size());
+
+                        setContentView(graph);
+
+                    }
+
+                }
+            });
+
+            //add exercises to graph if OK clicked
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+
+                    System.out.println("OK musclselist.size = " + biceps_list.size());
+                    for (int j = 0; j < biceps_list.size(); j++) {
+                        //if exercise is not already in list
+                        if (graph.try_add(biceps_ex[biceps_list.get(j)]))
+                        {
+                            daily_max(biceps_list.get(j),21);
+                            //pass name & index of exercise to set_exercises
+                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
+                            graph.proportion_graph2();
+                            System.out.printf("****%d: %s\n", j, biceps_ex[biceps_list.get(j)]);
+                        }
+
+                    }
+
+                    graph.draw_graph = true;
+                    setContentView(graph);
+
+                    System.out.println("***************debug***************");
+                    System.out.println("graph.data2.size() = " + graph.data.size());
+                    for (int k = 0; k < graph.data.size(); k++) {
+                        System.out.printf("%d:\n", k);
+                        graph.data.get(k).print();
+
+                    }
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    // remove all items from graph
+                    graph.data.clear();
+                    //clear the list of ints
+                    biceps_list.clear();
+                    //clear all checks
+                    for (int j = 0; j < biceps_sel.length; j++) {
+                        biceps_sel[j] = false;
+                    }
+                    setContentView(graph);
+
+                }
+            });
+            builder.show();
+            //end biceps
+        }//end v == MaxWeightFrag.back
+    }//end biceps_max()
 
 
     //go back to main button

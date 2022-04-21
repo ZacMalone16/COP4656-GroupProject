@@ -294,7 +294,7 @@ public class CurrentExercise extends Fragment
                                         break;
                                     case 1://bench
                                         System.out.println("dumbbell");
-                                        exercise_lookup = 10;
+                                        exercise_lookup = 15;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
@@ -316,7 +316,7 @@ public class CurrentExercise extends Fragment
                                     case 2://
                                         System.out.println("Barbell Curl");
 
-                                        exercise_lookup = 11;
+                                        exercise_lookup = 16;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
@@ -336,7 +336,7 @@ public class CurrentExercise extends Fragment
                                         break;
                                     case 3://cable
                                         System.out.println("Cable Curl");
-                                        exercise_lookup = 12;
+                                        exercise_lookup = 17;
                                         add_set.setVisibility(View.VISIBLE);
                                         add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()

@@ -90,6 +90,31 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,12,45);
         db.insertSet(workoutID,4,10,50);
 
+        //shoulder barbell
+        db.insertWorkout(22,"04.01.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,95);
+        db.insertSet(workoutID,2,10,105);
+        db.insertSet(workoutID,3,8,115);
+        db.insertSet(workoutID,4,3,120);
+        //shoulder dumbbell
+        db.insertWorkout(23,"04.01.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,30);
+        db.insertSet(workoutID,2,12,35);
+        db.insertSet(workoutID,3,9,40);
+        db.insertSet(workoutID,4,7,45);
+        //shoulder lateral
+        db.insertWorkout(24,"04.01.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,10);
+        db.insertSet(workoutID,2,12,15);
+        db.insertSet(workoutID,3,10,15);
+        db.insertSet(workoutID,4,9,15);
+
         //back lat pulldown
         db.insertWorkout(4,"04.02.2022");
         //one specific exercise
@@ -177,6 +202,31 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,2,10,45);
         db.insertSet(workoutID,3,7,50);
         db.insertSet(workoutID,4,5,60);
+
+        //shoulder barbell
+        db.insertWorkout(22,"04.09.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,95);
+        db.insertSet(workoutID,2,11,105);
+        db.insertSet(workoutID,3,10,115);
+        db.insertSet(workoutID,4,3,125);
+        //shoulder dumbbell
+        db.insertWorkout(23,"04.09.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,30);
+        db.insertSet(workoutID,2,13,35);
+        db.insertSet(workoutID,3,10,40);
+        db.insertSet(workoutID,4,8,45);
+        //shoulder lateral
+        db.insertWorkout(24,"04.09.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,10,15);
+        db.insertSet(workoutID,2,9,15);
+        db.insertSet(workoutID,3,6,15);
+        db.insertSet(workoutID,4,4,15);
 
         //bench
         db.insertWorkout(1,"04.16.2022");
