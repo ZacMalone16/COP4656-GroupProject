@@ -121,6 +121,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
 
+
                 //clear the data before adding to graph
                 data.clear();
                 names.clear();
@@ -148,6 +149,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 graph = new Graph(this, width, height, 0);//2
                 setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
+                graph.max_graph = true;
 
                 //max weight frag
                 manager = getFragmentManager();
@@ -178,6 +180,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
                 graph.proportion_graph2();
                 graph.draw_graph = true;
+                graph.max_graph = false;
                 setContentView(graph);
 
                 //sets and reps frag
@@ -249,8 +252,8 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 day = day.substring(3,5);
                 System.out.println("day = " + day);
                 //put into an 2d array of ints, x,y is date, weight
-                max_by_date[x][0] = Integer.parseInt(day);//date //Integer.parseInt(cur.getString(0)
-                max_by_date[x][1] = Integer.parseInt(cur.getString(1));//max for this exercise
+                max_by_date[x][1] = Integer.parseInt(day);//date //Integer.parseInt(cur.getString(0)
+                max_by_date[x][0] = Integer.parseInt(cur.getString(1));//max for this exercise
 
                 //System.out.println("cur(2) = " + cur.getString(2));
                 x++;

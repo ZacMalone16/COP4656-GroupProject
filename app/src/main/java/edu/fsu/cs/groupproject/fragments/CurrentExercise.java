@@ -55,6 +55,7 @@ public class CurrentExercise extends Fragment
     String[] chest_ex = {"Choose Exercise","Bench Press", "Incline Dumbbell Press", "Cable Flye"};
     String[] back_ex = {"Choose Exercise","Lat Pulldown", "T Bar Row", "Cable Row"};
     String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
+    String[] biceps_ex = {"Choose Exercise","Dumbbell Curl","Barbell Curl", "Cable Curl"};
     public static String [] exercise_array; // = {"","",""};
     public CurrentExercise()
     {
@@ -280,10 +281,102 @@ public class CurrentExercise extends Fragment
                     case 5:
                         break;
                     case 6:
+                        exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,biceps_ex));//exercise_array
+                        exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                        {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+                            {
+                                switch (exercise_spin.getSelectedItemPosition())
+                                {
+                                    case 0://choose
+                                        System.out.println("choose exercise");
+                                        break;
+                                    case 1://bench
+                                        System.out.println("dumbbell");
+                                        exercise_lookup = 10;
+                                        add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
+                                        add_set.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                System.out.println("add_set");
+                                                setNumber++;
+                                                set_num.setVisibility(View.VISIBLE);
+                                                set_num.setTextSize(25);
+                                                String str = String.valueOf(setNumber);
+                                                set_num.setText(str);
+                                                weight.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+
+                                        break;
+                                    case 2://
+                                        System.out.println("Barbell Curl");
+
+                                        exercise_lookup = 11;
+                                        add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
+                                        add_set.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                System.out.println("add_set");
+                                                setNumber++;
+                                                set_num.setVisibility(View.VISIBLE);
+                                                set_num.setTextSize(25);
+                                                String str = String.valueOf(setNumber);
+                                                set_num.setText(str);
+                                                weight.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+                                        break;
+                                    case 3://cable
+                                        System.out.println("Cable Curl");
+                                        exercise_lookup = 12;
+                                        add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
+                                        add_set.setOnClickListener(new View.OnClickListener()
+                                        {
+                                            @Override
+                                            public void onClick(View view)
+                                            {
+                                                System.out.println("add_set");
+                                                setNumber++;
+                                                set_num.setVisibility(View.VISIBLE);
+                                                set_num.setTextSize(25);
+                                                String str = String.valueOf(setNumber);
+                                                set_num.setText(str);
+                                                weight.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+                                        break;
+                                    default:
+                                        System.out.println("deafult case");
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView)
+                            {
+
+                            }
+                        });
                         break;
                     case 7:
                         break;
                     case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+
                         break;
                     default:
                         System.out.println("layout spinner = " + muscle_spin.getSelectedItemPosition());

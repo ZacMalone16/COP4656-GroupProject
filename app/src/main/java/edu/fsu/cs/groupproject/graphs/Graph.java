@@ -59,6 +59,8 @@ public class Graph extends FrameLayout
     float zero_y;
     float legend_y;
     boolean draw_graph;
+    boolean max_graph;
+    int g_height = 1040;//1000
     //int mod;
     Point origin =  new Point();
 
@@ -104,9 +106,9 @@ public class Graph extends FrameLayout
         l_margin = 225;
         top_margin = 125;
         calendar_w = (w - r_margin) - l_margin;//was w - 100 - 100
-        calendar_h = (h - 1000) - top_margin;
+        calendar_h = (h - g_height) - top_margin;//(h - 1000) - top_margin;
         origin.x = l_margin;
-        origin.y = height - 1000;
+        origin.y = height - g_height;//height - 1000;
         min_y = 1000;
         max_y = -1000;
         min_x = 1000;
@@ -188,9 +190,20 @@ public class Graph extends FrameLayout
         if(draw_graph)
         {
             //draw points on graph
-            draw_marks2(canvas);
+            if(max_graph)//switch axes since reps is smaller range put on x
+            {
+                draw_marks2("March", "LBS",canvas);
+                draw_legend(330,canvas);
+
+            }
+            else
+            {
+                draw_marks2("Reps","LBS",canvas);
+                draw_legend(420,canvas);
+            }
+
             draw_lines2(canvas);
-            draw_legend(canvas);
+
 
             //draw orange data points over lines
             for(int i = 0; i < data.size(); i++)
@@ -466,7 +479,7 @@ public class Graph extends FrameLayout
     }
 
 
-    void draw_marks2(Canvas canvas)
+    void draw_marks2(String x, String y, Canvas canvas)
     {
         //draw y axis units
         paint.setStyle(Paint.Style.FILL);
@@ -485,13 +498,11 @@ public class Graph extends FrameLayout
 
                 //
                 //draw x axis notches
-                canvas.drawLine(data.get(i).points.get(j).x,height - 1000, data.get(i).points.get(j).x,height - 1000 + 20,paint);//line1.get(i).x
+                canvas.drawLine(data.get(i).points.get(j).x,height - g_height, data.get(i).points.get(j).x,height - g_height + 20,paint);//line1.get(i).x
                 paint.setTextSize(45);
                 //next to point
-
-
                 //on x axis
-                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - g_height + 75,paint);
 
             }
 
@@ -509,14 +520,14 @@ public class Graph extends FrameLayout
         paint.setAntiAlias(true);
         paint.setFakeBoldText(true);
         paint.setTextSize(70);
-        canvas.drawText("March", (float)x_label,height - 1000 + 160,paint);
+        canvas.drawText(x, (float)x_label,height - g_height + 160,paint);
 
         //draw outline
         paint.setColor(Color.BLACK);
         paint.setTextSize(70);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
-        canvas.drawText("March", (float)x_label,height - 1000 + 160,paint);
+        canvas.drawText(x, (float)x_label,height - g_height + 160,paint);
 
 
         //draw y axis label
@@ -525,14 +536,14 @@ public class Graph extends FrameLayout
         int lbs_size = 75;
         double y_label = ((calendar_h/2.0) + top_margin) + lbs_size;
         paint.setTextSize(70);
-        canvas.drawText("LBS", 50,origin.y + 65,paint);//(float)y_label
+        canvas.drawText(y, 50,origin.y + 65,paint);//(float)y_label
 
         //draw label outline
         paint.setColor(Color.BLACK);
         paint.setTextSize(70);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
-        canvas.drawText("LBS", 50,origin.y + 65,paint);
+        canvas.drawText(y, 50,origin.y + 65,paint);
 
     }
 
@@ -625,9 +636,9 @@ public class Graph extends FrameLayout
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(10);
         //draw y axis
-        canvas.drawLine(l_margin,top_margin,l_margin,height - 1000,paint);
+        canvas.drawLine(l_margin,top_margin - 22,l_margin,height - g_height,paint);
         //draw x axis
-        canvas.drawLine(l_margin,height - 1000 ,width - r_margin,height - 1000,paint);
+        canvas.drawLine(l_margin,height - g_height ,width - r_margin,height - g_height,paint);
         paint.setColor(Color.RED);
         canvas.drawPoint(origin.x,origin.y,paint);
 
@@ -744,7 +755,7 @@ public class Graph extends FrameLayout
         System.out.println("legend y = " + legend_y);
 
     }
-    void draw_legend(Canvas canvas)
+    void draw_legend(int val,Canvas canvas)//pass in int value
     {
         //draw legend line name with color
         paint.setStyle(Paint.Style.FILL);
@@ -757,7 +768,7 @@ public class Graph extends FrameLayout
         for(int i = 0; i < data.size(); i++)
         {
             paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - 330) + (i * spacer),paint);//(height - 420)
+            canvas.drawText(data.get(i).name,50,(height - val) + (i * spacer),paint);//(height - 420)
             //canvas.drawLine();
 
         }
