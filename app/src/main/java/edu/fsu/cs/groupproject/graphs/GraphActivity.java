@@ -655,6 +655,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     }//end back_max()
 
 
+    //go back to main button
     public void home(View v)
     {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
