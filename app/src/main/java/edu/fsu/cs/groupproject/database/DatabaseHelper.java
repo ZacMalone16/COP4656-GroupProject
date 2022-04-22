@@ -331,6 +331,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cur;
     }
 
+    public Cursor todaysWorkout(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT Exercise, SetNum, Reps, Weight FROM lifts_table, sets_table GROUP BY SetNum, Exercise ORDER BY Exercise";
+        Cursor cur =  db.rawQuery(sql, null);
+        return cur;
+    }
+
 }
 //TODO: Date Query, Date/Muscle/Exercise Queries
 // Date -> Muscle Group -> Exercise

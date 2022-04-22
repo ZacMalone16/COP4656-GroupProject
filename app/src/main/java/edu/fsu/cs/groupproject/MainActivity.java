@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
+import edu.fsu.cs.groupproject.fragments.DailyView;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
 import edu.fsu.cs.groupproject.graphs.Graph;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public static boolean flag  = true;
     public static int rep_count;
     boolean complete = false;
+    DailyView dailyView = new DailyView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public void onCurrentExercisesSelected() {
 
         System.out.println("onCurrentExercisesSelected() - called from Main Activity");
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, dailyView, "Daily View").commit();
 
     }
 
