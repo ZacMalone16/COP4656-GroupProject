@@ -193,13 +193,13 @@ public class Graph extends FrameLayout
             if(max_graph)//switch axes since reps is smaller range put on x
             {
                 draw_marks2("March", "LBS",canvas);
-                draw_legend(330,canvas);
+                draw_legend("max",50,330,canvas);
 
             }
             else
             {
                 draw_marks2("Reps","LBS",canvas);
-                draw_legend(420,canvas);
+                draw_legend("reps",350,740,canvas);
             }
 
             draw_lines2(canvas);
@@ -755,7 +755,7 @@ public class Graph extends FrameLayout
         System.out.println("legend y = " + legend_y);
 
     }
-    void draw_legend(int val,Canvas canvas)//pass in int value
+    void draw_legend(String type,int x_val, int y_val,Canvas canvas)//pass in int value
     {
         //draw legend line name with color
         paint.setStyle(Paint.Style.FILL);
@@ -765,13 +765,46 @@ public class Graph extends FrameLayout
 
         int spacer = 45;
 
-        for(int i = 0; i < data.size(); i++)
+        //max weight graph
+        if(type.equals("max"))
         {
-            paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - val) + (i * spacer),paint);//(height - 420)
-            //canvas.drawLine();
+            if(data.size() <= 6)
+            {
+                for(int i = 0; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+            }
+            else if(data.size() <= 12)
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+
+                for(int i = 6; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+            }
 
         }
+        //type == sets,reps, and weight graph
+        else
+        {
+            for(int i = 0; i < data.size(); i++)
+            {
+                paint.setColor(switch_color(i));
+                //canvas.drawText(data.get(i).name,50,(height - val) + (i * spacer),paint);//
+                canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);//
+
+            }
+        }
+
+
     }
 
     int switch_color(int i)

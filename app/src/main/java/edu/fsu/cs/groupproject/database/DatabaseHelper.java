@@ -108,11 +108,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //15 //was 10
         values.put(T1_COL1, "Biceps");
-        values.put(T1_COL2, "Dumbbell Curl");
+        values.put(T1_COL2, "Barbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //16 was 11
         values.put(T1_COL1, "Biceps");
-        values.put(T1_COL2, "Barbell Curl");
+        values.put(T1_COL2, "Dumbbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //17 was 12
         values.put(T1_COL1, "Biceps");

@@ -229,7 +229,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,4,4,15);
 
         //biceps barbell
-        db.insertWorkout(16,"04.09.2022");
+        db.insertWorkout(15,"04.09.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,12,40);
@@ -237,7 +237,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,7,55);
         db.insertSet(workoutID,4,3,55);
         //biceps dumbbell
-        db.insertWorkout(17,"04.09.2022");
+        db.insertWorkout(16,"04.09.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,12,25);
@@ -245,7 +245,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,7,25);
         db.insertSet(workoutID,4,4,25);
         //biceps cable
-        db.insertWorkout(18,"04.09.2022");
+        db.insertWorkout(17,"04.09.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,10,40);
@@ -312,7 +312,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,4,3,65);
 
         //biceps barbell
-        db.insertWorkout(16,"04.17.2022");
+        db.insertWorkout(15,"04.17.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,12,40);
@@ -320,7 +320,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,7,55);
         db.insertSet(workoutID,4,3,55);
         //biceps dumbbell
-        db.insertWorkout(17,"04.17.2022");
+        db.insertWorkout(16,"04.17.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,12,25);
@@ -328,7 +328,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,7,25);
         db.insertSet(workoutID,4,4,25);
         //biceps cable
-        db.insertWorkout(18,"04.17.2022");
+        db.insertWorkout(17,"04.17.2022");
         workoutID = db.getWorkoutID();
         System.out.println("workoutID = " + workoutID);
         db.insertSet(workoutID,1,10,40);

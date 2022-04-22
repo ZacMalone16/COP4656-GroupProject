@@ -72,7 +72,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     String[] quads_ex = {"Squat", "Leg Press", "Leg Extension"};
     String[] hams_ex = {"Deadlift", "Leg Curl", "Dumbbell Lunge"};
     String[] calf_ex = {"Leg Press Calf Extension", "Seated Calf Raise", "Standing Calf Raise"};
-    String[] biceps_ex = {"Barbell Curl", "Dumbbell Curl", "Barbell Preacher Lunge"};
+    String[] biceps_ex = {"Barbell Curl", "Dumbbell Curl", "Cable Curl"};
     String[] triceps_ex = {"Seated Dumbbell Extension", "Overhead Barbell Extension", "Dumbbell Kickback"};
     String[] forearm_ex = {"Standing Barbell Wrist Curl", "Seated Dumbbell Wrist Curl"};
 
@@ -807,7 +807,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                         //if exercise is not already in list
                         if (graph.try_add(biceps_ex[biceps_list.get(j)]))
                         {
-                            daily_max(biceps_list.get(j),21);
+                            daily_max(biceps_list.get(j),14);
                             //pass name & index of exercise to set_exercises
                             //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
                             graph.proportion_graph2();
