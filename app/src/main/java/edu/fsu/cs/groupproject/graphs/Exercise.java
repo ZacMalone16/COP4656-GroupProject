@@ -7,10 +7,9 @@ import java.util.ArrayList;
 public class Exercise
 {
 
-    public String name;//bench press
-    public String muscle;
+    public String name;//exercise name
+    public String muscle;//muscle group
     public ArrayList<Point> data = new ArrayList<>();//index is set #, each row,col is weight and reps
-    //int[][] exercise = new int[][]
 
     public Exercise()
     {

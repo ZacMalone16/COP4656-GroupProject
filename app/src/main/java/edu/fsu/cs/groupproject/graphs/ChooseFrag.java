@@ -39,27 +39,14 @@ public class ChooseFrag extends Fragment
 
         db = new DatabaseHelper(getActivity());
 
+        //check if database is already populated with previous data
+        //this would normally be added by the user by the app if they had added a bunch of workout data
         Cursor cur = db.dateQuery("04.01.2022");
         if(cur != null && cur.getCount() > 0)
         {
             return;
         }
 
-        /*
-        Random rand = new Random();
-        for(int i = 0; i < 3; i++)
-        {
-            db.insertWorkout(i + 1,"04.11.2022");
-            int workoutID = db.getWorkoutID();
-            for(int j = 0; j < 4; j++)
-            {
-                db.insertSet(workoutID,j + 1, rand.nextInt(16) + 1, rand.nextInt(226) + 1);
-            }
-
-        }
-         */
-
-        System.out.println("populating db with prev workouts");
         //chest bench
         db.insertWorkout(1,"04.01.2022");
         //one specific exercise
@@ -586,10 +573,6 @@ public class ChooseFrag extends Fragment
     {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.choose_graph,container,false);
-        //Spinner spin = (Spinner) view.findViewById(R.id.spinner);
-        //Ar
-        //SpinnerAdapter spinnerAdapter = new SpinnerAdapter() {
-        //}
 
         choose_graph = (Spinner) view.findViewById(R.id.spinner);
         home = (Button) view.findViewById(R.id.home_button);
@@ -603,43 +586,20 @@ public class ChooseFrag extends Fragment
                 switch (choose_graph.getSelectedItemPosition())
                 {
                     case 0:
-                        System.out.println("case 0 selected in spinner");
                         break;
                     case 1:
-                        //set sets reps frag
+                        //load sets reps frag
                         Intent intent = new Intent(getActivity(), GraphActivity.class);
-                        //intent.putExtra("bundle_layout",1);
                         intent.putExtra("graph_num",1);
                         startActivity(intent);
-                        //graph = new Graph(getBaseContext(), width, height, 1);
-                        //setContentView(graph);
-                        System.out.println("layout spinner = " + choose_graph.getSelectedItemPosition());
-                        //layout = 1;
-
-                        //onStop();
-                        //recreate();
-                        //graph.set_layout(1);
                         break;
                     case 2:
-                        //set int var in main to load max weight frag
-                        //Intent intent2 = new Intent(getActivity(),MainActivity.class);
-                        Intent intent2 = new Intent(getActivity(), GraphActivity.class);//MaxWeight.class
-                        //intent2.putExtra("bundle_layout",2);
+                        //load max weight frag
+                        Intent intent2 = new Intent(getActivity(), GraphActivity.class);
                         intent2.putExtra("graph_num",2);
                         startActivity(intent2);
-                        //choose_graph.setSelection(0);
-
-                        System.out.println("layout spinner choose frag = " + choose_graph.getSelectedItemPosition());
-                        //Graph g2 = new Graph(getApplicationContext(),width,height,2);
-                        //graph = new Graph(getApplicationContext(), width, height, 2);
-                        //graph.setBackgroundColor(Color.WHITE);
-                        //graph.set_layout(2);
-
-                        //layout = 2;
-
                         break;
                     default:
-                        System.out.println("layout spinner = " + choose_graph.getSelectedItemPosition());
                         break;
                 }
             }

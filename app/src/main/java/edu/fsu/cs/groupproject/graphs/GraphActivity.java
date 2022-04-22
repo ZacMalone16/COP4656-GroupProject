@@ -28,16 +28,15 @@ import edu.fsu.cs.groupproject.database.DatabaseHelper;
 public class GraphActivity extends Activity //Activity //AppCompatActivity
 {
     Graph graph;
+    //used to get phone screen dimensions
     DisplayMetrics displayMetrics = new DisplayMetrics();
     //phone screen height
     int height;
     //phone screen width
     int width;
-    //int layout = -1;//-1
 
-    TextView textview;
-    //TextView chest;
-    TextView quads;
+    //TextView textview;
+    //TextView quads;
 
     FragmentManager manager;
     FragmentTransaction ft;
@@ -49,9 +48,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     int current_exercise;
     String name;
 
-    //Spinner muscle_spin;
-    //Spinner exercise_spin;
-    //Spinner date_spin;
+
 
     //vectors of exercises added (int index in list)
 
