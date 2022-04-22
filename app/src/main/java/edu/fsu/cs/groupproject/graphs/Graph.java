@@ -5,25 +5,18 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import edu.fsu.cs.groupproject.R;
 
-//missing 2 other constructors
+
 public class Graph extends FrameLayout
 {
     static Canvas can;
-    //ArrayList< ArrayList<Points> > data = new ArrayList<>();
-    ArrayList<Line> data = new ArrayList<>();//data
-    //ArrayList<Routine> day = new ArrayList<>();
+    ArrayList<Line> data = new ArrayList<>();
     ArrayList<Day> day = new ArrayList<>();
-
     ArrayList<int[][]> chest_exercises = new ArrayList<>();
     ArrayList<int[][]> back_exercises = new ArrayList<>();
     ArrayList<int[][]> shoulder_exercises = new ArrayList<>();
@@ -38,17 +31,15 @@ public class Graph extends FrameLayout
     int [][] cable_row = new int[4][2];
     int [][] dumbbell_press_01 = new int[5][2];
 
-    int max_weight;
-    int sets_reps;
-    //TextView chest1 = findViewById(R.id.chest_drop);
-
-    int layout;
+    //int max_weight;
+    //int sets_reps;
+    //int layout;
     int width;
     int height;
     int calendar_w;
     int calendar_h;
     int day_w;
-    int y_axis_h;
+    //int y_axis_h;
     int r_margin;
     int l_margin;
     int top_margin;
@@ -59,9 +50,9 @@ public class Graph extends FrameLayout
     float zero_y;
     float legend_y;
     boolean draw_graph;
-    //int mod;
+    boolean max_graph;
+    int g_height = 1040;
     Point origin =  new Point();
-
     Paint paint = new Paint();
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -85,51 +76,32 @@ public class Graph extends FrameLayout
     public Graph(Context context, int w, int h, int layout)
     {
         super(context);
-
         set_layout(layout);
 
-        System.out.println("graph constructor ()");
-        //inflate main layout
-        //inflate(getContext(),R.layout.choose_graph ,this);//choose_graph //max_weight
-
-        //max_weight = R.layout.max_weight;
-        //sets_reps = R.layout.sets_reps;
-        //inflate(getContext(),R.layout.activity_main ,this);
-        //init();
-
+        //init variables
         draw_graph = false;
         width = w;
         height = h;
         r_margin = 125;
         l_margin = 225;
         top_margin = 125;
-        calendar_w = (w - r_margin) - l_margin;//was w - 100 - 100
-        calendar_h = (h - 1000) - top_margin;
+        calendar_w = (w - r_margin) - l_margin;
+        calendar_h = (h - g_height) - top_margin;
         origin.x = l_margin;
-        origin.y = height - 1000;
+        origin.y = height - g_height;
         min_y = 1000;
         max_y = -1000;
         min_x = 1000;
         max_x = -1000;
-        System.out.printf("origin x,y: %d,%d\n", origin.x,origin.y);
         //each day width on graph
         day_w = calendar_w/31;
 
-        System.out.println("day w: " + day_w);
-        System.out.println("cal w: " + calendar_w);
-        System.out.println("cal h: " + calendar_h);
         //populate data array with some workout data
-        set_data();
+        //set_data();
         //populate workouts by date vector
-        set_days();
+        //set_days();
         //set up exercises
-        init_exercises();
-
-        //add data to points vector
-        //add_points(bench_press);
-        //add_points(incline_dumbell);
-        //add_points(cable_flyes);
-        //proportion_graph();
+        //init_exercises();
 
     }
 
@@ -138,32 +110,16 @@ public class Graph extends FrameLayout
         switch(i)
         {
             case 0:
-                System.out.println("set_layout case 0 choose_graph");
                 inflate(getContext(), R.layout.activity_main_graph,this);//R.layout.choose_graph
-                //layout = -1;
                 break;
             case 1:
-                System.out.println("set_layout case 1 sets_reps");
                 inflate(getContext(),R.layout.frag_sets_reps,this);
-                //layout = 1;
                 break;
             case 2:
-                System.out.println("set_layout case 2 max_weight");
                 inflate(getContext(),R.layout.frag_max_weight ,this);//R.layout.max_weight
-                //layout = 2;
                 break;
         }
     }
-    /**
-    void init()
-    {
-        inflate(getContext(),R.layout.activity_main ,this);//R.layout.graph_view
-        //getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        //width = displayMetrics.widthPixels;
-        //height = displayMetrics.heightPixels;
-    }
-     */
-
 
     void set_canvas(Canvas canvas)
     {
@@ -179,56 +135,48 @@ public class Graph extends FrameLayout
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-
         set_canvas(canvas);
-        System.out.println("onDraw()");
+
         //draw graph axes
         draw_axes(canvas);
 
         if(draw_graph)
         {
             //draw points on graph
-            draw_marks2(canvas);
+            if(max_graph)//switch axes since reps is smaller range put on x
+            {
+                draw_marks2("March", "LBS",canvas);
+                draw_legend("max",50,330,canvas);
+
+            }
+            else
+            {
+                draw_marks2("Reps","LBS",canvas);
+                draw_legend("reps",350,740,canvas);
+            }
+
+            //draw lines between points on graph
             draw_lines2(canvas);
-            draw_legend(canvas);
 
             //draw orange data points over lines
             for(int i = 0; i < data.size(); i++)
             {
                 for(int j = 0; j < data.get(i).points.size(); j++)
                 {
-                    //canvas.drawPoint(points.get(i).x,points.get(i).y,paint);
                     paint.setColor(Color.BLACK);
                     paint.setStyle(Paint.Style.FILL);
                     canvas.drawCircle(data.get(i).points.get(j).x, data.get(i).points.get(j).y,12,paint);
-                    //paint.setStrokeWidth(10);
                     paint.setColor(Color.rgb(255,175,0));
                     canvas.drawCircle(data.get(i).points.get(j).x, data.get(i).points.get(j).y,10,paint);
                 }
 
             }
 
-           /**
-            //old draw orange data points over lines
-            for(int i = 0; i < data.size(); i++)
-            {
-                for(int j = 0; j < data.get(i).size(); j++)
-                {
-                    //canvas.drawPoint(points.get(i).x,points.get(i).y,paint);
-                    paint.setColor(Color.BLACK);
-                    paint.setStyle(Paint.Style.FILL);
-                    canvas.drawCircle(data.get(i).get(j).x, data.get(i).get(j).y,12,paint);
-                    //paint.setStrokeWidth(10);
-                    paint.setColor(Color.rgb(255,175,0));
-                    canvas.drawCircle(data.get(i).get(j).x, data.get(i).get(j).y,10,paint);
-                }
-
-            }
-            */
         }
 
     }//end onDraw()
 
+    /*
     //add exercises to exercise vector
     void init_exercises()
     {
@@ -240,18 +188,18 @@ public class Graph extends FrameLayout
         back_exercises.add(t_bar_row);
         back_exercises.add(cable_row);
     }
+     */
 
     //array (chest exercises),get name(Bench press) and index of exercise(bench press) in exercises vector and pass to add_points
     void set_exercises(ArrayList<int[][]> array_l,String str,int index)
     {
 
-        //Bench press, chest_exercises[0]
         add_points(str, array_l.get(index));
     }
 
     void add_points(String str,int [][] array)
     {
-        ArrayList<Points> line = new ArrayList<>();
+        //ArrayList<Points> line = new ArrayList<>();
 
         Line the_line = new Line(str,array);
         data.add(the_line);
@@ -279,6 +227,7 @@ public class Graph extends FrameLayout
         return true;
     }
 
+    //remove line from graph
     void remove(String str)
     {
         for(int i = 0; i < data.size(); i++)
@@ -291,25 +240,8 @@ public class Graph extends FrameLayout
         }
     }
 
-    /**
-    //add routines w/exercises
-    void set_data2()
-    {
-        //add new chest routine March 1
-        day.add(0,new Routine("chest"));
-        //add chest exercises from march 1
-        day.get(0).exercises.add(new Exercise("Bench Press",bench_press));
-        day.get(0).exercises.add(new Exercise("Incline Dumbbell Press",incline_dumbell));
-        day.get(0).exercises.add(new Exercise("Cable Flye",cable_flyes));
-        day.add(1,new Routine("Back"));
-        day.get(1).exercises.add(new Exercise("Lat Pulldown",lat_pulldown));
-        day.get(1).exercises.add(new Exercise("T Bar Row",t_bar_row));
-        day.get(1).exercises.add(new Exercise("Cable Row",cable_row));
-        //routine.get(0).exercises.get(0).data.add()
 
-    }
-     */
-
+    /*
     void set_days()
     {
         day.add(new Day("March 1"));
@@ -322,8 +254,10 @@ public class Graph extends FrameLayout
         //day.add(new Day("March"))
 
     }
+     */
 
     //set up chest data max weight by day
+   /*
     void set_data()
     {
         //march 1, 95 lbs
@@ -464,9 +398,10 @@ public class Graph extends FrameLayout
         dumbbell_press_01[4][1] = 2;
 
     }
+    */
 
 
-    void draw_marks2(Canvas canvas)
+    void draw_marks2(String x, String y, Canvas canvas)
     {
         //draw y axis units
         paint.setStyle(Paint.Style.FILL);
@@ -480,18 +415,12 @@ public class Graph extends FrameLayout
             for(int j = 0; j < data.get(i).points.size(); j++)//stagger notches and units up and down to fit
             {
                 //draw y axis notches
-                canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);//line1.get(i).y
-                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);//line1.get(i).lbs
-
-                //
+                canvas.drawLine(l_margin + 20, data.get(i).points.get(j).y,l_margin - 20, data.get(i).points.get(j).y,paint);
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).lbs),l_margin - 100, data.get(i).points.get(j).y + 15,paint);
                 //draw x axis notches
-                canvas.drawLine(data.get(i).points.get(j).x,height - 1000, data.get(i).points.get(j).x,height - 1000 + 20,paint);//line1.get(i).x
+                canvas.drawLine(data.get(i).points.get(j).x,height - g_height, data.get(i).points.get(j).x,height - g_height + 20,paint);
                 paint.setTextSize(45);
-                //next to point
-
-
-                //on x axis
-                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - 1000 + 75,paint);
+                canvas.drawText(String.valueOf((int)data.get(i).points.get(j).day), data.get(i).points.get(j).x - 10,height - g_height + 75,paint);
 
             }
 
@@ -501,23 +430,21 @@ public class Graph extends FrameLayout
         paint.setColor(Color.GREEN);
         //size of month name text
         int month_size = 150;
-        double x_label = (calendar_w/2.0) + l_margin - month_size; // - size// cal_w- l_margin
-        System.out.println("cal w - lmargin" + (calendar_w - l_margin));
-
+        double x_label = (calendar_w/2.0) + l_margin - month_size;
+        //draw x axis label
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(25);
         paint.setAntiAlias(true);
         paint.setFakeBoldText(true);
         paint.setTextSize(70);
-        canvas.drawText("March", (float)x_label,height - 1000 + 160,paint);
+        canvas.drawText(x, (float)x_label,height - g_height + 160,paint);
 
-        //draw outline
+        //draw x label outline
         paint.setColor(Color.BLACK);
         paint.setTextSize(70);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
-        canvas.drawText("March", (float)x_label,height - 1000 + 160,paint);
-
+        canvas.drawText(x, (float)x_label,height - g_height + 160,paint);
 
         //draw y axis label
         paint.setColor(Color.GREEN);
@@ -525,93 +452,56 @@ public class Graph extends FrameLayout
         int lbs_size = 75;
         double y_label = ((calendar_h/2.0) + top_margin) + lbs_size;
         paint.setTextSize(70);
-        canvas.drawText("LBS", 50,origin.y + 65,paint);//(float)y_label
+        canvas.drawText(y, 50,origin.y + 65,paint);//(float)y_label
 
-        //draw label outline
+        //draw y label outline
         paint.setColor(Color.BLACK);
         paint.setTextSize(70);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
-        canvas.drawText("LBS", 50,origin.y + 65,paint);
+        canvas.drawText(y, 50,origin.y + 65,paint);
 
     }
 
+    //draw lines between points on graph
     void draw_lines2(Canvas canvas)
     {
 
         paint.setStrokeWidth(10);
-        System.out.println("drawLines2() data.size() = " + data.size());
-        for(int i = 0; i < data.size(); i++)//line1.size() - 1 //one less point
+        for(int i = 0; i < data.size(); i++)
         {
             paint.setColor(switch_color(i));
             for(int j = 0; j < data.get(i).points.size() - 1; j++)
             {
-                canvas.drawLine(data.get(i).points.get(j).x, data.get(i).points.get(j).y, data.get(i).points.get(j + 1).x, data.get(i).points.get(j + 1).y,paint); //line1.get(i).x //last point line1.get(i + 1).x
+                canvas.drawLine(data.get(i).points.get(j).x, data.get(i).points.get(j).y, data.get(i).points.get(j + 1).x, data.get(i).points.get(j + 1).y,paint);
             }
 
         }
 
     }
 
-   /*
-    void proportion_graph2()
-    {
-        //get difference between max and min
-        int span = find_span2();
-        System.out.println("span = " + span);
-        //mult every lb gained by this modifier, should be a double
-        int mod = calendar_h/span;
-        System.out.println("mod = " + mod);
-
-        int spacer = 25;
-        //spread the x coordinates out
-        for(int i = 0; i < data.size(); i++)
-        {
-            for(int j = 0; j < data.get(i).points.size(); j++)
-            {
-
-                data.get(i).points.get(j).x = (data.get(i).points.get(j).day * day_w) + l_margin;//data2.get(i).points.get(j).x
-                //spread the y coordinates out, set the difference in lbs gained from min amount of weight
-                data.get(i).points.get(j).diff = data.get(i).points.get(j).lbs - min;//data2.get(i).points.get(j).y
-                data.get(i).points.get(j).y = (origin.y - spacer) - (data.get(i).points.get(j).diff * mod);
-
-            }
-
-        }
-
-    }//end proportion graph
-    */
-
+    //proportion graph dynamically
     void proportion_graph2()
     {
         //get difference between max and min
         float span_x = find_span_x();
         float span_y = find_span_y();
-        System.out.println("span x = " + span_x);
-        System.out.println("span y = " + span_y);
-        //mult every lb gained by this modifier, should be a double
+        //mult every lb gained by this modifier
         float mod_y = calendar_h/span_y;
         float mod_x = calendar_w/span_x;
 
         int spacer = 25;
         zero_y = (origin.y - spacer) - ((0 - min_y) * mod_y);
-        System.out.println("zero_y: " + zero_y);
 
-        System.out.println("mod y = " + mod_y);
-        System.out.println("mod x = " + mod_x);
-
-        //spread the x coordinates out
+        //spread the coordinates out,set the difference in lbs gained from min amount of weight
         for(int i = 0; i < data.size(); i++)
         {
             for(int j = 0; j < data.get(i).points.size(); j++)
             {
-                //data.get(i).points.get(j).x = (data.get(i).points.get(j).day * day_w) + l_margin;//data2.get(i).points.get(j).x
+                //x coordinates
                 data.get(i).points.get(j).diff_x = data.get(i).points.get(j).day - min_x;
                 data.get(i).points.get(j).x = (data.get(i).points.get(j).diff_x * mod_x) + l_margin;
-                //spread the y coordinates out, set the difference in lbs gained from min amount of weight
-
-
-
+                //y coordinates
                 data.get(i).points.get(j).diff_y = data.get(i).points.get(j).lbs - min_y;
                 data.get(i).points.get(j).y = (origin.y - spacer) - (data.get(i).points.get(j).diff_y * mod_y);
             }
@@ -620,19 +510,21 @@ public class Graph extends FrameLayout
 
     }//end proportion graph
 
+    //draw the axes lines
     void draw_axes(Canvas canvas)
     {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(10);
         //draw y axis
-        canvas.drawLine(l_margin,top_margin,l_margin,height - 1000,paint);
+        canvas.drawLine(l_margin,top_margin - 22,l_margin,height - g_height,paint);
         //draw x axis
-        canvas.drawLine(l_margin,height - 1000 ,width - r_margin,height - 1000,paint);
+        canvas.drawLine(l_margin,height - g_height ,width - r_margin,height - g_height,paint);
         paint.setColor(Color.RED);
         canvas.drawPoint(origin.x,origin.y,paint);
 
     }
 
+    //find span in y axis data
     float find_span_y()
     {
         max_y = -1000;
@@ -640,16 +532,18 @@ public class Graph extends FrameLayout
         //check 1st line data
         for(int i = 0; i < data.size(); i++)
         {
-            for(int j = 0; j < data.get(i).points.size(); j++)//data2.get(i).points.get(j).x
+            //find max
+            for(int j = 0; j < data.get(i).points.size(); j++)
             {
-                if(data.get(i).points.get(j).lbs > max_y)//data.get(i).get(j).y > max
+                if(data.get(i).points.get(j).lbs > max_y)
                 {
-                    max_y = data.get(i).points.get(j).lbs;//max = data.get(i).get(j).y;
+                    max_y = data.get(i).points.get(j).lbs;
                 }
             }
 
         }
 
+        //find min
         for(int i = 0; i < data.size(); i++)
         {
             for(int j = 0; j < data.get(i).points.size(); j++)
@@ -662,16 +556,17 @@ public class Graph extends FrameLayout
 
         }
 
-        System.out.printf("min,max y: %f,%f\n", min_y,max_y);
-
+        //return the difference
         return max_y - min_y;
     }
 
+    //find span in x axis data
     float find_span_x()
     {
         max_x = -1000;
         min_x = 1000;
-        //check 1st line data
+
+        //find max
         for(int i = 0; i < data.size(); i++)
         {
             for(int j = 0; j < data.get(i).points.size(); j++)//data2.get(i).points.get(j).x
@@ -684,6 +579,7 @@ public class Graph extends FrameLayout
 
         }
 
+        //find min
         for(int i = 0; i < data.size(); i++)
         {
             for(int j = 0; j < data.get(i).points.size(); j++)
@@ -695,48 +591,12 @@ public class Graph extends FrameLayout
             }
 
         }
-
-        System.out.printf("min,max x: %f,%f\n", min_x,max_x);
-
+        //return difference
         return max_x - min_x;
     }
 
-    /*
-    int find_span2()
-    {
-        max = -1;
-        min = 1000;
-        //check 1st line data
-        for(int i = 0; i < data.size(); i++)
-        {
-            for(int j = 0; j < data.get(i).points.size(); j++)//data2.get(i).points.get(j).x
-            {
-                if(data.get(i).points.get(j).lbs > max)//data.get(i).get(j).y > max
-                {
-                    max = data.get(i).points.get(j).lbs;//max = data.get(i).get(j).y;
-                }
-            }
 
-        }
-
-        for(int i = 0; i < data.size(); i++)
-        {
-            for(int j = 0; j < data.get(i).points.size(); j++)
-            {
-                if(data.get(i).points.get(j).lbs < min)
-                {
-                    min = data.get(i).points.get(j).lbs;
-                }
-            }
-
-        }
-
-        System.out.printf("min,max: %d,%d\n", min,max);
-
-        return max - min;
-    }
-     */
-
+   /*
     void set_legend_y(float y)
     {
 
@@ -744,7 +604,10 @@ public class Graph extends FrameLayout
         System.out.println("legend y = " + legend_y);
 
     }
-    void draw_legend(Canvas canvas)
+    */
+
+    //draw the color coded legend below the graph
+    void draw_legend(String type,int x_val, int y_val,Canvas canvas)
     {
         //draw legend line name with color
         paint.setStyle(Paint.Style.FILL);
@@ -754,43 +617,117 @@ public class Graph extends FrameLayout
 
         int spacer = 45;
 
-        for(int i = 0; i < data.size(); i++)
+        //max weight graph
+        if(type.equals("max"))
         {
-            paint.setColor(switch_color(i));
-            canvas.drawText(data.get(i).name,50,(height - 330) + (i * spacer),paint);//(height - 420)
-            //canvas.drawLine();
+            //if 6 lines or less put in one column
+            if(data.size() <= 6)
+            {
+                for(int i = 0; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+            }
+            //if 12 lines of less put in two columns
+            else if(data.size() <= 12)
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+
+                for(int i = 6; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+            }
+            //if more than 12 lines
+            else if(data.size() <= 24)
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+
+                for(int i = 6; i < 12; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+
+                for(int i = 12; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+
+
+
+            }
 
         }
+        //type == sets,reps, and weight graph
+        else
+        {
+            //put in one column
+            for(int i = 0; i < data.size(); i++)
+            {
+                paint.setColor(switch_color(i));
+                //canvas.drawText(data.get(i).name,50,(height - val) + (i * spacer),paint);//
+                canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);//
+
+            }
+        }
+
+
     }
 
+    //alternate colors for lines and legend on the graph
     int switch_color(int i)
     {
         switch(i)
         {
             case 0:
-                //paint.setColor(Color.BLUE);
                 return Color.BLUE;
-                //break;
             case 1:
-                //paint.setColor(Color.RED);
                 return Color.RED;
-                //break;
             case 2:
-                //paint.setColor(Color.MAGENTA);
                 return Color.MAGENTA;
-                //break;
             case 3:
-                //paint.setColor(Color.YELLOW);
                 return Color.GREEN;
-                //break;
             case 4:
-                //paint.setColor(Color.LTGRAY);
                 return Color.DKGRAY;
             case 5:
                 return Color.CYAN;
-                //break;
+            case 6:
+                return Color.rgb(128,128,128);
+            case 7:
+                return Color.rgb(128,0,0);
+            case 8:
+                return Color.rgb(0,0,128);
+            case 9:
+                return Color.rgb(128,128,0);
+            case 10:
+                return Color.rgb(0,128,128);
+            case 11:
+                return Color.BLUE;
+            case 12:
+                return Color.RED;
+            case 13:
+                return Color.MAGENTA;
+            case 14:
+                return Color.GREEN;
+            case 15:
+                return Color.DKGRAY;
+            case 16:
+                return Color.CYAN;
 
         }
+        //add return green color if more lines than 17
         return Color.GREEN;
     }
 

@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         return false;
     }
 
-    public static boolean has_next_index(int index)
+    public static boolean has_next_index(int index) //
     {
         if(index + 1 > data_points.size() - 1)
         {

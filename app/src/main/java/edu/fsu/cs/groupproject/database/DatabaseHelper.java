@@ -81,50 +81,70 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(T1_COL2, "Squat");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //8
+        values.put(T1_COL1, "Quads");
+        values.put(T1_COL2, "Leg Press");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //9
+        values.put(T1_COL1, "Quads");
+        values.put(T1_COL2, "Leg Extension");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //10
         values.put(T1_COL1, "Hamstrings");
         values.put(T1_COL2, "Leg Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //9
+        //11
+        values.put(T1_COL1, "Hamstrings");
+        values.put(T1_COL2, "Dumbbell Lunge");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //12
+        values.put(T1_COL1, "Hamstrings");
+        values.put(T1_COL2, "Deadlift");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //13
         values.put(T1_COL1, "Calves");
         values.put(T1_COL2, "Calf Raise");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //10
-        values.put(T1_COL1, "Biceps");
-        values.put(T1_COL2, "Dumbbell Curl");
+        //14
+        values.put(T1_COL1, "Calves");
+        values.put(T1_COL2, "Seated Calf Raise");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //11
+        //15 //was 10
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Barbell Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //12
+        //16 was 11
+        values.put(T1_COL1, "Biceps");
+        values.put(T1_COL2, "Dumbbell Curl");
+        sqLiteDatabase.insert(TABLE_NAME1, null, values);
+        //17 was 12
         values.put(T1_COL1, "Biceps");
         values.put(T1_COL2, "Cable Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //11
+        //18
         values.put(T1_COL1, "Triceps");
         values.put(T1_COL2, "Barbell Extension");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //12
+        //19
         values.put(T1_COL1, "Triceps");
         values.put(T1_COL2, "Dumbbell Extension");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //13
+        //20
         values.put(T1_COL1, "Triceps");
         values.put(T1_COL2, "Cable Push Down");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //14
+        //21
         values.put(T1_COL1, "Forearms");
         values.put(T1_COL2, "Wrist Curl");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //15
+        //22
         values.put(T1_COL1, "Shoulders");
         values.put(T1_COL2, "Barbell Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //16
+        //23
         values.put(T1_COL1, "Shoulders");
         values.put(T1_COL2, "Dumbbell Press");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
-        //17
+        //24
         values.put(T1_COL1, "Shoulders");
         values.put(T1_COL2, "Lateral Raise");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);

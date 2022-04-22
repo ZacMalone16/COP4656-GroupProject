@@ -26,12 +26,12 @@ public class MaxWeightFrag extends Fragment
     static TextView chest;
     static TextView back;
     static TextView shoulder;
-    TextView quads;
-    TextView hams;
-    TextView calf;
-    TextView bicep;
-    TextView tricep;
-    TextView forearms;
+    static TextView quads;
+    static TextView hams;
+    static TextView calf;
+    static TextView biceps;
+    static TextView triceps;
+    static TextView forearms;
 
     public MaxWeightFrag()
     {
@@ -58,8 +58,8 @@ public class MaxWeightFrag extends Fragment
         quads = view.findViewById(R.id.quads_drop);
         hams = view.findViewById(R.id.hamstrings_drop);
         calf = view.findViewById(R.id.calf_drop);
-        bicep = view.findViewById(R.id.biceps_drop);
-        tricep = view.findViewById(R.id.triceps_drop);
+        biceps = view.findViewById(R.id.biceps_drop);
+        triceps = view.findViewById(R.id.triceps_drop);
         forearms = view.findViewById(R.id.forearms_drop);
 
         return view;

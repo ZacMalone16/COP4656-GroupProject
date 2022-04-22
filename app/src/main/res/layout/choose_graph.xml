@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Spinner
         android:id="@+id/spinner"
+        style="@android:style/Widget.Spinner"
         android:layout_width="wrap_content"
         android:layout_height="35sp"
-        android:padding="5dp"
-
-
-        style="@android:style/Widget.Spinner"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="56dp"
         android:entries="@array/graphs"
-         />
-</RelativeLayout>
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:onClick="home"
+        android:text="Back to Main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--600
     android:textSize="30sp"
