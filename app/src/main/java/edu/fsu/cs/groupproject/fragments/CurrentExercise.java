@@ -18,8 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 //import android.app.Fragment;
 
-import java.util.Date;
-
 import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
@@ -50,12 +48,7 @@ public class CurrentExercise extends Fragment
     int muscle_lookup = 0;
     int exercise_lookup = 0;
     int prev_exercise = - 1;
-
     String current_date = "04.29.2022";
-
-    Date curDate = new Date(java.util.Calendar.getInstance().getTimeInMillis());
-
-
     public static boolean muscle_chosen = false;
     SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
@@ -119,7 +112,7 @@ public class CurrentExercise extends Fragment
         View view = inflater.inflate(R.layout.current_exercise, container, false);//activity_main
 
 
-         //sensorManager = (SensorManager) getS
+        //sensorManager = (SensorManager) getS
         muscle_spin = (Spinner) view.findViewById(R.id.addWorkout_muscleSpinner);
         exercise_spin = (Spinner) view.findViewById(R.id.addWorkout_exercisesSpinner);
         add_set = (Button) view.findViewById(R.id.add_set_button);
@@ -185,22 +178,22 @@ public class CurrentExercise extends Fragment
                                         System.out.println("bench press");
                                         exercise_lookup = 1;
                                         /**
-                                        add_set.setVisibility(View.VISIBLE);
-                                        add_reps_man.setVisibility(View.VISIBLE);
-                                        add_set.setOnClickListener(new View.OnClickListener()
-                                        {
-                                            @Override
-                                            public void onClick(View view)
-                                            {
-                                                System.out.println("add_set");
-                                                setNumber++;
-                                                set_num.setVisibility(View.VISIBLE);
-                                                set_num.setTextSize(25);
-                                                String str = String.valueOf(setNumber);
-                                                set_num.setText(str);
-                                                weight.setVisibility(View.VISIBLE);
-                                            }
-                                        });
+                                         add_set.setVisibility(View.VISIBLE);
+                                         add_reps_man.setVisibility(View.VISIBLE);
+                                         add_set.setOnClickListener(new View.OnClickListener()
+                                         {
+                                         @Override
+                                         public void onClick(View view)
+                                         {
+                                         System.out.println("add_set");
+                                         setNumber++;
+                                         set_num.setVisibility(View.VISIBLE);
+                                         set_num.setTextSize(25);
+                                         String str = String.valueOf(setNumber);
+                                         set_num.setText(str);
+                                         weight.setVisibility(View.VISIBLE);
+                                         }
+                                         });
                                          */
                                         /*
                                         add_reps_man.setOnClickListener(new View.OnClickListener()
@@ -905,8 +898,6 @@ public class CurrentExercise extends Fragment
                 System.out.println("before set text");
                 reps.setText(String.valueOf(numReps));
 
-
-
                 MainActivity.calibrate = false;
                 MainActivity.stop = false;
                 MainActivity.flag = true;
@@ -929,98 +920,98 @@ public class CurrentExercise extends Fragment
                 prev_exercise = exercise_lookup;
 
                 /** old debug querys
-                System.out.println("getAllData");
-                Cursor cur = db.getAllDatat1();
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
+                 System.out.println("getAllData");
+                 Cursor cur = db.getAllDatat1();
+                 if(cur != null && cur.getCount() > 0)
+                 {
+                 cur.moveToFirst();
+                 while(!cur.isAfterLast())
+                 {
 
-                        System.out.println("0 exercise ID = " + cur.getString(0));
-                        System.out.println("1 muscleGroup = " + cur.getString(1));
-                        System.out.println("2 Exercise = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
+                 System.out.println("0 exercise ID = " + cur.getString(0));
+                 System.out.println("1 muscleGroup = " + cur.getString(1));
+                 System.out.println("2 Exercise = " + cur.getString(2));
+                 cur.moveToNext();
+                 }
 
-                }
-                System.out.println("getExerciseData with workout id");
-                System.out.println("current workoutID = " + workoutID);
-                //need a way to get every row in this table
-                cur = db.getExerciseData(workoutID);
-                if(cur != null && cur.getCount() > 0)
-                {
-                    //cur.moveToFirst();
-                    cur.moveToNext();
-                    while(!cur.isAfterLast())
-                    {
+                 }
+                 System.out.println("getExerciseData with workout id");
+                 System.out.println("current workoutID = " + workoutID);
+                 //need a way to get every row in this table
+                 cur = db.getExerciseData(workoutID);
+                 if(cur != null && cur.getCount() > 0)
+                 {
+                 //cur.moveToFirst();
+                 cur.moveToNext();
+                 while(!cur.isAfterLast())
+                 {
 
-                        System.out.printf("0: %s workoutID = specific exercise on this date\n", cur.getString(0));
-                        System.out.printf("1: %s exerciseID refers 1 = bench \n", cur.getString(1));
-                        System.out.printf("2: %s date \n", cur.getString(2));
-                        cur.moveToNext();
-                    }
-
-
-                }
-                else
-                {
-                    System.out.println("cur =  null or getcount = 0");
-                }
-
-                System.out.println("getAllExerciseData");
-                //cur = db.getAllExerciseData();
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
-
-                        System.out.println("0 workoutID = " + cur.getString(0));
-                        System.out.println("1 exerciseID = " + cur.getString(1));
-                        System.out.println("2 date = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
-
-                }
+                 System.out.printf("0: %s workoutID = specific exercise on this date\n", cur.getString(0));
+                 System.out.printf("1: %s exerciseID refers 1 = bench \n", cur.getString(1));
+                 System.out.printf("2: %s date \n", cur.getString(2));
+                 cur.moveToNext();
+                 }
 
 
+                 }
+                 else
+                 {
+                 System.out.println("cur =  null or getcount = 0");
+                 }
 
-                System.out.println("getWorkoutData");
-                System.out.println("workoutID = " + workoutID);
-                cur = db.getWorkoutData(workoutID);
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
+                 System.out.println("getAllExerciseData");
+                 //cur = db.getAllExerciseData();
+                 if(cur != null && cur.getCount() > 0)
+                 {
+                 cur.moveToFirst();
+                 while(!cur.isAfterLast())
+                 {
 
-                        System.out.println("0 setID = " + cur.getString(0));
-                        System.out.println("1 workoutID = " + cur.getString(1));
-                        System.out.println("2 setNum = " + cur.getString(2));
-                        System.out.println("3 Reps = " + cur.getString(3));
-                        System.out.println("4 weight = " + cur.getString(4));
-                        cur.moveToNext();
-                    }
-                }
+                 System.out.println("0 workoutID = " + cur.getString(0));
+                 System.out.println("1 exerciseID = " + cur.getString(1));
+                 System.out.println("2 date = " + cur.getString(2));
+                 cur.moveToNext();
+                 }
 
-                System.out.println("getDataForDate");
-                System.out.println("workoutID = " + workoutID);
-                System.out.println("date = 01.01.2021");
-                cur = db.getDataForDate("01.01.2021");
+                 }
 
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
 
-                        System.out.println("cur(0)date = " + cur.getString(0));
-                        System.out.println("cur(1)workout ID = " + cur.getString(1));
-                        //System.out.println("cur(2) = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
-                }
+
+                 System.out.println("getWorkoutData");
+                 System.out.println("workoutID = " + workoutID);
+                 cur = db.getWorkoutData(workoutID);
+                 if(cur != null && cur.getCount() > 0)
+                 {
+                 cur.moveToFirst();
+                 while(!cur.isAfterLast())
+                 {
+
+                 System.out.println("0 setID = " + cur.getString(0));
+                 System.out.println("1 workoutID = " + cur.getString(1));
+                 System.out.println("2 setNum = " + cur.getString(2));
+                 System.out.println("3 Reps = " + cur.getString(3));
+                 System.out.println("4 weight = " + cur.getString(4));
+                 cur.moveToNext();
+                 }
+                 }
+
+                 System.out.println("getDataForDate");
+                 System.out.println("workoutID = " + workoutID);
+                 System.out.println("date = 01.01.2021");
+                 cur = db.getDataForDate("01.01.2021");
+
+                 if(cur != null && cur.getCount() > 0)
+                 {
+                 cur.moveToFirst();
+                 while(!cur.isAfterLast())
+                 {
+
+                 System.out.println("cur(0)date = " + cur.getString(0));
+                 System.out.println("cur(1)workout ID = " + cur.getString(1));
+                 //System.out.println("cur(2) = " + cur.getString(2));
+                 cur.moveToNext();
+                 }
+                 }
                  */
 
 

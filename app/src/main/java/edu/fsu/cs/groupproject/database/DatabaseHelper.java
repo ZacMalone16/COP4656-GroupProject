@@ -160,6 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Can easily insert a new workout to the workout table:
     public boolean insertWorkout(int ExerciseID, String Date){
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(T2_COL1, ExerciseID);
@@ -201,7 +202,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     db.insertSet(workoutid, set_number, reps, weight);
     prompt for next weight or finish workout.
      */
-
     public boolean insertSet(int WorkoutID, int Set, int Reps, int Weight){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -229,6 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         else return 1;
     }
+
 
     //Test function to check data
     public Cursor getAllDatat1(){
@@ -297,7 +298,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //cur.getString(2) //Date of Max
     }
 
-    public Cursor getDates() {
+    public Cursor getDates(){
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT DISTINCT Date FROM " + TABLE_NAME2 + "";
         Cursor cur =  db.rawQuery(sql, null);
@@ -329,26 +330,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cur = db.rawQuery(sql, null);
         return cur;
     }
-
-/*    public Cursor maxWeight(int ExerciseID){
-        SQLiteDatabase db = this.getReadableDatabase();
-        //date and max weight for that specific exercise on each day.
-        // select max(weight), date
-        String sql = "SELECT  lifts_table.Exercise, max(sets_table.Weight), Date FROM lifts_table, workouts_table, sets_table ON workouts_table.WorkoutID = sets_table.WorkoutID WHERE workouts_table.ExerciseID = '" + ExerciseID + "'";
-        Cursor cur =  db.rawQuery(sql, null);
-        return cur;
-        //cur.getString(0) //Exercise Name
-        //cur.getString(1) //Max Weight
-        //cur.getString(2) //Date of Max
-    }
-
-    public Cursor getDates(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT DISTINCT Date FROM " + TABLE_NAME2 + "";
-        Cursor cur =  db.rawQuery(sql, null);
-        return cur;
-        //cur.getString(0) //Date
-    }*/
 
 }
 //TODO: Date Query, Date/Muscle/Exercise Queries
