@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         if(extras != null)
         {
             onAddWorkoutSelected();
-            System.out.println("bundle extras != null");
             String start = (String) extras.get("start");
-            System.out.println("start = " + start);
+
             //load sets and reps frag
             if (start.equals("true"))
             {
@@ -350,8 +349,3 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     }
 }//end MainActivity class
 
-/*    private void openWorkouts() {
-        Intent intent = new Intent(this, GraphActivity.class);
-        startActivity(intent);
-    }
-*/
