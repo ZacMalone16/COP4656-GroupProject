@@ -56,6 +56,7 @@ public class CurrentExercise extends Fragment
     String[] back_ex = {"Choose Exercise","Lat Pulldown", "T Bar Row", "Cable Row"};
     String[] quad_ex = {"Squat", "Leg Press", "Leg Extension"};
     String[] biceps_ex = {"Choose Exercise","Dumbbell Curl","Barbell Curl", "Cable Curl"};
+    String[] triceps_ex = {"Choose Exercise","Barbell Extension","Dumbbell Extension", "Cable Push Down"};
     public static String [] exercise_array; // = {"","",""};
     public CurrentExercise()
     {
@@ -237,6 +238,7 @@ public class CurrentExercise extends Fragment
                                         exercise_lookup = 4;
                                         System.out.println("Lat pulldown");
                                         add_set.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
                                         {
                                             @Override
@@ -295,6 +297,7 @@ public class CurrentExercise extends Fragment
                                     case 1://bench
                                         System.out.println("dumbbell");
                                         exercise_lookup = 15;
+                                        add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setVisibility(View.VISIBLE);
                                         add_reps_man.setVisibility(View.VISIBLE);
                                         add_set.setOnClickListener(new View.OnClickListener()
@@ -368,6 +371,56 @@ public class CurrentExercise extends Fragment
                         });
                         break;
                     case 7:
+                        exercise_spin.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,triceps_ex));//exercise_array
+                        exercise_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                        {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+                            {
+                                switch (exercise_spin.getSelectedItemPosition())
+                                {
+                                    case 0:
+                                        //System.out.println("choose back exercise");
+                                        break;
+                                    case 1:////lat pulldown
+                                        exercise_lookup = 18;
+                                        //System.out.println("Lat pulldown");
+                                        break;
+                                    case 2://T bar row
+                                        exercise_lookup = 19;
+                                        break;
+                                    case 3://cable row
+                                        exercise_lookup = 20;
+                                        break;
+                                    default:
+                                        System.out.println("deafult case");
+                                        break;
+                                }
+
+                                add_set.setVisibility(View.VISIBLE);
+                                add_set.setOnClickListener(new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        System.out.println("add_set");
+                                        setNumber++;
+                                        set_num.setVisibility(View.VISIBLE);
+                                        add_reps_man.setVisibility(View.VISIBLE);
+                                        set_num.setTextSize(25);
+                                        String str = String.valueOf(setNumber);
+                                        set_num.setText(str);
+                                        weight.setVisibility(View.VISIBLE);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView)
+                            {
+
+                            }
+                        });
                         break;
                     case 8:
                         break;

@@ -74,13 +74,14 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     String[] calf_ex = {"Leg Press Calf Extension", "Seated Calf Raise", "Standing Calf Raise"};
     String[] biceps_ex = {"Barbell Curl", "Dumbbell Curl", "Cable Curl"};
     String[] triceps_ex = {"Barbell Extension", "Dumbbell Extension", "Cable Push Down"};
-    String[] forearm_ex = {"Standing Barbell Wrist Curl", "Seated Dumbbell Wrist Curl"};
+    String[] forearms_ex = {"Wrist Curl"};
 
     boolean[] chest_sel = new boolean[3];//selectedLang
     boolean[] back_sel = new boolean[3];
     boolean[] shoulder_sel = new boolean[3];
     boolean[] biceps_sel = new boolean[3];
     boolean[] triceps_sel = new boolean[3];
+    boolean[] forearms_sel = new boolean[3];
     DatabaseHelper db;
 
     //int set_
@@ -858,7 +859,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         }//end v == MaxWeightFrag.back
     }//end biceps_max()
 
-    //biceps drop down onclick
+    //triceps drop down onclick
     public void triceps_max(View v)
     {
         if(v == MaxWeightFrag.triceps)
@@ -949,6 +950,107 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     //clear all checks
                     for (int j = 0; j < triceps_sel.length; j++) {
                         triceps_sel[j] = false;
+                    }
+                    setContentView(graph);
+
+                }
+            });
+            builder.show();
+            //end biceps
+        }//end v == MaxWeightFrag.back
+    }//end triceps_max()
+
+    //triceps drop down onclick
+    public void forearms_max(View v)
+    {
+        if(v == MaxWeightFrag.forearms)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
+            builder.setTitle("Choose Forearm Exercises");
+            builder.setCancelable(false);
+            builder.setMultiChoiceItems(forearms_ex, forearms_sel, new DialogInterface.OnMultiChoiceClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i, boolean b)
+                {
+
+                    if (b)
+                    {
+
+                        //vector of ints
+                        forearms_list.add(i);
+                        System.out.printf("%d added\n", i);
+                        System.out.println("checked musclselist.size = " + forearms_list.size());
+
+                    }
+                    //checkbox is cleared, call remove function
+                    else
+                    {
+                        System.out.printf("****removed %d: %s\n", i, forearms_ex[i]);//error this line //muscle_list.get(i)
+                        graph.remove(forearms_ex[i]);//muscle_list.get(i)
+                        forearms_list.remove(Integer.valueOf(i));
+                        graph.proportion_graph2();
+                        System.out.println("unchecked musclselist.size = " + forearms_list.size());
+
+                        setContentView(graph);
+
+                    }
+
+                }
+            });
+
+            //add exercises to graph if OK clicked
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+
+                    System.out.println("OK musclselist.size = " + forearms_list.size());
+                    for (int j = 0; j < forearms_list.size(); j++) {
+                        //if exercise is not already in list
+                        if (graph.try_add(forearms_ex[forearms_list.get(j)]))
+                        {
+                            daily_max(forearms_list.get(j),17);
+                            //pass name & index of exercise to set_exercises
+                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
+                            graph.proportion_graph2();
+                            System.out.printf("****%d: %s\n", j, forearms_ex[forearms_list.get(j)]);
+                        }
+
+                    }
+
+                    graph.draw_graph = true;
+                    setContentView(graph);
+
+                    System.out.println("***************debug***************");
+                    System.out.println("graph.data2.size() = " + graph.data.size());
+                    for (int k = 0; k < graph.data.size(); k++) {
+                        System.out.printf("%d:\n", k);
+                        graph.data.get(k).print();
+
+                    }
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    // remove all items from graph
+                    graph.data.clear();
+                    //clear the list of ints
+                    forearms_list.clear();
+                    //clear all checks
+                    for (int j = 0; j < forearms_sel.length; j++) {
+                        forearms_sel[j] = false;
                     }
                     setContentView(graph);
 

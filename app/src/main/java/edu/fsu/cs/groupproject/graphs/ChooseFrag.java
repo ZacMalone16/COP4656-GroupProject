@@ -278,6 +278,16 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,2,9,35);
         db.insertSet(workoutID,3,7,30);
         db.insertSet(workoutID,4,3,25);
+        //forearms wrist
+        db.insertWorkout(21,"04.09.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,20,25);
+        db.insertSet(workoutID,2,19,30);
+        db.insertSet(workoutID,3,15,35);
+        db.insertSet(workoutID,3,8,40);
+        db.insertSet(workoutID,3,7,40);
+        db.insertSet(workoutID,3,2,45);
 
         //
         //tricep barbell ext
@@ -370,7 +380,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,1,12,40);
         db.insertSet(workoutID,2,9,50);
         db.insertSet(workoutID,3,7,55);
-        db.insertSet(workoutID,4,3,55);
+        db.insertSet(workoutID,4,3,65);
         //biceps dumbbell
         db.insertWorkout(16,"04.17.2022");
         workoutID = db.getWorkoutID();
@@ -387,6 +397,16 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,2,9,35);
         db.insertSet(workoutID,3,7,30);
         db.insertSet(workoutID,4,3,25);
+        //forearms wrist
+        db.insertWorkout(21,"04.17.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,17,30);
+        db.insertSet(workoutID,2,15,35);
+        db.insertSet(workoutID,3,11,35);
+        db.insertSet(workoutID,3,8,40);
+        db.insertSet(workoutID,3,6,45);
+        db.insertSet(workoutID,3,1,55);
 
         //bench
         db.insertWorkout(1,"04.23.2022");
