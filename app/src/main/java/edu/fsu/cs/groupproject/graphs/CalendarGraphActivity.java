@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,26 +26,13 @@ public class CalendarGraphActivity extends Activity {
 
     Graph graph;
     DisplayMetrics displayMetrics = new DisplayMetrics();
-
-    //CalendarCommunications calendarCommunications;
-    //phone screen height
     int height;
-    //phone screen width
     int width;
-    //int layout = -1;//-1
-
-    TextView textview;
-    //TextView chest;
-    TextView quads1;
-
-
-
     FragmentManager manager;
     FragmentTransaction ft;
     static int choose_graph_sel;
     static ArrayList<int[][]> data = new ArrayList<>();
     static ArrayList<String> names = new ArrayList<>();
-    //int [][] max_by_date;
     int workoutID;
     int current_exercise;
     String name;
@@ -57,6 +43,20 @@ public class CalendarGraphActivity extends Activity {
 
     public static void addData(int[][] dataToAdd) {
         data.add(dataToAdd);
+    }
+
+    public static void clear() {
+        clearNames();
+        clearData();
+    }
+
+
+    private static void clearNames() {
+        names.clear();
+    }
+
+    private static void clearData() {
+        data.clear();
     }
 
     //Spinner muscle_spin;

@@ -7,26 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 import edu.fsu.cs.groupproject.graphs.CalendarGraphActivity;
-import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
 public class Calendar extends Fragment {
 
@@ -113,6 +106,8 @@ public class Calendar extends Fragment {
 
         int workoutID, x, current_exercise = -1;
         int[][] points_array;
+
+        CalendarGraphActivity.clear();
 
         String clicked_date = date;
 
