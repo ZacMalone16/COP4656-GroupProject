@@ -96,13 +96,6 @@ public class Graph extends FrameLayout
         //each day width on graph
         day_w = calendar_w/31;
 
-        //populate data array with some workout data
-        //set_data();
-        //populate workouts by date vector
-        //set_days();
-        //set up exercises
-        //init_exercises();
-
     }
 
     void set_layout(int i)
@@ -176,21 +169,7 @@ public class Graph extends FrameLayout
 
     }//end onDraw()
 
-    /*
-    //add exercises to exercise vector
-    void init_exercises()
-    {
-        chest_exercises.add(bench_press);
-        chest_exercises.add(incline_dumbell);
-        chest_exercises.add(cable_flyes);
-
-        back_exercises.add(lat_pulldown);
-        back_exercises.add(t_bar_row);
-        back_exercises.add(cable_row);
-    }
-     */
-
-    //array (chest exercises),get name(Bench press) and index of exercise(bench press) in exercises vector and pass to add_points
+    //set exercises by passing in arraylist of points, name of line on graph, index of line in array list
     void set_exercises(ArrayList<int[][]> array_l,String str,int index)
     {
 
@@ -199,17 +178,18 @@ public class Graph extends FrameLayout
 
     void add_points(String str,int [][] array)
     {
-        //ArrayList<Points> line = new ArrayList<>();
-
+        //make new line for graph
         Line the_line = new Line(str,array);
         data.add(the_line);
 
+        /*
         //print out data
         for(int i = 0; i < data.size(); i++)
         {
             System.out.printf("%s:\n", data.get(i).name);
             data.get(i).print();
         }
+         */
 
     }
 
@@ -239,167 +219,6 @@ public class Graph extends FrameLayout
             }
         }
     }
-
-
-    /*
-    void set_days()
-    {
-        day.add(new Day("March 1"));
-        Exercise e = new Exercise("Chest","Bench Press",bench_press_01);
-        day.get(0).exercises.add(e);
-        e = new Exercise("Chest","Incline Dumbbell Press",incline_dumbell_01);
-        day.get(0).exercises.add(e);
-        e = new Exercise("Shoulders","Dumbbell Press", dumbbell_press_01);
-        day.get(0).exercises.add(e);
-        //day.add(new Day("March"))
-
-    }
-     */
-
-    //set up chest data max weight by day
-   /*
-    void set_data()
-    {
-        //march 1, 95 lbs
-        bench_press[0][0] = 1;//-1 to identify skip this index
-        bench_press[0][1] = 55;//1 to identify the exercise
-        //march 9, 95 lbs
-        bench_press[1][0] = 9;
-        bench_press[1][1] = 105;
-        //march 15, 95 lbs
-        bench_press[2][0] = 15;
-        bench_press[2][1] = 125;
-        //march 20, 95 lbs
-        bench_press[3][0] = 20;
-        bench_press[3][1] = 135;
-        //march 28, 95 lbs
-        bench_press[4][0] = 28;
-        bench_press[4][1] = 225;
-        //march 31, 95 lbs
-        bench_press[5][0] = 31;
-        bench_press[5][1] = 235;
-
-        //each index is a set, 0,0 is lbs 0,1 is reps
-        //set 1
-        bench_press_01[0][0] = 95;
-        bench_press_01[0][1] = 12;
-        //set 2
-        bench_press_01[1][0] = 115;
-        bench_press_01[1][1] = 12;
-        //set 3
-        bench_press_01[2][0] = 135;
-        bench_press_01[2][1] = 7;
-        //set 4
-        bench_press_01[3][0] = 145;
-        bench_press_01[3][1] = 2;
-        //set 5
-        bench_press_01[4][0] = 125;
-        bench_press_01[4][1] = 4;
-
-        //dumbell incline data
-        incline_dumbell[0][0] = 2;//2 to identify the exercise
-        incline_dumbell[0][1] = 50;
-        //
-        incline_dumbell[1][0] = 9;
-        incline_dumbell[1][1] = 55;
-        //
-        incline_dumbell[2][0] = 15;
-        incline_dumbell[2][1] = 140;
-        //
-        incline_dumbell[3][0] = 20;
-        incline_dumbell[3][1] = 60;
-        //
-        incline_dumbell[4][0] = 31;
-        incline_dumbell[4][1] = 215;
-
-        //set 1
-        incline_dumbell_01[0][0] = 55;
-        incline_dumbell_01[0][1] = 10;
-        //set 2
-        incline_dumbell_01[1][0] = 50;
-        incline_dumbell_01[1][1] = 8;
-        //set 3
-        incline_dumbell_01[2][0] = 45;
-        incline_dumbell_01[2][1] = 6;
-        //set 4
-        incline_dumbell_01[3][0] = 40;
-        incline_dumbell_01[3][1] = 5;
-        //set 5
-        incline_dumbell_01[4][0] = 40;
-        incline_dumbell_01[4][1] = 4;
-
-        //pulley flyes data
-        cable_flyes[0][0] = 5;//3 to identify
-        cable_flyes[0][1] = 35;
-        //
-        cable_flyes[1][0] = 13;
-        cable_flyes[1][1] = 45;
-        //
-        cable_flyes[2][0] = 20;
-        cable_flyes[2][1] = 50;
-        //
-        cable_flyes[3][0] = 22;
-        cable_flyes[3][1] = 55;
-        //
-        cable_flyes[4][0] = 27;
-        cable_flyes[4][1] = 35;
-
-        lat_pulldown[0][0] = 7;
-        lat_pulldown[0][1] = 55;
-        //
-        lat_pulldown[1][0] = 14;
-        lat_pulldown[1][1] = 65;
-        //
-        lat_pulldown[2][0] = 20;
-        lat_pulldown[2][1] = 85;
-        //
-        lat_pulldown[3][0] = 27;
-        lat_pulldown[3][1] = 90;
-
-        t_bar_row[0][0] = 7;
-        t_bar_row[0][1] = 75;
-        //
-        t_bar_row[1][0] = 14;
-        t_bar_row[1][1] = 85;
-        //
-        t_bar_row[2][0] = 20;
-        t_bar_row[2][1] = 55;
-        //
-        t_bar_row[3][0] = 27;
-        t_bar_row[3][1] = 90;
-
-        cable_row[0][0] = 7;
-        cable_row[0][1] = 50;
-        //
-        cable_row[1][0] = 14;
-        cable_row[1][1] = 60;
-        //
-        cable_row[2][0] = 20;
-        cable_row[2][1] = 60;
-        //
-        cable_row[3][0] = 27;
-        cable_row[3][1] = 70;
-
-        //shoulders
-        //set 1
-        dumbbell_press_01[0][0] = 35;
-        dumbbell_press_01[0][1] = 12;
-        //set 2
-        dumbbell_press_01[1][0] = 40;
-        dumbbell_press_01[1][1] = 10;
-        //set 2
-        dumbbell_press_01[2][0] = 45;
-        dumbbell_press_01[2][1] = 7;
-        //set 2
-        dumbbell_press_01[3][0] = 50;
-        dumbbell_press_01[3][1] = 4;
-        //set 2
-        dumbbell_press_01[4][0] = 50;
-        dumbbell_press_01[4][1] = 2;
-
-    }
-    */
-
 
     void draw_marks2(String x, String y, Canvas canvas)
     {
@@ -594,17 +413,6 @@ public class Graph extends FrameLayout
         //return difference
         return max_x - min_x;
     }
-
-
-   /*
-    void set_legend_y(float y)
-    {
-
-        legend_y = y;
-        System.out.println("legend y = " + legend_y);
-
-    }
-    */
 
     //draw the color coded legend below the graph
     void draw_legend(String type,int x_val, int y_val,Canvas canvas)

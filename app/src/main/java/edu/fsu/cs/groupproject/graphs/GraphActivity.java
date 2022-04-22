@@ -30,23 +30,19 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     //phone screen width
     int width;
 
-    //TextView textview;
-    //TextView quads;
-
     FragmentManager manager;
     FragmentTransaction ft;
     static int choose_graph_sel;
     static ArrayList<int[][]> data = new ArrayList<>();
     static ArrayList<String> names = new ArrayList<>();
     int [][] max_by_date;
-    int workoutID;
+    //int workoutID;
     int current_exercise;
     String name;
 
 
 
     //vectors of exercises added (int index in list)
-
     ArrayList<Integer> chest_list = new ArrayList<>();//langlist
     ArrayList<Integer> back_list = new ArrayList<>();
     ArrayList<Integer> shoulder_list = new ArrayList<>();
@@ -68,6 +64,7 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     String[] triceps_ex = {"Barbell Extension", "Dumbbell Extension", "Cable Push Down"};
     String[] forearms_ex = {"Wrist Curl"};
 
+    //array of booleans that refer to if the exercise at this index was added
     boolean[] chest_sel = new boolean[3];//selectedLang
     boolean[] back_sel = new boolean[3];
     boolean[] shoulder_sel = new boolean[3];
@@ -79,41 +76,24 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     boolean[] calf_sel = new boolean[2];
     DatabaseHelper db;
 
-    //int set_
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-
-        //System.out.println("main activiy oncreate(), layout = " + layout);
-
+        //get width and height of phone screen
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         db = new DatabaseHelper(getBaseContext());
 
-        //muscle_spin = (Spinner) findViewById(R.id.muscleSpinner);
-        //exercise_spin = (Spinner) findViewById(R.id.exerciseSpinner);
-        //date_spin = (Spinner) findViewById(R.id.dateSpinner);
-        System.out.println("width: " + width);
-        System.out.println("height: " + height);
 
-
-        //check if bundle is null
-        //if nundle is null load choose frag
-        //if not null load frag from the bundle
-
+        //check if bundle is not null
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
-
-            System.out.println("bundle extras != null");
-            //int bundle_layout = extras.getInt("bundle_layout");
+            //get bundle extras
             int graph_num = extras.getInt("graph_num");
-            //System.out.println("main bundle_layout = " + bundle_layout);
-            System.out.println("main graphnum = " + graph_num);
+
             //load sets and reps frag
             if(graph_num == 1)//if(bundle_layout == 1)
             {
@@ -141,12 +121,10 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 ChooseFrag chooseFrag = new ChooseFrag();
                 ft.replace(R.id.spinner_frag,chooseFrag);
                 ft.commit();
-                //chooseFrag.choose_graph.setSelection(1);
-
 
             }
             //load max weight frag
-            else if(graph_num == 2)//else if(bundle_layout == 2)
+            else if(graph_num == 2)
             {
                 graph = new Graph(this, width, height, 0);//2
                 setContentView(graph);
@@ -171,15 +149,14 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
             else if(graph_num == 3)
             {
                 choose_graph_sel = 1;
-
                 graph = new Graph(this, width, height, 0);//
-                //setContentView(graph);
                 graph.setBackgroundColor(Color.WHITE);
                 for(int i = 0; i < data.size(); i++)
                 {
-                    graph.set_exercises(data,names.get(i),i);//"BenchPress"
+                    graph.set_exercises(data,names.get(i),i);
                 }
 
+                //proportion new graph
                 graph.proportion_graph2();
                 graph.draw_graph = true;
                 graph.max_graph = false;
@@ -201,98 +178,90 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
             }
 
         }
-        //extras == null
+        //extras == null load choose graph frag
         else
         {
-            System.out.println("bundle extras = null");
             graph = new Graph(this, width, height, 0);//
             setContentView(graph);
             graph.setBackgroundColor(Color.WHITE);
 
             manager = getFragmentManager();
             ft = manager.beginTransaction();
-            //Graph g2 = new Graph(this, width, height, 0);
             ChooseFrag chooseFrag = new ChooseFrag();
-            //ft.replace(R.id.buttons_frag,chooseFrag);//
             ft.replace(R.id.spinner_frag,chooseFrag);
             ft.commit();
         }
 
-        //set position of legend y
-        //graph.set_legend_y(quads.getY());
-
-        //setContentView(R.layout.activity_main);
-
     }//end OnCreate()
 
+   /*
     public void set_content()
     {
         setContentView(graph);
     }
+    */
 
     public void daily_max(int sel,int eID)
     {
 
-        //chest bench
+        //exercise ID in database
         int exerciseID = sel + 1 + eID;
-        //data.clear();
+        //get daily max
         Cursor cur = db.dailyMax(exerciseID);
 
+        //if the cursor wasn't null and has data
         if(cur != null && cur.getCount() > 0)
         {
             //set up array to size of cur.getCount()
             max_by_date = new int[cur.getCount()][2];
+            //move to first row
             cur.moveToFirst();
             int x = 0;
             //while there is another row
             while(!cur.isAfterLast())
             {
-                //Cursor cur2 = db.dailyMax()
-                System.out.println("cur(0)date = " + cur.getString(0));
-                System.out.println("cur(1)max weight = " + cur.getString(1));
+                //parse the date
                 String day = cur.getString(0);
                 day = day.substring(3,5);
-                System.out.println("day = " + day);
-                //put into an 2d array of ints, x,y is date, weight
-                max_by_date[x][1] = Integer.parseInt(day);//date //Integer.parseInt(cur.getString(0)
-                max_by_date[x][0] = Integer.parseInt(cur.getString(1));//max for this exercise
-
-                //System.out.println("cur(2) = " + cur.getString(2));
+                //put into an 2d array of ints, x,y is date, max weight
+                max_by_date[x][1] = Integer.parseInt(day);
+                max_by_date[x][0] = Integer.parseInt(cur.getString(1));
+                //increment index
                 x++;
+                //move to next row
                 cur.moveToNext();
             }
+            //add data to arraylist
             data.add(max_by_date);
 
+            //get name of exercise
             Cursor cur2 = db.getAllDatat1();
-
             if(cur2 != null && cur2.getCount() > 0)
             {
                 cur2.moveToFirst();
-                while(!cur2.isAfterLast())//
+                while(!cur2.isAfterLast())
                 {
-                    if(Integer.parseInt(cur2.getString(0)) == exerciseID)//==workoutid
+                    //if workout ID is equal to exerciseID
+                    if(Integer.parseInt(cur2.getString(0)) == exerciseID)
                     {
-                        //GraphActivity.names.add(cur2.getString(2));
+                        //get name of exercise
                         name = cur2.getString(2);
                         break;
 
                     }
-
-                    //System.out.println("0 exercise ID = " + cur2.getString(0));
-                    //System.out.println("1 muscleGroup = " + cur2.getString(1));
-                    //System.out.println("2 Exercise = " + cur2.getString(2));
+                    //move to next row
                     cur2.moveToNext();
                 }
 
             }
 
-
-            //need to add index by checking what the size is
+            //set exercises on graph to be displayed
             graph.set_exercises(data,name,data.size() - 1);//chest_ex[chest_list.get(j)]
         }
 
     }
 
+    /*
     public void pop_max_data()
     {
         //start dynamic pop//////////////////////////
@@ -394,47 +363,19 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
         }
 
-       /*
-        cur2 = db.getDates();
-        if(cur2 != null && cur2.getCount() > 0)
-        {
-            cur2.moveToFirst();
-            while(!cur2.isAfterLast())//
-            {
-                System.out.println("");
-                cur2.moveToNext();
-                //workoutID++;
-            }
-
-        }
-        */
-
-        /*
-        workoutID = 1;
-        //cur2 = db.getWorkoutData(workoutID);
-        cur2 = db.maxWeight(workoutID);
-        while(cur2 != null && cur2.getCount() > 0)
-        {
-            cur2.moveToFirst();
-
-        }
-         */
-
-
-
         //end dynamic pop//////////////////////////
 
     }//end pop_max_data
+     */
 
+    //chest drop down
     public void chest_max(View v)
     {
-
         if(v == MaxWeightFrag.chest)
         {
-            //pop_max_data();
-            System.out.println("chestlsit.size = " + chest_list.size());
-            System.out.println("chest-sel.size = " + chest_sel.length);
 
+
+            /*
             for(int j = 0; j < chest_sel.length; j++)
             {
                 //chest_sel[chest_list.get(i)] = true;
@@ -442,8 +383,9 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 //chest_sel[chest_list.get(i)] = true;
                 System.out.println("chest_sel i = " + chest_sel[j]);
             }
+             */
 
-
+            //set up dialog popup
             AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
             builder.setTitle("Choose Chest Exercises");
             builder.setCancelable(false);
@@ -455,22 +397,17 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
                     if (b)
                     {
-
-                        //vector of ints
+                        //vector of ints refers to what was selected
                         chest_list.add(i);
-                        System.out.printf("%d added\n", i);
-                        System.out.println("checked musclselist.size = " + chest_list.size());
 
                     }
                     //checkbox is cleared, call remove function
                     else
                     {
-                        System.out.printf("****removed %d: %s\n", i, chest_ex[i]);//error this line //muscle_list.get(i)
-                        graph.remove(chest_ex[i]);//muscle_list.get(i)
+                        //remove exercise from graph if check box cleared
+                        graph.remove(chest_ex[i]);
                         chest_list.remove(Integer.valueOf(i));
                         graph.proportion_graph2();
-                        System.out.println("unchecked musclselist.size = " + chest_list.size());
-
                         setContentView(graph);
 
                     }
@@ -485,21 +422,15 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
 
-
-                    System.out.println("OK musclselist.size = " + chest_list.size());
                     for (int j = 0; j < chest_list.size(); j++)
                     {
-
 
                         //if exercise name is not already in list
                         if (graph.try_add(chest_ex[chest_list.get(j)]))
                         {
                             daily_max(chest_list.get(j),0);
-
-                            //pass arraylist for chest1,name & index of exercise to set_exercises
-                            //graph.set_exercises(graph.chest_exercises, chest_ex[chest_list.get(j)], chest_list.get(j));
                             graph.proportion_graph2();
-                            System.out.printf("****%d: %s\n", j, chest_ex[chest_list.get(j)]);
+
                         }
 
                     }
@@ -507,13 +438,16 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
+                    /*
                     System.out.println("***************debug***************");
                     System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++) {
+                    for (int k = 0; k < graph.data.size(); k++)
+                    {
                         System.out.printf("%d:\n", k);
                         graph.data.get(k).print();
 
                     }
+                     */
 
                 }
             });
@@ -546,8 +480,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
             });
             builder.show();
 
-
-
         }//end if v == chest
     }//end chest_max()
 
@@ -568,22 +500,17 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
                     if (b)
                     {
-
                         //vector of ints
                         back_list.add(i);
-                        System.out.printf("%d added\n", i);
-                        System.out.println("checked musclselist.size = " + back_list.size());
 
                     }
                     //checkbox is cleared, call remove function
                     else
                     {
-                        System.out.printf("****removed %d: %s\n", i, back_ex[i]);//error this line //muscle_list.get(i)
+
                         graph.remove(back_ex[i]);//muscle_list.get(i)
                         back_list.remove(Integer.valueOf(i));
                         graph.proportion_graph2();
-                        System.out.println("unchecked musclselist.size = " + back_list.size());
-
                         setContentView(graph);
 
                     }
@@ -597,16 +524,15 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
 
-                    System.out.println("OK musclselist.size = " + back_list.size());
-                    for (int j = 0; j < back_list.size(); j++) {
+                    for (int j = 0; j < back_list.size(); j++)
+                    {
                         //if exercise is not already in list
                         if (graph.try_add(back_ex[back_list.get(j)]))
                         {
+                            //add to list
                             daily_max(back_list.get(j),3);
-                            //pass name & index of exercise to set_exercises
-                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
                             graph.proportion_graph2();
-                            System.out.printf("****%d: %s\n", j, back_ex[back_list.get(j)]);
+
                         }
 
                     }
@@ -614,13 +540,16 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
+                    /*
                     System.out.println("***************debug***************");
                     System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++) {
+                    for (int k = 0; k < graph.data.size(); k++)
+                    {
                         System.out.printf("%d:\n", k);
                         graph.data.get(k).print();
 
                     }
+                     */
 
                 }
             });
@@ -669,22 +598,15 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
                     if (b)
                     {
-
                         //vector of ints
                         shoulder_list.add(i);
-                        System.out.printf("%d added\n", i);
-                        System.out.println("checked musclselist.size = " + shoulder_list.size());
-
                     }
                     //checkbox is cleared, call remove function
                     else
                     {
-                        System.out.printf("****removed %d: %s\n", i, shoulder_ex[i]);//error this line //muscle_list.get(i)
-                        graph.remove(shoulder_ex[i]);//muscle_list.get(i)
+                        graph.remove(shoulder_ex[i]);
                         shoulder_list.remove(Integer.valueOf(i));
                         graph.proportion_graph2();
-                        System.out.println("unchecked musclselist.size = " + shoulder_list.size());
-
                         setContentView(graph);
 
                     }
@@ -698,16 +620,14 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
 
-                    System.out.println("OK musclselist.size = " + shoulder_list.size());
-                    for (int j = 0; j < shoulder_list.size(); j++) {
-                        //if exercise is not already in list
+                    for (int j = 0; j < shoulder_list.size(); j++)
+                    {
+                        //if exercise is not already in list add
                         if (graph.try_add(shoulder_ex[shoulder_list.get(j)]))
                         {
                             daily_max(shoulder_list.get(j),21);
-                            //pass name & index of exercise to set_exercises
-                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
                             graph.proportion_graph2();
-                            System.out.printf("****%d: %s\n", j, shoulder_ex[shoulder_list.get(j)]);
+
                         }
 
                     }
@@ -715,13 +635,16 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
+                    /*
                     System.out.println("***************debug***************");
                     System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++) {
+                    for (int k = 0; k < graph.data.size(); k++)
+                    {
                         System.out.printf("%d:\n", k);
                         graph.data.get(k).print();
 
                     }
+                     */
 
                 }
             });
@@ -770,22 +693,16 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
                     if (b)
                     {
-
                         //vector of ints
                         biceps_list.add(i);
-                        System.out.printf("%d added\n", i);
-                        System.out.println("checked musclselist.size = " + biceps_list.size());
 
                     }
                     //checkbox is cleared, call remove function
                     else
                     {
-                        System.out.printf("****removed %d: %s\n", i, biceps_ex[i]);//error this line //muscle_list.get(i)
                         graph.remove(biceps_ex[i]);//muscle_list.get(i)
                         biceps_list.remove(Integer.valueOf(i));
                         graph.proportion_graph2();
-                        System.out.println("unchecked musclselist.size = " + biceps_list.size());
-
                         setContentView(graph);
 
                     }
@@ -794,21 +711,20 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
             });
 
             //add exercises to graph if OK clicked
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+            {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
 
-                    System.out.println("OK musclselist.size = " + biceps_list.size());
-                    for (int j = 0; j < biceps_list.size(); j++) {
-                        //if exercise is not already in list
+                    for (int j = 0; j < biceps_list.size(); j++)
+                    {
+                        //if exercise is not already in list add
                         if (graph.try_add(biceps_ex[biceps_list.get(j)]))
                         {
                             daily_max(biceps_list.get(j),14);
-                            //pass name & index of exercise to set_exercises
-                            //graph.set_exercises(graph.back_exercises, back_ex[back_list.get(j)], back_list.get(j));
                             graph.proportion_graph2();
-                            System.out.printf("****%d: %s\n", j, biceps_ex[biceps_list.get(j)]);
+
                         }
 
                     }
@@ -816,13 +732,16 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
+                    /*
                     System.out.println("***************debug***************");
                     System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++) {
+                    for (int k = 0; k < graph.data.size(); k++)
+                    {
                         System.out.printf("%d:\n", k);
                         graph.data.get(k).print();
 
                     }
+                     */
 
                 }
             });
