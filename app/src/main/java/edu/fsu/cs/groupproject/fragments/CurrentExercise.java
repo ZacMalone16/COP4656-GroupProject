@@ -851,6 +851,7 @@ public class CurrentExercise extends Fragment
             }
         });
 
+        //manually add reps without using accelerometer
         add_reps_man.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -918,102 +919,6 @@ public class CurrentExercise extends Fragment
                 db.insertSet(workoutID,setNumber,numReps,weight_amt);
 
                 prev_exercise = exercise_lookup;
-
-                /** old debug querys
-                 System.out.println("getAllData");
-                 Cursor cur = db.getAllDatat1();
-                 if(cur != null && cur.getCount() > 0)
-                 {
-                 cur.moveToFirst();
-                 while(!cur.isAfterLast())
-                 {
-
-                 System.out.println("0 exercise ID = " + cur.getString(0));
-                 System.out.println("1 muscleGroup = " + cur.getString(1));
-                 System.out.println("2 Exercise = " + cur.getString(2));
-                 cur.moveToNext();
-                 }
-
-                 }
-                 System.out.println("getExerciseData with workout id");
-                 System.out.println("current workoutID = " + workoutID);
-                 //need a way to get every row in this table
-                 cur = db.getExerciseData(workoutID);
-                 if(cur != null && cur.getCount() > 0)
-                 {
-                 //cur.moveToFirst();
-                 cur.moveToNext();
-                 while(!cur.isAfterLast())
-                 {
-
-                 System.out.printf("0: %s workoutID = specific exercise on this date\n", cur.getString(0));
-                 System.out.printf("1: %s exerciseID refers 1 = bench \n", cur.getString(1));
-                 System.out.printf("2: %s date \n", cur.getString(2));
-                 cur.moveToNext();
-                 }
-
-
-                 }
-                 else
-                 {
-                 System.out.println("cur =  null or getcount = 0");
-                 }
-
-                 System.out.println("getAllExerciseData");
-                 //cur = db.getAllExerciseData();
-                 if(cur != null && cur.getCount() > 0)
-                 {
-                 cur.moveToFirst();
-                 while(!cur.isAfterLast())
-                 {
-
-                 System.out.println("0 workoutID = " + cur.getString(0));
-                 System.out.println("1 exerciseID = " + cur.getString(1));
-                 System.out.println("2 date = " + cur.getString(2));
-                 cur.moveToNext();
-                 }
-
-                 }
-
-
-
-                 System.out.println("getWorkoutData");
-                 System.out.println("workoutID = " + workoutID);
-                 cur = db.getWorkoutData(workoutID);
-                 if(cur != null && cur.getCount() > 0)
-                 {
-                 cur.moveToFirst();
-                 while(!cur.isAfterLast())
-                 {
-
-                 System.out.println("0 setID = " + cur.getString(0));
-                 System.out.println("1 workoutID = " + cur.getString(1));
-                 System.out.println("2 setNum = " + cur.getString(2));
-                 System.out.println("3 Reps = " + cur.getString(3));
-                 System.out.println("4 weight = " + cur.getString(4));
-                 cur.moveToNext();
-                 }
-                 }
-
-                 System.out.println("getDataForDate");
-                 System.out.println("workoutID = " + workoutID);
-                 System.out.println("date = 01.01.2021");
-                 cur = db.getDataForDate("01.01.2021");
-
-                 if(cur != null && cur.getCount() > 0)
-                 {
-                 cur.moveToFirst();
-                 while(!cur.isAfterLast())
-                 {
-
-                 System.out.println("cur(0)date = " + cur.getString(0));
-                 System.out.println("cur(1)workout ID = " + cur.getString(1));
-                 //System.out.println("cur(2) = " + cur.getString(2));
-                 cur.moveToNext();
-                 }
-                 }
-                 */
-
 
                 System.out.println("new date query***********");
                 System.out.println("04.01.2022");

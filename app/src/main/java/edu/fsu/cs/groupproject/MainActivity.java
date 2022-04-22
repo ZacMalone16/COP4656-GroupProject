@@ -60,21 +60,13 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         if(extras != null)
         {
             onAddWorkoutSelected();
-            String start = (String) extras.get("start");
-
-            //load sets and reps frag
-            if (start.equals("true"))
-            {
-
-                System.out.println("bundle worked");
-            }
 
         }
         else
         {
-            System.out.println("bundle == null");
+
             init();
-            //onAddWorkoutSelected();
+
         }
 
 
@@ -115,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     public void onGraphSelected() {
 
-        System.out.println("onGraphSelected() - called from main activity");
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         //phone screen height
         int height = displayMetrics.heightPixels;
@@ -132,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     public void onCurrentExercisesSelected() {
 
-        System.out.println("onCurrentExercisesSelected() - called from Main Activity");
+
 
     }
 
@@ -140,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     public void onSensorChanged(SensorEvent event)
     {
-        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)//Sensor.TYPE_ACCELEROMETER
+        //get acceleration in each axis
+        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
         {
             ax = event.values[0];
             ay = event.values[1];
@@ -148,17 +139,21 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         }
 
 
+        //if start button has not been pressed
         if(!calibrate)
         {
+            //get current acceleration to use as offset
             offset_x = ax;
             offset_y = ay;
             offset_z = az;
         }
 
+        //if start was pressed and not stop
         if(calibrate && !stop)
         {
-            //System.out.println("calibrate && !stop");
-            if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )//if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
+            //filter number one
+            //subtract the offset from the current acceleration values, and only add if this value is outside the .2 to -.2 range
+            if(  (ay - offset_y) >= 0.2 || (ay - offset_y) <= -0.2 )
             {
                 //add raw data outside -.2 to .2
                 PointF p = new PointF(count,(float)ay);
@@ -166,11 +161,16 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
                 //if change in magnitude is larger than .5f add to data points
                 if(Math.abs(prev.y) - Math.abs((ay - offset_y)) > .5f || Math.abs(prev.y) - Math.abs((ay - offset_y)) < -.5f )
                 {
+                    //z axis not used
                     //az -= offset_z;
+
+                    //subtract the offset
                     ax -= offset_x;
                     ay -= offset_y;
+                    //add point
                     p = new PointF(count,(float)ay);
                     data_points.add(p);
+                    //increment count
                     count++;
                 }
 
@@ -178,50 +178,33 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             //save prev point
             prev = new PointF(count,(float)ay);
         }
+        //only call count reps once after set is completed
         else if(stop && flag)
         {
             count_reps();
-            System.out.println("get reps called =============================");
             flag = false;
-            //if(flag)
-            //{
-                /*
-                //new VanityTask().execute();
 
-                boolean has_next_rep = get_reps();
-                rep_count = 0;
-                while(has_next_rep)
-                {
-
-                    rep_count++;
-                    System.out.printf("REP %d\n", rep_count);
-                    has_next_rep = get_reps();
-                }
-                 */
-
-
-            //rep_count_num.setText(rep_count);
-            // flag = false;
-
-
-            //}
         }
     }
+
+    //count reps
     public static int count_reps()
     {
+        //call get reps, return false if a pair of points wasn't found, return false if there are no more data points
         boolean has_next_rep = get_reps();
         rep_count = 0;
+        //while get reps returns true
         while(has_next_rep)
         {
-
+            //increment rep count
             rep_count++;
-            System.out.printf("REP %d\n", rep_count);
+            //call get reps again
             has_next_rep = get_reps();
         }
-        System.out.println("");
+        System.out.println(" ");
 
+        //return the number of reps counted
         return rep_count;
-
 
     }
 
@@ -231,19 +214,20 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 
     }
 
+
+    //get the number of reps
     public static boolean get_reps()
     {
-        //float error_margin = .5f;
-        PointF p;
 
+        PointF p;
         boolean is_large;
-        //int index = 0;
 
         if(!has_next_index(index))
         {
             //failure no next rep
             return false;
         }
+        //check if magnitude of change was large enough to count
         is_large = check_is_large(index,"up");
         while(!is_large)
         {
@@ -260,16 +244,19 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         }
 
         //add start point to reps
-        p = new PointF(data_points.get(index).x,data_points.get(index).y);//index + 1
+        p = new PointF(data_points.get(index).x,data_points.get(index).y);
         reps.add(p);
 
+        //check if next index exists
         if(!has_next_index(index))
         {
             return false;
         }
 
+        //check if magnitude of change was large enough to count
         is_large = check_is_large(index,"down");
 
+        //while false continue checking next index
         while(!is_large)
         {
             //increment index
@@ -296,30 +283,29 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
 
     public static boolean check_is_large(int i,String str)
     {
-        //float next = Math.abs(data_points.get(i + 1).y);////should this be absolute value?
-        //float current = Math.abs(data_points.get(i).y);//should this be absolute value?
-        float next = data_points.get(i + 1).y;////should this be absolute value?
-        float current = data_points.get(i).y;//should this be absolute value?
+       //check the index passed in, and the next index for change in magnitude that equals mag
+        float next = data_points.get(i + 1).y;
+        float current = data_points.get(i).y;
 
+        //magnitude difference to check for
         float mag = (float)2.0;
 
         //finds min
         if(str.equals("up"))
         {
-            //System.out.printf("up: %f - %f = %f\n", next,current, next - current);
+
             if(next - current >= mag)
             {
-                //System.out.println("min found$$$$$$$$$$$$$$$$$");
+
                 return true;
             }
         }
         //finds max
         else if(str.equals("down"))
         {
-            //System.out.printf("down: %f - %f = %f\n", next,current, next - current);
+
             if(next - current <= -mag)
             {
-                //System.out.println("max found$$$$$$$$$$$$$$$$$");
 
                 return true;
             }
@@ -327,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         return false;
     }
 
+    //check if the next index exists
     public static boolean has_next_index(int index) //
     {
         if(index + 1 > data_points.size() - 1)
@@ -336,16 +323,13 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
         return true;
     }
 
+    //start button, sets calibrate to true
     public void start(View v)
     {
         calibrate = true;
 
     }
 
-    public void man_add_reps(View v)
-    {
 
-
-    }
 }//end MainActivity class
 
