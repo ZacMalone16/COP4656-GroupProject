@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.fsu.cs.groupproject.MainActivity;
@@ -29,6 +31,8 @@ public class DailyView extends Fragment {
     ListView dailyview;
     DatabaseHelper db;
     Button home;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+    Date currentTime = java.util.Calendar.getInstance().getTime();
 
     public DailyView(){
     }
@@ -37,7 +41,6 @@ public class DailyView extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DatabaseHelper(getContext());
-
 
 /*
         Cursor cur = db.todaysWorkout();
@@ -61,13 +64,15 @@ public class DailyView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_daily_view, container, false);
-
+        String changedDate = dateFormat.format(currentTime);
+        String current_date = new String(changedDate);
+        System.out.println(current_date);
         home = (Button) view.findViewById(R.id.home_button3);
 
                 ListView dailyview = view.findViewById(R.id.dailylistview);
 
         workout_list = new ArrayList<String>(); // ##########################################
-        Cursor cur = db.todaysWorkout();
+        Cursor cur = db.todaysWorkout(current_date);
 
         while(cur.moveToNext()) {
             if(cur.getInt(1) != 1){
@@ -82,8 +87,8 @@ public class DailyView extends Fragment {
                 workout_list.add("Weight: " + cur.getString(3));
             }
         }
-
-        CustomListAdapter listAdapter = new CustomListAdapter(workout_list);// #####################
+        cur.close();
+        CustomListAdapter listAdapter = new CustomListAdapter(workout_list);
         dailyview.setAdapter(listAdapter);
 
         home.setOnClickListener(new View.OnClickListener()
