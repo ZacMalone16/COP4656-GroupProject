@@ -1,5 +1,6 @@
 package edu.fsu.cs.groupproject.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -10,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
 
@@ -25,6 +28,7 @@ public class DailyView extends Fragment {
     ArrayList<String> workout_list;
     ListView dailyview;
     DatabaseHelper db;
+    Button home;
 
     public DailyView(){
     }
@@ -33,6 +37,7 @@ public class DailyView extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DatabaseHelper(getContext());
+
 
 /*
         Cursor cur = db.todaysWorkout();
@@ -57,7 +62,9 @@ public class DailyView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_daily_view, container, false);
 
-        ListView dailyview = view.findViewById(R.id.dailylistview);
+        home = (Button) view.findViewById(R.id.home_button3);
+
+                ListView dailyview = view.findViewById(R.id.dailylistview);
 
         workout_list = new ArrayList<String>(); // ##########################################
         Cursor cur = db.todaysWorkout();
@@ -78,6 +85,18 @@ public class DailyView extends Fragment {
 
         CustomListAdapter listAdapter = new CustomListAdapter(workout_list);// #####################
         dailyview.setAdapter(listAdapter);
+
+        home.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         return view;
     }
 
