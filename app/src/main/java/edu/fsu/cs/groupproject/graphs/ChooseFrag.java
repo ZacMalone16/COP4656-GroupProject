@@ -169,7 +169,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,1,12,40);
         db.insertSet(workoutID,2,8,45);
         db.insertSet(workoutID,3,6,45);
-        db.insertSet(workoutID,4,3,45);
+        db.insertSet(workoutID,4,3,50);
 
         //bench
         db.insertWorkout(1,"04.09.2022");
@@ -295,7 +295,7 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,1,12,30);
         db.insertSet(workoutID,2,9,35);
         db.insertSet(workoutID,3,5,40);
-        db.insertSet(workoutID,4,3,45);
+        db.insertSet(workoutID,4,3,50);
         //tricep cable push down
         db.insertWorkout(20,"04.15.2022");
         workoutID = db.getWorkoutID();
