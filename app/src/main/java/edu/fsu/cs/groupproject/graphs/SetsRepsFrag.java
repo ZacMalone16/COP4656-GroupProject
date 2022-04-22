@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ public class SetsRepsFrag extends Fragment
     Spinner date_spin;
     ListView simpleListView;
     TextView days_list;
+    LinearLayout linear;
     DatabaseHelper db;
     ArrayList<int[][]> data = new ArrayList<>();
     ArrayList<String> date_list = new ArrayList<>();
@@ -91,6 +94,7 @@ public class SetsRepsFrag extends Fragment
         days_list = (TextView) view.findViewById(R.id.itemTextView);
         days_list.setTextColor(Color.BLACK);
         //days_list.setHighlightColor(Color.BLUE);
+        //linear = (LinearLayout) view.findViewById(R.id.linear_parent);
 
         simpleListView = (ListView) view.findViewById(R.id.simpleListView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(),R.layout.frag_sets_reps,R.id.itemTextView,date_list);

@@ -16,8 +16,8 @@
 
     <ListView
         android:id="@+id/simpleListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -47,18 +47,6 @@
 <!--
 android:entries="@array/datesEntries"
 
- <Spinner
-        android:id="@+id/dateSpinner"
-        android:layout_width="301dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        style="@android:style/Widget.Spinner"/>
 
 style="@android:style/TextAppearance.Inverse"
 style="@android:style/Theme.Black"
