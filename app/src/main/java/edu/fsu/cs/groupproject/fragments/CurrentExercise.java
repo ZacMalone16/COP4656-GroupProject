@@ -25,6 +25,11 @@ import edu.fsu.cs.groupproject.database.DatabaseHelper;
 import edu.fsu.cs.groupproject.graphs.Exercise;
 import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CurrentExercise extends Fragment
 {
 
@@ -43,11 +48,11 @@ public class CurrentExercise extends Fragment
     int weight_amt = 0;
     int numReps;
     DatabaseHelper db;
-    Exercise e;
+    //Exercise e;
     //int muscle_lookup = 0;
     int exercise_lookup = 0;
     int prev_exercise = - 1;
-    String current_date = "04.29.2022";
+    String current_date;
     //public static boolean muscle_chosen = false;
     //SensorManager sensorManager;
     String [] muscles = {"Chest","Back","Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Forearms", "Shoulders"};
@@ -61,6 +66,10 @@ public class CurrentExercise extends Fragment
     String[] forearms_ex = {"Choose Exercise","Wrist Curl"};
     String[] shoulder_ex = {"Choose Exercise","Barbell Press","Dumbbell Press" , "Lateral Raise"};
     //public static String [] exercise_array; // = {"","",""};
+
+    Button home;
+
+    Date currentTime = Calendar.getInstance().getTime();
     public CurrentExercise()
     {
 
@@ -81,6 +90,7 @@ public class CurrentExercise extends Fragment
     {
         View view = inflater.inflate(R.layout.current_exercise, container, false);//activity_main
 
+
         muscle_spin = (Spinner) view.findViewById(R.id.addWorkout_muscleSpinner);
         exercise_spin = (Spinner) view.findViewById(R.id.addWorkout_exercisesSpinner);
         add_set = (Button) view.findViewById(R.id.add_set_button);
@@ -97,7 +107,25 @@ public class CurrentExercise extends Fragment
         add_reps_man = view.findViewById(R.id.add_reps_manual);
         rep_spin = (Spinner) view.findViewById(R.id.rep_spinner);
 
-        e = new Exercise();
+        //get today's date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+        String changedDate = dateFormat.format(currentTime);
+        //set current date from today's date
+        current_date = new String(changedDate);
+        home = (Button) view.findViewById(R.id.home_button2);
+
+        home.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
 
        //select muscle group spinner
         muscle_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -571,7 +599,7 @@ public class CurrentExercise extends Fragment
                         });
                         break;
                     default:
-                        System.out.println("layout spinner = " + muscle_spin.getSelectedItemPosition());
+
                         break;
                 }
             }
@@ -598,7 +626,7 @@ public class CurrentExercise extends Fragment
                 weight.setVisibility(View.VISIBLE);
                 weight.setTextSize(25);
                 weight.setText(String.valueOf(str));
-                System.out.println("weight = " + weight_amt);
+
             }
         });
 
@@ -686,46 +714,6 @@ public class CurrentExercise extends Fragment
 
                 //set prev = current exercise
                 prev_exercise = exercise_lookup;
-
-                /*
-                System.out.println("new date query***********");
-                System.out.println("04.01.2022");
-                Cursor cur = db.dateQuery("04.01.2022");
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
-
-                        System.out.println("cur(0)WorkoutID = " + cur.getString(0));
-                        System.out.println("cur(1)Exercise = " + cur.getString(1));
-                        System.out.println("cur(2 Set Number = " + cur.getString(2));
-                        System.out.println("cur(3 Weight = " + cur.getString(3));
-                        System.out.println("cur(4 Reps = " + cur.getString(4));
-                        //System.out.println("cur(2) = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
-                }
-
-                System.out.println(current_date);
-                cur = db.dateQuery(current_date);
-                if(cur != null && cur.getCount() > 0)
-                {
-                    cur.moveToFirst();
-                    while(!cur.isAfterLast())
-                    {
-
-                        System.out.println("cur(0)WorkoutID = " + cur.getString(0));
-                        System.out.println("cur(1)Exercise = " + cur.getString(1));
-                        System.out.println("cur(2 Set Number = " + cur.getString(2));
-                        System.out.println("cur(3 Weight = " + cur.getString(3));
-                        System.out.println("cur(4 Reps = " + cur.getString(4));
-                        //System.out.println("cur(2) = " + cur.getString(2));
-                        cur.moveToNext();
-                    }
-                }
-                 */
-
 
             }//end stop
         });

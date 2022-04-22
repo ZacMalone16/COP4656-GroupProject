@@ -40,8 +40,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     int current_exercise;
     String name;
 
-
-
     //vectors of exercises added (int index in list)
     ArrayList<Integer> chest_list = new ArrayList<>();//langlist
     ArrayList<Integer> back_list = new ArrayList<>();
@@ -194,12 +192,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
     }//end OnCreate()
 
-   /*
-    public void set_content()
-    {
-        setContentView(graph);
-    }
-    */
 
     public void daily_max(int sel,int eID)
     {
@@ -261,129 +253,13 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
 
     }
 
-    /*
-    public void pop_max_data()
-    {
-        //start dynamic pop//////////////////////////
-        //clear list of exercises
-        data.clear();
-        names.clear();
-        //get name of exercise
-        Cursor cur2 = db.getAllDatat1();
 
-        if(cur2 != null && cur2.getCount() > 0)
-        {
-            cur2.moveToFirst();
-            while(!cur2.isAfterLast())//
-            {
-                //loop through exercises in db and check if the name equals the item checked
-
-                //get all chest exercises //Integer.parseInt(cur2.getString(2)) == workoutID
-                if(cur2.getString(1).equals("Chest"))//cur2.getString(2).equals(chest_ex[chest_list.get(j)])
-                {
-                    names.add(cur2.getString(2));
-                    //System.out.println("0 exercise ID = " + cur2.getString(0));
-                    //System.out.println("1 muscleGroup = " + cur2.getString(1));
-                    System.out.println("2 Exercise = " + cur2.getString(2));
-
-                }
-
-                cur2.moveToNext();
-                //workoutID++;
-            }
-
-        }
-
-        Cursor cur = db.getDates();
-        if(cur != null && cur.getCount() > 0)
-        {
-            cur.moveToFirst();
-            while(!cur.isAfterLast())
-            {
-                //for every date in date query
-                cur2 = db.dateQuery(cur.getString(0));
-                int max = 0;
-
-                if(cur2 != null && cur2.getCount() > 0)
-                {
-                    cur2.moveToFirst();
-                    //set current exercise
-                    current_exercise = Integer.parseInt(cur.getString(0));
-                    while(!cur2.isAfterLast())//
-                    {
-                        if(Integer.parseInt(cur.getString(0)) == current_exercise)
-                        {
-
-                            cur.moveToNext();
-                            continue;
-                        }
-
-                        //if the weight on this set is greater than max
-                        if(Integer.parseInt(cur2.getString(3)) > max)
-                        {
-                            max = Integer.parseInt(cur2.getString(3));
-
-                        }
-                        //date query
-                        System.out.println("cur(0)WorkoutID = " + cur2.getString(0));
-                        System.out.println("cur(1)Exercise = " + cur2.getString(1));
-                        System.out.println("cur(2 Set Number = " + cur2.getString(2));
-                        System.out.println("cur(3 Weight = " + cur2.getString(3));
-                        System.out.println("cur(4 Reps = " + cur2.getString(4));
-                        cur2.moveToNext();
-                        //workoutID++;
-                    }
-
-                }
-
-                //go to next date
-                cur.moveToNext();
-            }
-        }
-
-
-
-
-        cur2 = db.maxWeight(1);
-        System.out.println("exerciseID = " + 1);
-        if(cur2 != null && cur2.getCount() > 0)
-        {
-            cur2.moveToFirst();
-            while(!cur2.isAfterLast())//
-            {
-                System.out.printf("0 Exercise Name %s\n",cur2.getString(0));
-                System.out.printf("1 Max weight %s\n",cur2.getString(1));
-                System.out.printf("2 date of max %s\n",cur2.getString(2));
-                //cur.getString(0) //Exercise Name
-                //cur.getString(1) //Max Weight
-                //cur.getString(2) //Date of Max
-                cur2.moveToNext();
-                //workoutID++;
-            }
-
-        }
-
-        //end dynamic pop//////////////////////////
-
-    }//end pop_max_data
-     */
 
     //chest drop down
     public void chest_max(View v)
     {
         if(v == MaxWeightFrag.chest)
         {
-
-
-            /*
-            for(int j = 0; j < chest_sel.length; j++)
-            {
-                //chest_sel[chest_list.get(i)] = true;
-                //System.out.println("chestlist i = " + chest_list.get(i));
-                //chest_sel[chest_list.get(i)] = true;
-                System.out.println("chest_sel i = " + chest_sel[j]);
-            }
-             */
 
             //set up dialog popup
             AlertDialog.Builder builder = new AlertDialog.Builder(GraphActivity.this);
@@ -438,16 +314,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
-                    /*
-                    System.out.println("***************debug***************");
-                    System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++)
-                    {
-                        System.out.printf("%d:\n", k);
-                        graph.data.get(k).print();
-
-                    }
-                     */
 
                 }
             });
@@ -540,17 +406,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
-                    /*
-                    System.out.println("***************debug***************");
-                    System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++)
-                    {
-                        System.out.printf("%d:\n", k);
-                        graph.data.get(k).print();
-
-                    }
-                     */
-
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -635,16 +490,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
-                    /*
-                    System.out.println("***************debug***************");
-                    System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++)
-                    {
-                        System.out.printf("%d:\n", k);
-                        graph.data.get(k).print();
-
-                    }
-                     */
 
                 }
             });
@@ -732,16 +577,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
                     graph.draw_graph = true;
                     setContentView(graph);
 
-                    /*
-                    System.out.println("***************debug***************");
-                    System.out.println("graph.data2.size() = " + graph.data.size());
-                    for (int k = 0; k < graph.data.size(); k++)
-                    {
-                        System.out.printf("%d:\n", k);
-                        graph.data.get(k).print();
-
-                    }
-                     */
 
                 }
             });

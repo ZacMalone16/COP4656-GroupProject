@@ -15,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
+import edu.fsu.cs.groupproject.fragments.DailyView;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
 import edu.fsu.cs.groupproject.graphs.Graph;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     static ArrayList<PointF> data_points = new ArrayList<>();
     static ArrayList<PointF> reps = new ArrayList<>();
     static ArrayList<PointF> raw_data = new ArrayList<>();
+    DailyView dailyView = new DailyView();
 
     SensorManager sensorManager;
     CurrentExercise currentExercise = new CurrentExercise();
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public static boolean flag  = true;
     public static int rep_count;
     boolean complete = false;
+    Date currentTime = java.util.Calendar.getInstance().getTime();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     public void onCurrentExercisesSelected() {
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, dailyView, "Daily View").commit();
 
 
     }
