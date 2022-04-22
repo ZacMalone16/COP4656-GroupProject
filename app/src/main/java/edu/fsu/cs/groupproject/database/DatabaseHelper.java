@@ -331,10 +331,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cur;
     }
 
-    public Cursor todaysWorkout(){
+    public Cursor todaysWorkout(String current_date){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT Exercise, SetNum, Reps, Weight FROM lifts_table, sets_table GROUP BY SetNum, Exercise ORDER BY Exercise";
+        String sql = "SELECT Exercise, SetNum, Reps, Weight FROM lifts_table, sets_table, workouts_table WHERE lifts_table.ExerciseID = workouts_table.ExerciseID AND workouts_table.Date = '" + current_date + "' GROUP BY Exercise, Date, SetNum, workouts_table.ExerciseID";
         Cursor cur =  db.rawQuery(sql, null);
         return cur;
     }
