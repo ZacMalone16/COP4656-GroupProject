@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,9 +26,27 @@ import java.util.ArrayList;
 import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
+import edu.fsu.cs.groupproject.fragments.Communications;
 
-public class GraphActivity extends Activity //Activity //AppCompatActivity
+public class GraphActivity extends Activity implements Communications//Activity //AppCompatActivity
 {
+
+    CalendarCommunications calendarCommunications;
+
+    @Override
+    public void establishCommunications(Context context) {
+        if (context instanceof GraphActivity.CalendarCommunications) {
+            calendarCommunications = (GraphActivity.CalendarCommunications) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement CalendarCommunications.");
+        }
+    }
+
+    public interface CalendarCommunications {
+        void onBackButton();
+    } //Activity //AppCompatActivity
+
+
     Graph graph;
     //used to get phone screen dimensions
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -47,7 +67,6 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     int workoutID;
     int current_exercise;
     String name;
-
 
 
     //vectors of exercises added (int index in list)
@@ -89,6 +108,9 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+
+
         //setContentView(R.layout.activity_main);
 
         //System.out.println("main activiy oncreate(), layout = " + layout);
@@ -104,6 +126,8 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         //date_spin = (Spinner) findViewById(R.id.dateSpinner);
         System.out.println("width: " + width);
         System.out.println("height: " + height);
+
+
 
 
         //check if bundle is null
@@ -209,6 +233,12 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
         //extras == null
         else
         {
+            Button backButton = findViewById(R.id.backButton1);
+
+            if (backButton == null) {
+                System.out.println("kys2");
+            }
+
             System.out.println("bundle extras = null");
             graph = new Graph(this, width, height, 0);//
             setContentView(graph);
@@ -1366,11 +1396,10 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     }//end biceps_max()
 
     //go back to main button
-    public void home(View v)
-    {
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(intent);
-    }
+    public void home(View v) {        
+      Intent intent = new Intent(getBaseContext(), MainActivity.class);
+      startActivity(intent);}
+
 
 
 }
