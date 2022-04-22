@@ -145,6 +145,52 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,7,50);
         db.insertSet(workoutID,4,5,60);
 
+        //hams leg curl
+        db.insertWorkout(10,"04.02.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,25);
+        db.insertSet(workoutID,2,10,30);
+        db.insertSet(workoutID,3,8,35);
+        db.insertSet(workoutID,4,2,40);
+        //hams lunge
+        db.insertWorkout(11,"04.02.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,35);
+        db.insertSet(workoutID,2,9,40);
+        db.insertSet(workoutID,3,6,40);
+        db.insertSet(workoutID,4,5,40);
+        //hams dead lift
+        db.insertWorkout(12,"04.02.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,95);
+        db.insertSet(workoutID,2,12,115);
+        db.insertSet(workoutID,3,9,125);
+        db.insertSet(workoutID,4,4,135);
+
+        //calves calf raise
+        db.insertWorkout(13,"04.02.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,55);
+        db.insertSet(workoutID,2,12,65);
+        db.insertSet(workoutID,3,10,70);
+        db.insertSet(workoutID,4,6,70);
+        //calves seated calf raise
+        db.insertWorkout(14,"04.02.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,10,25);
+        db.insertSet(workoutID,2,8,25);
+        db.insertSet(workoutID,3,6,35);
+        db.insertSet(workoutID,4,5,40);
+
+
         //
         //tricep barbell ext
         db.insertWorkout(18,"04.08.2022");
@@ -170,6 +216,31 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,2,8,45);
         db.insertSet(workoutID,3,6,45);
         db.insertSet(workoutID,4,3,50);
+
+        //squats quads
+        db.insertWorkout(7,"04.08.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,95);
+        db.insertSet(workoutID,2,10,115);
+        db.insertSet(workoutID,3,7,125);
+        db.insertSet(workoutID,4,5,135);
+        //leg press quads
+        db.insertWorkout(8,"04.08.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,140);
+        db.insertSet(workoutID,2,12,160);
+        db.insertSet(workoutID,3,10,180);
+        db.insertSet(workoutID,4,8,180);
+        //leg ext quads
+        db.insertWorkout(9,"04.08.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,30);
+        db.insertSet(workoutID,2,11,35);
+        db.insertSet(workoutID,3,7,40);
+        db.insertSet(workoutID,4,4,45);
 
         //bench
         db.insertWorkout(1,"04.09.2022");
@@ -314,6 +385,47 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,2,8,45);
         db.insertSet(workoutID,3,6,45);
         db.insertSet(workoutID,4,3,45);
+        //squats quads
+        db.insertWorkout(7,"04.15.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,105);
+        db.insertSet(workoutID,2,12,115);
+        db.insertSet(workoutID,3,8,135);
+        db.insertSet(workoutID,4,3,140);
+        //leg press quads
+        db.insertWorkout(8,"04.15.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,160);
+        db.insertSet(workoutID,2,10,180);
+        db.insertSet(workoutID,3,7,190);
+        db.insertSet(workoutID,4,5,200);
+        //leg ext quads
+        db.insertWorkout(9,"04.15.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,30);
+        db.insertSet(workoutID,2,12,35);
+        db.insertSet(workoutID,3,8,45);
+        db.insertSet(workoutID,4,3,50);
+
+        //calves calf raise
+        db.insertWorkout(13,"04.15.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,15,60);
+        db.insertSet(workoutID,2,11,65);
+        db.insertSet(workoutID,3,7,75);
+        db.insertSet(workoutID,4,4,75);
+        //calves seated calf raise
+        db.insertWorkout(14,"04.15.2022");
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,10,30);
+        db.insertSet(workoutID,2,7,35);
+        db.insertSet(workoutID,3,6,40);
+        db.insertSet(workoutID,4,3,45);
 
         //bench
         db.insertWorkout(1,"04.16.2022");
@@ -407,6 +519,34 @@ public class ChooseFrag extends Fragment
         db.insertSet(workoutID,3,8,40);
         db.insertSet(workoutID,3,6,45);
         db.insertSet(workoutID,3,1,55);
+
+        //hams leg curl
+        db.insertWorkout(10,"04.17.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,35);
+        db.insertSet(workoutID,2,11,45);
+        db.insertSet(workoutID,3,7,50);
+        db.insertSet(workoutID,4,4,55);
+        //hams lunge
+        db.insertWorkout(11,"04.17.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,35);
+        db.insertSet(workoutID,2,8,40);
+        db.insertSet(workoutID,3,5,45);
+        db.insertSet(workoutID,4,3,50);
+        //hams dead lift
+        db.insertWorkout(12,"04.17.2022");
+        //one specific exercise
+        workoutID = db.getWorkoutID();
+        System.out.println("workoutID = " + workoutID);
+        db.insertSet(workoutID,1,12,105);
+        db.insertSet(workoutID,2,10,125);
+        db.insertSet(workoutID,3,6,135);
+        db.insertSet(workoutID,4,5,145);
 
         //bench
         db.insertWorkout(1,"04.23.2022");

@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //12
         values.put(T1_COL1, "Hamstrings");
-        values.put(T1_COL2, "Dead Lift");
+        values.put(T1_COL2, "Deadlift");
         sqLiteDatabase.insert(TABLE_NAME1, null, values);
         //13
         values.put(T1_COL1, "Calves");

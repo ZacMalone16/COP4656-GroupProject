@@ -104,6 +104,7 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
             android:hint="Quadriceps"
+            android:onClick="quads_max"
             style="@android:style/Theme.Black"/>
 
         <TextView
@@ -114,6 +115,7 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="16dp"
             android:hint="Hamstrings"
+            android:onClick="hams_max"
             style="@android:style/Theme.Black"/>
 
         <TextView
@@ -124,6 +126,7 @@
             android:drawableRight="@android:drawable/arrow_down_float"
             android:drawablePadding="8dp"
             android:hint="Calves"
+            android:onClick="calf_max"
             style="@android:style/Theme.Black"/>
 
 

@@ -790,6 +790,29 @@ public class Graph extends FrameLayout
                     canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
                 }
             }
+            else if(data.size() <= 24)
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val,(height - y_val) + (i * spacer),paint);
+                }
+
+                for(int i = 6; i < 12; i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+
+                for(int i = 12; i < data.size(); i++)
+                {
+                    paint.setColor(switch_color(i));
+                    canvas.drawText(data.get(i).name,x_val + 500,(height - y_val) + ((i - 6) * spacer),paint);
+                }
+
+
+
+            }
 
         }
         //type == sets,reps, and weight graph
