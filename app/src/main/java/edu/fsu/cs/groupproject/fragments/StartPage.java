@@ -51,10 +51,18 @@ public class StartPage extends Fragment implements Communications {
 
         Button viewPreviousWorkouts = (Button) view.findViewById(R.id.startPage_viewPreviousWorkouts);
         viewPreviousWorkouts.setOnClickListener(v -> startPageCommunications.onViewPreviousSelected());
+
+/*        Button graphButton = view.findViewById(R.id.startPage_graph);
+        graphButton.setOnClickListener(v -> startPageCommunications.onGraphSelected());*/
+
+        Button currentExercisesButton = view.findViewById(R.id.startPage_currentExercise);
+        currentExercisesButton.setOnClickListener(v -> startPageCommunications.onCurrentExercisesSelected());
     }
 
     public interface StartPageCommunications {
         void onAddWorkoutSelected();
         void onViewPreviousSelected();
+        void onGraphSelected();
+        void onCurrentExercisesSelected();
     }
 }

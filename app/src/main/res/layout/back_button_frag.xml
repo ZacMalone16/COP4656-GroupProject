@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/backButtonFrag_BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="35sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:onClick="backToMain"
+        android:text="Back to Main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--600
+    android:textSize="30sp"
+android:translationY="0sp"
+       <edu.fsu.cs.graph.Graph
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="87dp"
+        tools:visibility="gone">
+
+    </edu.fsu.cs.graph.Graph>
+
+    <LinearLayout
+        android:layout_width="175sp"
+        android:layout_height="39dp"
+        android:orientation="horizontal"
+        android:translationY="150sp"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="629dp">
+
+
+    </LinearLayout>
+
+                android:layout_weight="1"
+    android:layout_weight="0"
+
+    <TextView
+        android:id="@+id/choose_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:drawablePadding="16dp"
+        android:hint="Choose graph"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+    -->

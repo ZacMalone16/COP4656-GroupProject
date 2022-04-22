@@ -19,56 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.016" />
 
-    <Button
-        android:id="@+id/main_ExerciseButtonButton"
-        android:layout_width="48dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="600dp"
-        android:text="G"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="graph_frag"/>
 
-    <Button
-        android:id="@+id/main_previousWorkoutsButton"
-        android:layout_width="48dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="600dp"
-        android:text="CE"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/main_workoutPlanButton"
-        android:layout_width="48dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="600dp"
-        android:text="E"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/main_currentWorkoutButton"
-        android:layout_width="48dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="600dp"
-        android:text="CW"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/main_calendarButton"
-        android:layout_width="48dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="600dp"
-        android:text="C"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

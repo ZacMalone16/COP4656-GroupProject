@@ -1,8 +1,5 @@
 package edu.fsu.cs.groupproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.PointF;
@@ -11,15 +8,20 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
+import edu.fsu.cs.groupproject.fragments.Calendar;
 import edu.fsu.cs.groupproject.fragments.CurrentExercise;
 import edu.fsu.cs.groupproject.fragments.FragmentCommunications;
 import edu.fsu.cs.groupproject.fragments.StartPage;
-import edu.fsu.cs.groupproject.graphs.GraphActivity;
 import edu.fsu.cs.groupproject.graphs.Graph;
+import edu.fsu.cs.groupproject.graphs.GraphActivity;
 
 public class MainActivity extends AppCompatActivity implements FragmentCommunications, SensorEventListener
 {
@@ -107,6 +109,32 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     @Override
     public void onViewPreviousSelected() {
         // Calendar needs to be implemented, haven't gotten to it yet.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView2, new Calendar(), "Calendar").commit();
+    }
+
+    @Override
+    public void onGraphSelected() {
+
+        System.out.println("onGraphSelected() - called from main activity");
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        //phone screen height
+        int height = displayMetrics.heightPixels;
+        //phone screen width
+        int width = displayMetrics.widthPixels;
+
+        Graph graph = new Graph(this, width, height, 0);
+
+
+
+    }
+
+    @Override
+    public void onCurrentExercisesSelected() {
+
+        System.out.println("onCurrentExercisesSelected() - called from Main Activity");
+
     }
 
 

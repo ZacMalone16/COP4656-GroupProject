@@ -19,9 +19,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_conversion_absoluteWidth="411dp" />
 
-
-
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="330sp"

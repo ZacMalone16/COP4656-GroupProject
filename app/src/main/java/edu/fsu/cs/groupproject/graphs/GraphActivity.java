@@ -11,19 +11,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-//import android.support.v4.app.Fragment;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.MainActivity;
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
+
+//import android.support.v4.app.Fragment;
 
 public class GraphActivity extends Activity //Activity //AppCompatActivity
 {
@@ -1370,6 +1365,10 @@ public class GraphActivity extends Activity //Activity //AppCompatActivity
     {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
+    }
+
+    public void backToMain(View v) {
+        home(v);
     }
 
 

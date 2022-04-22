@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +21,7 @@ import java.util.ArrayList;
 
 import edu.fsu.cs.groupproject.R;
 import edu.fsu.cs.groupproject.database.DatabaseHelper;
-import edu.fsu.cs.groupproject.fragments.Calendar;
-import edu.fsu.cs.groupproject.fragments.Communications;
+import edu.fsu.cs.groupproject.fragments.BackButtonFrag;
 
 public class CalendarGraphActivity extends Activity {
 
@@ -198,6 +196,14 @@ public class CalendarGraphActivity extends Activity {
             //after clicked a day in SetsRepsFrag
             else if(graph_num == 3)
             {
+
+                          //choose graph frag
+                manager = getFragmentManager();
+                ft = manager.beginTransaction();
+                BackButtonFrag chooseFrag = new BackButtonFrag();
+                ft.replace(R.id.spinner_frag, chooseFrag);
+                ft.commit();
+
                 choose_graph_sel = 1;
 
                 graph = new Graph(this, width, height, 0);//
