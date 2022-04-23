@@ -1,3 +1,5 @@
+TESTED ON Galaxy S21 API32 ANDROID 12
+
 Pumping Iron
 
 Team Members: Matt Kaplan, Zac Malone, Collin Burnett
